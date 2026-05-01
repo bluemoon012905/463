@@ -1041,8 +1041,8 @@ function renderStatsPreview() {
     .join("");
 }
 
-function getLectureSlidesLink(sourceFile) {
-  return encodeURI(`../${sourceFile}`);
+function getLectureSlidesLink(filename) {
+  return encodeURI(`./lecture-slides/${filename}`);
 }
 
 function renderLectureSlides() {
@@ -1057,7 +1057,7 @@ function renderLectureSlides() {
       (lecture) => `
         <a
           class="review-item lecture-slide-link"
-          href="${getLectureSlidesLink(lecture.source_file)}"
+          href="${getLectureSlidesLink(lecture.filename)}"
           target="_blank"
           rel="noopener noreferrer"
         >
