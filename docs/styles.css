@@ -23,7 +23,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Share Tech Mono", "Courier New", monospace;
+  font-family: "Nunito", sans-serif;
   color: var(--ink);
   background-color: #0a1e3d;
   background-image:
@@ -76,7 +76,7 @@ h1,
 h2 {
   margin: 0;
   line-height: 1.05;
-  font-family: "Rajdhani", "Share Tech Mono", sans-serif;
+  font-family: "Nunito", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -196,7 +196,7 @@ h2 {
   border: 1.5px solid var(--line-strong);
   background: rgba(8, 26, 56, 0.8);
   font-size: 0.82rem;
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Nunito", sans-serif;
   letter-spacing: 0.05em;
   color: var(--ink);
 }
@@ -316,7 +316,7 @@ button:hover {
   color: var(--accent);
   font-weight: 700;
   border: 1.5px solid var(--accent);
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Nunito", sans-serif;
   letter-spacing: 0.1em;
   font-size: 0.82rem;
   text-transform: uppercase;
@@ -418,7 +418,7 @@ button:hover {
 .feedback-result {
   margin: 0 0 8px;
   font-weight: 700;
-  font-family: "Rajdhani", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 1.05rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -452,7 +452,7 @@ button:hover {
   margin-top: 10px;
   font-size: clamp(1.3rem, 2vw, 1.7rem);
   color: var(--accent);
-  font-family: "Rajdhani", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: 700;
 }
 
@@ -485,7 +485,7 @@ button:hover {
 .review-item h3 {
   margin: 0 0 8px;
   font-size: 0.95rem;
-  font-family: "Share Tech Mono", monospace;
+  font-family: "Nunito", sans-serif;
   color: var(--ink);
 }
 
@@ -498,6 +498,28 @@ button:hover {
 
 .hidden {
   display: none;
+}
+
+.turtle-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  animation: turtle-explode 800ms ease-out forwards;
+}
+
+@keyframes turtle-explode {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0.3);
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(1.1);
+    opacity: 0;
+  }
 }
 
 @media (max-width: 860px) {

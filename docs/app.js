@@ -393,8 +393,36 @@ function startQuiz() {
   renderQuestion();
 }
 
+function spawnTurtles(event) {
+  const count = 16;
+  const x = event.clientX;
+  const y = event.clientY;
+
+  for (let i = 0; i < count; i++) {
+    const img = document.createElement("img");
+    img.src = "./turtle_scholar.png";
+    img.className = "turtle-particle";
+
+    const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.6;
+    const speed = 90 + Math.random() * 130;
+    const dx = Math.cos(angle) * speed;
+    const dy = Math.sin(angle) * speed;
+    const size = 30 + Math.random() * 34;
+    const rotation = (Math.random() - 0.5) * 600;
+    const duration = 650 + Math.random() * 450;
+
+    img.style.cssText = `left:${x}px;top:${y}px;width:${size}px;--dx:${dx}px;--dy:${dy}px;--rot:${rotation}deg;animation-duration:${duration}ms`;
+
+    document.body.appendChild(img);
+    img.addEventListener("animationend", () => img.remove());
+  }
+}
+
 function bindEvents() {
-  ui.startButton.addEventListener("click", startQuiz);
+  ui.startButton.addEventListener("click", (e) => {
+    spawnTurtles(e);
+    startQuiz();
+  });
   ui.openStatsButton.addEventListener("click", () => setRoute("#stats"));
   ui.backHomeButton.addEventListener("click", () => setRoute("#home"));
   ui.openStatsFromQuizButton.addEventListener("click", () => setRoute("#stats"));
