@@ -94,7 +94,6 @@
           <div class="button-row">
             <button class="primary-button start-button" id="start-button">Start Quiz</button>
             <button class="ghost-button" id="listen-mode-button">Listen Mode</button>
-            <button class="ghost-button" id="open-stats-button">Open Stats</button>
           </div>
 
           <section class="stats-preview">
@@ -105,6 +104,7 @@
             <div class="stats-preview-list" id="stats-preview-list"></div>
             <div class="button-row stats-actions">
               <button class="ghost-button" id="start-mistake-quiz-button">Quiz Mistake Book</button>
+              <button class="ghost-button" id="open-stats-button">Open Stats</button>
             </div>
           </section>
         </section>
@@ -112,6 +112,7 @@
         <section class="quiz-card app-view hidden" id="quiz-view">
           <div class="page-topbar">
             <button class="ghost-button" id="back-home-button">Back Home</button>
+            <button class="ghost-button hidden" id="remove-current-mistake-button">Remove From Mistake Book</button>
             <button class="ghost-button" id="open-stats-from-quiz-button">Stats</button>
           </div>
 
@@ -218,10 +219,6 @@
             <div class="card-header">
               <h2>Mistake Book</h2>
               <p>Every missed question is saved here until you clean it out.</p>
-            </div>
-
-            <div class="button-row stats-actions">
-              <button class="primary-button" id="stats-mistake-quiz-button">Quiz All Mistakes</button>
             </div>
 
             <div class="review-list" id="mistake-book-list"></div>

@@ -21,6 +21,7 @@ const state = {
   attempts: [],
   mistakeBook: [],
   quizContextLabel: "Selected Practice Set",
+  quizSource: "selection",
   speech: {
     supported: "speechSynthesis" in window && "SpeechSynthesisUtterance" in window,
     voices: [],
@@ -80,6 +81,7 @@ const ui = {
   feedbackExplanation: document.getElementById("feedback-explanation"),
   nextButton: document.getElementById("next-button"),
   restartButton: document.getElementById("restart-button"),
+  removeCurrentMistakeButton: document.getElementById("remove-current-mistake-button"),
   resultsCard: document.getElementById("results-card"),
   resultsSummary: document.getElementById("results-summary"),
   correctCount: document.getElementById("correct-count"),
@@ -96,7 +98,6 @@ const ui = {
   statsHomeButton: document.getElementById("stats-home-button"),
   clearStatsButton: document.getElementById("clear-stats-button"),
   startMistakeQuizButton: document.getElementById("start-mistake-quiz-button"),
-  statsMistakeQuizButton: document.getElementById("stats-mistake-quiz-button"),
   mistakeBookList: document.getElementById("mistake-book-list"),
   dopamineToggle: document.getElementById("dopamine-toggle"),
   quizAudioToggle: document.getElementById("quiz-audio-toggle"),
@@ -407,6 +408,7 @@ function resetQuizState() {
   state.answered = false;
   state.missed = [];
   state.quizContextLabel = "Selected Practice Set";
+  state.quizSource = "selection";
 }
 
 function resetListenModeState() {
@@ -640,6 +642,7 @@ function renderQuestion() {
   ui.scoreText.textContent = `Score: ${state.score}`;
   ui.progressFill.style.width = `${((state.currentIndex + 1) / total) * 100}%`;
   ui.questionText.textContent = question.prompt;
+  renderMistakeQuizActions(question);
 
   ui.options.innerHTML = "";
   question.options.forEach((option, index) => {
@@ -652,6 +655,23 @@ function renderQuestion() {
 
   renderQuizAudioControls();
   updatePauseAudioButton();
+}
+
+function renderMistakeQuizActions(question) {
+  const isMistakeQuiz = state.quizSource === "mistake-book" && question?.mistakeKey;
+  ui.removeCurrentMistakeButton.classList.toggle("hidden", !isMistakeQuiz);
+
+  if (!isMistakeQuiz) {
+    ui.removeCurrentMistakeButton.disabled = false;
+    ui.removeCurrentMistakeButton.textContent = "Remove From Mistake Book";
+    return;
+  }
+
+  const stillSaved = state.mistakeBook.some((item) => item.key === question.mistakeKey);
+  ui.removeCurrentMistakeButton.disabled = !stillSaved;
+  ui.removeCurrentMistakeButton.textContent = stillSaved
+    ? "Remove From Mistake Book"
+    : "Removed From Mistake Book";
 }
 
 function getListenQuestion() {
@@ -951,13 +971,13 @@ function upsertMistake(missedItem) {
     state.mistakeBook.unshift(missedItem);
   }
   saveMistakeBook();
-  renderMistakeBook();
+  renderMistakeBookState();
 }
 
 function removeMistake(mistakeKey) {
   state.mistakeBook = state.mistakeBook.filter((item) => item.key !== mistakeKey);
   saveMistakeBook();
-  renderMistakeBook();
+  renderMistakeBookState();
 }
 
 function recordAttempt() {
@@ -1027,41 +1047,44 @@ function renderStatsPage() {
     .join("");
 }
 
-function renderMistakeBook() {
+function renderMistakeBookState() {
   const hasMistakes = state.mistakeBook.length > 0;
   ui.startMistakeQuizButton.disabled = !hasMistakes;
-  ui.statsMistakeQuizButton.disabled = !hasMistakes;
 
   if (state.mistakeBook.length === 0) {
     ui.mistakeBookList.innerHTML =
       '<div class="review-item"><h3>No saved mistakes</h3><p>Missed questions will show up here so you can quiz them later or clean them out.</p></div>';
-    return;
+  } else {
+    ui.mistakeBookList.innerHTML = state.mistakeBook
+      .map(
+        (item) => `
+          <article class="review-item">
+            <div class="review-item-header">
+              <h3>Unit ${item.unit}: ${item.unitTitle}</h3>
+              <button class="ghost-button inline-action-button" type="button" data-clean-mistake="${item.key}">
+                Clean From Mistakes
+              </button>
+            </div>
+            <p><strong>Topic:</strong> ${item.topic}</p>
+            <p><strong>Question:</strong> ${item.prompt}</p>
+            <p><strong>Correct answer:</strong> ${item.correct}</p>
+            <p>${item.explanation}</p>
+          </article>
+        `,
+      )
+      .join("");
+
+    ui.mistakeBookList.querySelectorAll("[data-clean-mistake]").forEach((button) => {
+      button.addEventListener("click", () => {
+        removeMistake(button.dataset.cleanMistake);
+      });
+    });
   }
 
-  ui.mistakeBookList.innerHTML = state.mistakeBook
-    .map(
-      (item) => `
-        <article class="review-item">
-          <div class="review-item-header">
-            <h3>Unit ${item.unit}: ${item.unitTitle}</h3>
-            <button class="ghost-button inline-action-button" type="button" data-clean-mistake="${item.key}">
-              Clean From Mistakes
-            </button>
-          </div>
-          <p><strong>Topic:</strong> ${item.topic}</p>
-          <p><strong>Question:</strong> ${item.prompt}</p>
-          <p><strong>Correct answer:</strong> ${item.correct}</p>
-          <p>${item.explanation}</p>
-        </article>
-      `,
-    )
-    .join("");
-
-  ui.mistakeBookList.querySelectorAll("[data-clean-mistake]").forEach((button) => {
-    button.addEventListener("click", () => {
-      removeMistake(button.dataset.cleanMistake);
-    });
-  });
+  const currentQuestion = state.activeQuestions[state.currentIndex];
+  if (window.location.hash === "#quiz" && currentQuestion) {
+    renderMistakeQuizActions(currentQuestion);
+  }
 }
 
 function showResults() {
@@ -1113,7 +1136,10 @@ function nextStep() {
   renderQuestion();
 }
 
-function startQuizWithQuestions(questions, quizContextLabel = "Selected Practice Set") {
+function startQuizWithQuestions(
+  questions,
+  { quizContextLabel = "Selected Practice Set", quizSource = "selection" } = {},
+) {
   state.activeQuestions = questions;
   if (state.activeQuestions.length === 0) {
     return;
@@ -1123,6 +1149,7 @@ function startQuizWithQuestions(questions, quizContextLabel = "Selected Practice
   cancelSpeechPlayback();
   resetQuizState();
   state.quizContextLabel = quizContextLabel;
+  state.quizSource = quizSource;
   setRoute("#quiz");
   renderQuestion();
 }
@@ -1142,6 +1169,7 @@ function buildMistakeQuestionPool() {
   return shuffle(
     state.mistakeBook.map((item) => ({
       id: item.questionId || item.key,
+      mistakeKey: item.key,
       prompt: item.prompt,
       options: [...item.options],
       answerIndex: item.answerIndex,
@@ -1159,7 +1187,23 @@ function startMistakeQuiz() {
     return;
   }
 
-  startQuizWithQuestions(buildMistakeQuestionPool(), "Mistake Book quiz.");
+  startQuizWithQuestions(buildMistakeQuestionPool(), {
+    quizContextLabel: "Mistake Book quiz.",
+    quizSource: "mistake-book",
+  });
+}
+
+function removeCurrentQuestionFromMistakeBook() {
+  if (state.quizSource !== "mistake-book") {
+    return;
+  }
+
+  const question = state.activeQuestions[state.currentIndex];
+  if (!question?.mistakeKey) {
+    return;
+  }
+
+  removeMistake(question.mistakeKey);
 }
 
 function startListenMode() {
@@ -1396,8 +1440,8 @@ function bindEvents() {
   ui.listenModeButton.addEventListener("click", startListenMode);
   ui.openStatsButton.addEventListener("click", () => setRoute("#stats"));
   ui.startMistakeQuizButton.addEventListener("click", startMistakeQuiz);
-  ui.statsMistakeQuizButton.addEventListener("click", startMistakeQuiz);
   ui.backHomeButton.addEventListener("click", () => setRoute("#home"));
+  ui.removeCurrentMistakeButton.addEventListener("click", removeCurrentQuestionFromMistakeBook);
   ui.openStatsFromQuizButton.addEventListener("click", () => setRoute("#stats"));
   ui.resultsHomeButton.addEventListener("click", () => setRoute("#home"));
   ui.statsHomeButton.addEventListener("click", () => setRoute("#home"));
@@ -1568,7 +1612,7 @@ async function init() {
   updateQuestionCountHelp();
   renderStatsPreview();
   renderStatsPage();
-  renderMistakeBook();
+  renderMistakeBookState();
   renderListenTransportState();
   updatePauseAudioButton();
   bindEvents();
