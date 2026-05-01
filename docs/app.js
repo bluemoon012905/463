@@ -293,6 +293,8 @@ async function init() {
   state.data = await response.json();
   state.units = state.data.units;
   state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
+  state.showUnitNumbersOnly = true;
+  ui.unitLabelToggle.checked = true;
 
   populateControls();
   updateQuestionCountHelp();

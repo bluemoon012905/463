@@ -127,7 +127,8 @@ h2 {
 }
 
 .field select,
-.field input {
+.field input[type="number"],
+.field input[type="text"] {
   appearance: none;
   width: 100%;
   border: 1px solid var(--line);
@@ -158,7 +159,13 @@ h2 {
 .checkbox-field input {
   inline-size: 18px;
   block-size: 18px;
+  width: 18px;
+  flex: 0 0 18px;
+  margin: 0;
   accent-color: var(--accent);
+  appearance: auto;
+  border: 1px solid rgba(55, 36, 14, 0.22);
+  background: #fff8ef;
 }
 
 .unit-strip {
@@ -231,6 +238,12 @@ button:hover {
 
 .primary-button {
   padding: 14px 20px;
+}
+
+.start-button {
+  background: linear-gradient(180deg, #0f7b72, #0b5d57);
+  color: #f4fffd;
+  box-shadow: 0 16px 32px rgba(11, 93, 87, 0.22);
 }
 
 .ghost-button {
