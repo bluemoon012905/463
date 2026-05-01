@@ -522,10 +522,21 @@ button:hover {
   border-top: 1.5px solid var(--line-strong);
 }
 
+.lecture-slides-section {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1.5px solid var(--line-strong);
+}
+
 .stats-preview-list,
 .stats-history-list {
   display: grid;
   gap: 14px;
+}
+
+.lecture-slides-list {
+  display: grid;
+  gap: 12px;
 }
 
 .stats-actions {
@@ -558,6 +569,16 @@ button:hover {
   color: var(--muted);
   line-height: 1.55;
   font-size: 0.88rem;
+}
+
+.lecture-slide-link {
+  display: block;
+  text-decoration: none;
+}
+
+.lecture-slide-link:hover h3,
+.lecture-slide-link:hover p {
+  color: var(--accent);
 }
 
 .review-item-header {

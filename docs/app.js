@@ -19,6 +19,7 @@ const state = {
   score: 0,
   answered: false,
   missed: [],
+  lectureSlides: [],
   attempts: [],
   mistakeBook: [],
   quizContextLabel: "Selected Practice Set",
@@ -94,6 +95,7 @@ const ui = {
   tryAgainButton: document.getElementById("try-again-button"),
   resultsHomeButton: document.getElementById("results-home-button"),
   statsPreviewList: document.getElementById("stats-preview-list"),
+  lectureSlidesList: document.getElementById("lecture-slides-list"),
   statsAttempts: document.getElementById("stats-attempts"),
   statsAverageAccuracy: document.getElementById("stats-average-accuracy"),
   statsTotalQuestions: document.getElementById("stats-total-questions"),
@@ -1039,6 +1041,35 @@ function renderStatsPreview() {
     .join("");
 }
 
+function getLectureSlidesLink(sourceFile) {
+  return encodeURI(`../${sourceFile}`);
+}
+
+function renderLectureSlides() {
+  if (state.lectureSlides.length === 0) {
+    ui.lectureSlidesList.innerHTML =
+      '<div class="review-item"><h3>No lecture slides found</h3><p>Add lecture PDFs to the Notes folder to show them here.</p></div>';
+    return;
+  }
+
+  ui.lectureSlidesList.innerHTML = state.lectureSlides
+    .map(
+      (lecture) => `
+        <a
+          class="review-item lecture-slide-link"
+          href="${getLectureSlidesLink(lecture.source_file)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h3>Lecture ${lecture.lecture_number}</h3>
+          <p>${lecture.lecture_title}</p>
+          <p><strong>PDF:</strong> ${lecture.filename}</p>
+        </a>
+      `,
+    )
+    .join("");
+}
+
 function renderStatsPage() {
   const attempts = state.attempts;
   const totalQuestions = attempts.reduce((sum, attempt) => sum + attempt.total, 0);
@@ -1602,12 +1633,28 @@ function bindEvents() {
 }
 
 async function init() {
-  const [easyResponse, hardResponse] = await Promise.all([
+  const [easyResponse, hardResponse, lectureSlidesResponse] = await Promise.all([
     fetch("./data/quiz_questions.json"),
     fetch("./data/quiz_questions_hard.json"),
+    fetch("./data/lecture_slides.json"),
   ]);
   state.data = await easyResponse.json();
   state.hardData = await hardResponse.json();
+  const lectureSlidesData = await lectureSlidesResponse.json();
+  const seenLectureNumbers = new Set();
+  state.lectureSlides = lectureSlidesData.lectures.filter((lecture) => {
+    if (
+      !Number.isInteger(lecture.lecture_number) ||
+      lecture.lecture_number < 1 ||
+      lecture.lecture_number > 24 ||
+      seenLectureNumbers.has(lecture.lecture_number)
+    ) {
+      return false;
+    }
+
+    seenLectureNumbers.add(lecture.lecture_number);
+    return true;
+  });
   rebuildUnitsFromData();
   state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
   state.selectedTopics = new Set(state.topics.map((topicEntry) => topicEntry.key));
@@ -1638,6 +1685,7 @@ async function init() {
   renderUnitStrip();
   updateQuestionCountHelp();
   renderStatsPreview();
+  renderLectureSlides();
   renderStatsPage();
   renderMistakeBookState();
   renderHomeSettingsVisibility();
