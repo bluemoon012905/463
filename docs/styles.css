@@ -498,6 +498,10 @@ button:hover {
   gap: 14px;
 }
 
+.stats-actions {
+  margin-top: 16px;
+}
+
 .review-list {
   display: grid;
   gap: 12px;
@@ -524,6 +528,27 @@ button:hover {
   color: var(--muted);
   line-height: 1.55;
   font-size: 0.88rem;
+}
+
+.review-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+}
+
+.review-item-header h3 {
+  margin-bottom: 0;
+}
+
+.inline-action-button {
+  padding: 10px 12px;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.mistake-book-section {
+  margin-top: 28px;
 }
 
 .listen-toolbar {

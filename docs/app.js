@@ -1,4 +1,5 @@
-const STORAGE_KEY = "cse463_quiz_attempts";
+const ATTEMPT_STORAGE_KEY = "cse463_quiz_attempts";
+const MISTAKE_STORAGE_KEY = "cse463_mistake_book";
 
 const state = {
   data: null,
@@ -18,6 +19,8 @@ const state = {
   answered: false,
   missed: [],
   attempts: [],
+  mistakeBook: [],
+  quizContextLabel: "Selected Practice Set",
   speech: {
     supported: "speechSynthesis" in window && "SpeechSynthesisUtterance" in window,
     voices: [],
@@ -92,6 +95,9 @@ const ui = {
   statsHistoryList: document.getElementById("stats-history-list"),
   statsHomeButton: document.getElementById("stats-home-button"),
   clearStatsButton: document.getElementById("clear-stats-button"),
+  startMistakeQuizButton: document.getElementById("start-mistake-quiz-button"),
+  statsMistakeQuizButton: document.getElementById("stats-mistake-quiz-button"),
+  mistakeBookList: document.getElementById("mistake-book-list"),
   dopamineToggle: document.getElementById("dopamine-toggle"),
   quizAudioToggle: document.getElementById("quiz-audio-toggle"),
   listenModeButton: document.getElementById("listen-mode-button"),
@@ -353,6 +359,7 @@ function buildQuestionPool() {
             ...question,
             unit: topicEntry.unit,
             unitTitle: topicEntry.unitTitle,
+            difficulty: state.difficulty,
           })),
         )
       : getSelectedUnits().flatMap((unit) =>
@@ -360,6 +367,7 @@ function buildQuestionPool() {
             ...question,
             unit: unit.unit,
             unitTitle: unit.title,
+            difficulty: state.difficulty,
           })),
         );
 
@@ -398,6 +406,7 @@ function resetQuizState() {
   state.score = 0;
   state.answered = false;
   state.missed = [];
+  state.quizContextLabel = "Selected Practice Set";
 }
 
 function resetListenModeState() {
@@ -866,13 +875,9 @@ function handleAnswer(selectedIndex, event) {
       playSound("correct");
     }
   } else {
-    state.missed.push({
-      question: question.prompt,
-      unit: question.unit,
-      unitTitle: question.unitTitle,
-      correct: question.options[question.answerIndex],
-      explanation: question.explanation,
-    });
+    const missedItem = buildMissedItem(question);
+    state.missed.push(missedItem);
+    upsertMistake(missedItem);
     if (state.maxDopamine) {
       playSound("incorrect");
     }
@@ -889,14 +894,70 @@ function handleAnswer(selectedIndex, event) {
 
 function loadAttempts() {
   try {
-    state.attempts = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "[]");
+    state.attempts = JSON.parse(window.localStorage.getItem(ATTEMPT_STORAGE_KEY) || "[]");
   } catch {
     state.attempts = [];
   }
 }
 
 function saveAttempts() {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.attempts));
+  window.localStorage.setItem(ATTEMPT_STORAGE_KEY, JSON.stringify(state.attempts));
+}
+
+function loadMistakeBook() {
+  try {
+    state.mistakeBook = JSON.parse(window.localStorage.getItem(MISTAKE_STORAGE_KEY) || "[]");
+  } catch {
+    state.mistakeBook = [];
+  }
+}
+
+function saveMistakeBook() {
+  window.localStorage.setItem(MISTAKE_STORAGE_KEY, JSON.stringify(state.mistakeBook));
+}
+
+function getQuestionStorageKey(question) {
+  if (question.id) {
+    return `${question.difficulty || "easy"}::${question.id}`;
+  }
+  return `${question.difficulty || "easy"}::${question.unit}::${question.topic}::${question.prompt}`;
+}
+
+function buildMissedItem(question) {
+  return {
+    key: getQuestionStorageKey(question),
+    questionId: question.id || null,
+    prompt: question.prompt,
+    options: [...question.options],
+    answerIndex: question.answerIndex,
+    topic: question.topic,
+    unit: question.unit,
+    unitTitle: question.unitTitle,
+    difficulty: question.difficulty || state.difficulty,
+    explanation: question.explanation,
+    correct: question.options[question.answerIndex],
+    lastMissedAt: new Date().toISOString(),
+  };
+}
+
+function upsertMistake(missedItem) {
+  const existingIndex = state.mistakeBook.findIndex((item) => item.key === missedItem.key);
+  if (existingIndex >= 0) {
+    state.mistakeBook[existingIndex] = {
+      ...state.mistakeBook[existingIndex],
+      ...missedItem,
+    };
+  } else {
+    state.mistakeBook.unshift(missedItem);
+  }
+  saveMistakeBook();
+  renderMistakeBook();
+}
+
+function removeMistake(mistakeKey) {
+  state.mistakeBook = state.mistakeBook.filter((item) => item.key !== mistakeKey);
+  saveMistakeBook();
+  renderMistakeBook();
 }
 
 function recordAttempt() {
@@ -966,6 +1027,43 @@ function renderStatsPage() {
     .join("");
 }
 
+function renderMistakeBook() {
+  const hasMistakes = state.mistakeBook.length > 0;
+  ui.startMistakeQuizButton.disabled = !hasMistakes;
+  ui.statsMistakeQuizButton.disabled = !hasMistakes;
+
+  if (state.mistakeBook.length === 0) {
+    ui.mistakeBookList.innerHTML =
+      '<div class="review-item"><h3>No saved mistakes</h3><p>Missed questions will show up here so you can quiz them later or clean them out.</p></div>';
+    return;
+  }
+
+  ui.mistakeBookList.innerHTML = state.mistakeBook
+    .map(
+      (item) => `
+        <article class="review-item">
+          <div class="review-item-header">
+            <h3>Unit ${item.unit}: ${item.unitTitle}</h3>
+            <button class="ghost-button inline-action-button" type="button" data-clean-mistake="${item.key}">
+              Clean From Mistakes
+            </button>
+          </div>
+          <p><strong>Topic:</strong> ${item.topic}</p>
+          <p><strong>Question:</strong> ${item.prompt}</p>
+          <p><strong>Correct answer:</strong> ${item.correct}</p>
+          <p>${item.explanation}</p>
+        </article>
+      `,
+    )
+    .join("");
+
+  ui.mistakeBookList.querySelectorAll("[data-clean-mistake]").forEach((button) => {
+    button.addEventListener("click", () => {
+      removeMistake(button.dataset.cleanMistake);
+    });
+  });
+}
+
 function showResults() {
   const total = state.activeQuestions.length;
   const accuracy = Math.round((state.score / total) * 100);
@@ -977,6 +1075,9 @@ function showResults() {
   renderStatsPage();
 
   ui.resultsSummary.textContent = `You answered ${state.score} out of ${total} correctly.`;
+  if (state.quizContextLabel !== "Selected Practice Set") {
+    ui.resultsSummary.textContent += ` ${state.quizContextLabel}.`;
+  }
   ui.correctCount.textContent = String(state.score);
   ui.accuracyCount.textContent = `${accuracy}%`;
   ui.reviewedUnits.textContent = String(uniqueUnits.size);
@@ -1012,6 +1113,20 @@ function nextStep() {
   renderQuestion();
 }
 
+function startQuizWithQuestions(questions, quizContextLabel = "Selected Practice Set") {
+  state.activeQuestions = questions;
+  if (state.activeQuestions.length === 0) {
+    return;
+  }
+
+  stopListenPlayback();
+  cancelSpeechPlayback();
+  resetQuizState();
+  state.quizContextLabel = quizContextLabel;
+  setRoute("#quiz");
+  renderQuestion();
+}
+
 function startQuiz() {
   const hasSelection =
     state.selectionMode === "topics" ? state.selectedTopics.size > 0 : state.selectedUnits.size > 0;
@@ -1020,16 +1135,31 @@ function startQuiz() {
     return;
   }
 
-  state.activeQuestions = buildQuestionPool();
-  if (state.activeQuestions.length === 0) {
+  startQuizWithQuestions(buildQuestionPool());
+}
+
+function buildMistakeQuestionPool() {
+  return shuffle(
+    state.mistakeBook.map((item) => ({
+      id: item.questionId || item.key,
+      prompt: item.prompt,
+      options: [...item.options],
+      answerIndex: item.answerIndex,
+      explanation: item.explanation,
+      difficulty: item.difficulty || "easy",
+      topic: item.topic,
+      unit: item.unit,
+      unitTitle: item.unitTitle,
+    })),
+  );
+}
+
+function startMistakeQuiz() {
+  if (state.mistakeBook.length === 0) {
     return;
   }
 
-  stopListenPlayback();
-  cancelSpeechPlayback();
-  resetQuizState();
-  setRoute("#quiz");
-  renderQuestion();
+  startQuizWithQuestions(buildMistakeQuestionPool(), "Mistake Book quiz.");
 }
 
 function startListenMode() {
@@ -1265,6 +1395,8 @@ function bindEvents() {
   });
   ui.listenModeButton.addEventListener("click", startListenMode);
   ui.openStatsButton.addEventListener("click", () => setRoute("#stats"));
+  ui.startMistakeQuizButton.addEventListener("click", startMistakeQuiz);
+  ui.statsMistakeQuizButton.addEventListener("click", startMistakeQuiz);
   ui.backHomeButton.addEventListener("click", () => setRoute("#home"));
   ui.openStatsFromQuizButton.addEventListener("click", () => setRoute("#stats"));
   ui.resultsHomeButton.addEventListener("click", () => setRoute("#home"));
@@ -1430,11 +1562,13 @@ async function init() {
   }
 
   loadAttempts();
+  loadMistakeBook();
   renderSelectionControls();
   renderUnitStrip();
   updateQuestionCountHelp();
   renderStatsPreview();
   renderStatsPage();
+  renderMistakeBook();
   renderListenTransportState();
   updatePauseAudioButton();
   bindEvents();
