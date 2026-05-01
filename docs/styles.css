@@ -548,6 +548,44 @@ button:hover {
   }
 }
 
+.confetti-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  animation: confetti-fly var(--dur) ease-out forwards;
+  border-radius: 2px;
+}
+
+@keyframes confetti-fly {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(0);
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.6);
+    opacity: 0;
+  }
+}
+
+.dopamine-field {
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+.dopamine-field input {
+  accent-color: #a855f7;
+}
+
+.dopamine-field span {
+  background: linear-gradient(90deg, #5bc8f5, #a855f7, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 @media (max-width: 860px) {
   .control-grid,
   .results-grid {

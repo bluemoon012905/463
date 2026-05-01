@@ -8,6 +8,7 @@ const state = {
   selectedUnits: new Set(),
   selectedTopics: new Set(),
   showUnitNumbersOnly: true,
+  maxDopamine: false,
   activeQuestions: [],
   currentIndex: 0,
   score: 0,
@@ -61,6 +62,7 @@ const ui = {
   statsHistoryList: document.getElementById("stats-history-list"),
   statsHomeButton: document.getElementById("stats-home-button"),
   clearStatsButton: document.getElementById("clear-stats-button"),
+  dopamineToggle: document.getElementById("dopamine-toggle"),
 };
 
 function shuffle(array) {
@@ -288,12 +290,12 @@ function renderQuestion() {
     const button = document.createElement("button");
     button.className = "option-button neutral";
     button.textContent = option;
-    button.addEventListener("click", () => handleAnswer(index));
+    button.addEventListener("click", (e) => handleAnswer(index, e));
     ui.options.appendChild(button);
   });
 }
 
-function handleAnswer(selectedIndex) {
+function handleAnswer(selectedIndex, event) {
   if (state.answered) {
     return;
   }
@@ -316,6 +318,14 @@ function handleAnswer(selectedIndex) {
 
   if (isCorrect) {
     state.score += 1;
+    if (state.maxDopamine) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      spawnConfetti(x, y);
+      spawnTurtles({ clientX: x, clientY: y });
+      playSound("correct");
+    }
   } else {
     state.missed.push({
       question: question.prompt,
@@ -324,6 +334,9 @@ function handleAnswer(selectedIndex) {
       correct: question.options[question.answerIndex],
       explanation: question.explanation,
     });
+    if (state.maxDopamine) {
+      playSound("incorrect");
+    }
   }
 
   ui.scoreText.textContent = `Score: ${state.score}`;
@@ -476,6 +489,62 @@ function startQuiz() {
   renderQuestion();
 }
 
+let audioCtx = null;
+
+function playSound(type) {
+  if (!audioCtx || audioCtx.state === "closed") audioCtx = new AudioContext();
+  if (audioCtx.state === "suspended") audioCtx.resume();
+
+  if (type === "correct") {
+    [[523.25, 0], [659.25, 0.08], [783.99, 0.16]].forEach(([freq, delay]) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.type = "triangle";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.28, audioCtx.currentTime + delay);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + 0.35);
+      osc.start(audioCtx.currentTime + delay);
+      osc.stop(audioCtx.currentTime + delay + 0.35);
+    });
+  } else {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+    osc.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.35);
+    gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+    osc.start(audioCtx.currentTime);
+    osc.stop(audioCtx.currentTime + 0.4);
+  }
+}
+
+const CONFETTI_COLORS = ["#5bc8f5", "#28cda0", "#ffd166", "#ef476f", "#a855f7", "#fb923c", "#f8fafc"];
+
+function spawnConfetti(x, y) {
+  const count = 55;
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement("div");
+    el.className = "confetti-particle";
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 70 + Math.random() * 170;
+    const dx = Math.cos(angle) * speed;
+    const dy = Math.sin(angle) * speed;
+    const w = 6 + Math.random() * 9;
+    const h = w * (0.35 + Math.random() * 0.7);
+    const rot = (Math.random() - 0.5) * 720;
+    const dur = 550 + Math.random() * 450;
+    const color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+    el.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:${color};--dx:${dx}px;--dy:${dy}px;--rot:${rot}deg;--dur:${dur}ms`;
+    document.body.appendChild(el);
+    el.addEventListener("animationend", () => el.remove());
+  }
+}
+
 function spawnTurtles(event) {
   const count = 16;
   const x = event.clientX;
@@ -544,6 +613,10 @@ function bindEvents() {
     renderUnitStrip();
   });
 
+  ui.dopamineToggle.addEventListener("change", () => {
+    state.maxDopamine = ui.dopamineToggle.checked;
+  });
+
   ui.questionCount.addEventListener("input", () => {
     const { questionCount, topicCount } = getSelectionStats();
     const rawValue = Number.parseInt(ui.questionCount.value, 10);
@@ -607,6 +680,7 @@ async function init() {
   state.selectedTopics = new Set(state.topics.map((topicEntry) => topicEntry.key));
   ui.selectionMode.value = state.selectionMode;
   ui.unitLabelToggle.checked = true;
+  ui.dopamineToggle.checked = false;
 
   loadAttempts();
   renderSelectionControls();
