@@ -11,6 +11,7 @@ const state = {
 const ui = {
   statUnits: document.getElementById("stat-units"),
   statQuestions: document.getElementById("stat-questions"),
+  statTopics: document.getElementById("stat-topics"),
   unitSelect: document.getElementById("unit-select"),
   questionCount: document.getElementById("question-count"),
   shuffleToggle: document.getElementById("shuffle-toggle"),
@@ -19,6 +20,7 @@ const ui = {
   allUnitsButton: document.getElementById("all-units-button"),
   quizCard: document.getElementById("quiz-card"),
   quizTitle: document.getElementById("quiz-title"),
+  topicLine: document.getElementById("topic-line"),
   unitBadge: document.getElementById("unit-badge"),
   progressText: document.getElementById("progress-text"),
   scoreText: document.getElementById("score-text"),
@@ -59,7 +61,7 @@ function populateControls() {
   ui.unitStrip.innerHTML = state.units
     .map(
       (unit) =>
-        `<span class="unit-pill">Unit ${unit.unit}: ${unit.title} (${unit.questions.length})</span>`,
+        `<span class="unit-pill">Unit ${unit.unit}: ${unit.title} (${unit.topics.length} topics, ${unit.questions.length} questions)</span>`,
     )
     .join("");
 }
@@ -131,6 +133,7 @@ function renderQuestion() {
   hideFeedback();
 
   ui.quizTitle.textContent = `${question.unitTitle}`;
+  ui.topicLine.textContent = `Topic: ${question.topic}`;
   ui.unitBadge.textContent = `Unit ${question.unit}`;
   ui.progressText.textContent = `Question ${state.currentIndex + 1} of ${total}`;
   ui.scoreText.textContent = `Score: ${state.score}`;
@@ -250,6 +253,9 @@ async function init() {
   ui.statUnits.textContent = String(state.units.length);
   ui.statQuestions.textContent = String(
     state.units.reduce((sum, unit) => sum + unit.questions.length, 0),
+  );
+  ui.statTopics.textContent = String(
+    state.units.reduce((sum, unit) => sum + unit.topics.length, 0),
   );
 
   populateControls();

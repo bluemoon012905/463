@@ -108,6 +108,7 @@ h2 {
 .feedback-explanation,
 .review-copy,
 .progress-meta,
+.topic-line,
 .field span,
 .unit-strip,
 .results-summary,
@@ -231,6 +232,12 @@ button:hover {
   justify-content: space-between;
   gap: 20px;
   align-items: start;
+}
+
+.topic-line {
+  margin: 10px 0 0;
+  font-size: 0.98rem;
+  font-weight: 600;
 }
 
 .unit-badge {

@@ -1,0 +1,821 @@
+{
+  "course": "CSE 463",
+  "units": [
+    {
+      "unit": 1,
+      "title": "Introduction to Interaction Design",
+      "topics": [
+        {
+          "slug": "u1-human-centered-design",
+          "title": "Human-Centered Design",
+          "summary": "Design should begin with human needs, capabilities, and behavior rather than forcing people to adapt to the system.",
+          "fact": "This approach puts human needs, capabilities, and behavior first when designing interactive systems.",
+          "example": "Norman's definition of human-centered design"
+        },
+        {
+          "slug": "u1-interaction-sequence",
+          "title": "Interaction Sequence",
+          "summary": "Interactive systems involve repeated cycles of human input and system output over a sequence of actions.",
+          "fact": "The lecture used examples like a microwave to show how input and output alternate during use.",
+          "example": "Entering time, pressing start, and seeing countdown feedback"
+        },
+        {
+          "slug": "u1-hcd-process",
+          "title": "Human-Centered Design Process",
+          "summary": "The design process connects understanding people, design, engineering, and evaluation through iteration.",
+          "fact": "The process was shown as involving user research, design, engineering, understanding people, and evaluation.",
+          "example": "Iterating between understanding people and evaluation"
+        },
+        {
+          "slug": "u1-hci-disciplines",
+          "title": "HCI as an Interdisciplinary Field",
+          "summary": "HCI combines technical, design, and behavioral perspectives rather than belonging to a single discipline.",
+          "fact": "The lecture framed HCI with a three-legged stool analogy.",
+          "example": "Computer science, design, and behavioral sciences"
+        }
+      ]
+    },
+    {
+      "unit": 2,
+      "title": "Usability",
+      "topics": [
+        {
+          "slug": "u2-why-hcd-matters",
+          "title": "Why Human-Centered Design Matters",
+          "summary": "Focusing on users leads to safer, more usable, and more commercially successful systems.",
+          "fact": "The lecture tied HCI to widespread technology use, safety, and product acceptance.",
+          "example": "Usability issues causing a car recall"
+        },
+        {
+          "slug": "u2-design-mistakes",
+          "title": "Common Design Mistakes",
+          "summary": "Poor design often comes from optimizing for graphics, ideal conditions, or developer assumptions instead of real use.",
+          "fact": "One mistake discussed was designing only for ideal use and context.",
+          "example": "Ignoring real-world use conditions"
+        },
+        {
+          "slug": "u2-usability-components",
+          "title": "Components of Usability",
+          "summary": "Usability includes learnability, memorability, efficiency, low error rates, and satisfaction rather than being one single property.",
+          "fact": "Nielsen's framing treats usability as a multi-dimensional quality of interfaces.",
+          "example": "Easy to learn, easy to remember, efficient, few errors, satisfying"
+        },
+        {
+          "slug": "u2-learnability-vs-efficiency",
+          "title": "Learnability and Efficiency Tradeoff",
+          "summary": "Designs that help novice users can differ from designs that help expert users work quickly.",
+          "fact": "The lecture compared easy-to-learn systems with systems optimized for efficient expert use.",
+          "example": "Accelerators, templates, and defaults for expert users"
+        }
+      ]
+    },
+    {
+      "unit": 3,
+      "title": "Usability & User Experience",
+      "topics": [
+        {
+          "slug": "u3-iso-usability",
+          "title": "ISO Usability Definition",
+          "summary": "Usability is defined in terms of effectiveness, efficiency, and satisfaction for specified users performing specified tasks.",
+          "fact": "The lecture emphasized both the user and the task in the ISO definition.",
+          "example": "Specified users completing specified tasks"
+        },
+        {
+          "slug": "u3-seven-stages-gulfs",
+          "title": "Seven Stages of Action and Gulfs",
+          "summary": "Norman's action cycle highlights the gulf of execution and gulf of evaluation as barriers between goals, actions, and interpretation.",
+          "fact": "The gulf of execution concerns translating goals into actions, while the gulf of evaluation concerns judging results.",
+          "example": "Users not knowing what to do next or whether an action worked"
+        },
+        {
+          "slug": "u3-affordances-feedback",
+          "title": "Affordances, Signifiers, Mapping, and Feedback",
+          "summary": "Good interfaces make actions discoverable through affordances, clear signifiers, sensible mapping, and understandable feedback.",
+          "fact": "The lecture treated signifiers as clues that communicate available affordances.",
+          "example": "A labeled control that clearly indicates what action it performs"
+        },
+        {
+          "slug": "u3-user-experience-broader",
+          "title": "User Experience Beyond Usability",
+          "summary": "User experience includes feelings, pleasure, and emotional response in addition to task success and efficiency.",
+          "fact": "The lecture connected UX to broader emotional design ideas from the 2000s.",
+          "example": "Norman's emotional design and designing for pleasure"
+        }
+      ]
+    },
+    {
+      "unit": 4,
+      "title": "Intro to IxD-PACT",
+      "topics": [
+        {
+          "slug": "u4-ueq",
+          "title": "User Experience Questionnaire",
+          "summary": "UEQ is a structured way to measure dimensions of user experience rather than relying on vague impressions.",
+          "fact": "The lecture used the UEQ and its short version to compare apps.",
+          "example": "Rating systems with the short version of UEQ"
+        },
+        {
+          "slug": "u4-hcd-iterations",
+          "title": "Iterative Human-Centered Design",
+          "summary": "Human-centered design proceeds through recurring activities rather than a single linear pass.",
+          "fact": "The model for HCD was shown as four activities with multiple iterations.",
+          "example": "Repeatedly revisiting research, design, prototyping, and evaluation"
+        },
+        {
+          "slug": "u4-problem-space",
+          "title": "Discovering the Problem Space",
+          "summary": "Design teams must understand the real problem before trying to build a solution, so they build the right thing rather than merely building correctly.",
+          "fact": "The lecture contrasted building the thing right with identifying the right thing to build.",
+          "example": "Windows CE versus iPhone as a problem-space lesson"
+        },
+        {
+          "slug": "u4-pact-framework",
+          "title": "PACT Framework",
+          "summary": "PACT analyzes people, activities, context, and technology to structure design understanding.",
+          "fact": "PACT was introduced as a user-centric framework for thinking about design problems.",
+          "example": "Considering user differences, physical context, and task purpose together"
+        }
+      ]
+    },
+    {
+      "unit": 5,
+      "title": "Visual Perception",
+      "topics": [
+        {
+          "slug": "u5-perception-biases",
+          "title": "Perception and Visual Biases",
+          "summary": "Human perception is not a perfect recording system and can be biased or fooled by visual structure.",
+          "fact": "The lecture used visual illusions to show that perception can be biased.",
+          "example": "Size illusion demonstrations"
+        },
+        {
+          "slug": "u5-gestalt-laws",
+          "title": "Gestalt Principles",
+          "summary": "Gestalt laws such as proximity, similarity, continuity, closure, symmetry, figure-ground, and common fate help explain how users group visual information.",
+          "fact": "Gestalt principles describe how vision is optimized for seeing structure.",
+          "example": "Grouping nearby items through proximity"
+        },
+        {
+          "slug": "u5-visual-hierarchy",
+          "title": "Visual Hierarchy and Structuring",
+          "summary": "Designers can guide interpretation by using size, location, chunking, and spacing to create a clear information hierarchy.",
+          "fact": "The lecture emphasized that users infer informational structure from visual hierarchy.",
+          "example": "Using spacing and chunking to surface important information"
+        },
+        {
+          "slug": "u5-attention-limits",
+          "title": "Attention and Bandwidth Limits",
+          "summary": "Visual attention is limited, so clutter and weak hierarchy can hide important information or overload users.",
+          "fact": "The lecture explicitly states that vision has limited bandwidth.",
+          "example": "Subitizing and attention tasks that reveal perceptual limits"
+        }
+      ]
+    },
+    {
+      "unit": 6,
+      "title": "Cognition,Motor Control",
+      "topics": [
+        {
+          "slug": "u6-memory-systems",
+          "title": "Memory Systems",
+          "summary": "The lecture distinguishes sensory memory, working memory, and long-term memory as different parts of cognitive processing.",
+          "fact": "The dark-room analogy was used to explain sensory memory, and working memory was discussed as short-term and limited.",
+          "example": "Sensory memory, working memory, and long-term memory"
+        },
+        {
+          "slug": "u6-recognition-recall",
+          "title": "Recognition versus Recall",
+          "summary": "Recognition is usually easier than recall, so interfaces should provide cues instead of forcing users to remember everything unaided.",
+          "fact": "The lecture explicitly says recognition is easy and recall is hard.",
+          "example": "Choosing from visible options instead of remembering commands"
+        },
+        {
+          "slug": "u6-workload-rehearsal",
+          "title": "Cognitive Workload and Rehearsal",
+          "summary": "Interfaces can increase or reduce cognitive workload, and rehearsal helps users maintain or retrieve information.",
+          "fact": "The lecture connects rehearsal to preventing forgetting and treats cognitive workload as an important metric.",
+          "example": "Reducing memory burden with external cues"
+        },
+        {
+          "slug": "u6-models-bimanual",
+          "title": "Descriptive and Predictive Models",
+          "summary": "HCI uses descriptive and predictive models to explain human behavior, including bimanual coordination models such as Guiard's model.",
+          "fact": "Guiard's model was presented as a descriptive model of bimanual tasks.",
+          "example": "Analyzing two-handed interaction with Guiard's model"
+        }
+      ]
+    },
+    {
+      "unit": 7,
+      "title": "Motor Control, Modelling",
+      "topics": [
+        {
+          "slug": "u7-fitts-law",
+          "title": "Fitts' Law",
+          "summary": "Fitts' Law predicts pointing time from target distance and width through an index of difficulty.",
+          "fact": "The movement time equation uses target distance and width to model pointing performance.",
+          "example": "Larger and closer targets being faster to acquire"
+        },
+        {
+          "slug": "u7-steering-law",
+          "title": "Steering Law",
+          "summary": "Steering Law extends pointing models to tasks that require moving through a constrained path or tunnel.",
+          "fact": "The lecture describes Steering Law as mathematically derived from Fitts' Law.",
+          "example": "Navigating a cursor through a narrow menu tunnel"
+        },
+        {
+          "slug": "u7-klm",
+          "title": "Keystroke-Level Model",
+          "summary": "KLM estimates how long expert users take to perform routine tasks by breaking actions into low-level operators.",
+          "fact": "KLM was introduced as an instance of the Model Human Processor.",
+          "example": "Millisecond-level estimates of text entry or GUI tasks"
+        },
+        {
+          "slug": "u7-power-law-practice",
+          "title": "Power Law of Practice",
+          "summary": "The power law of practice predicts that repeated performance becomes faster with experience.",
+          "fact": "The lecture applied the power law to typing and other repeated motor tasks.",
+          "example": "Users getting faster with a new keyboard over repeated trials"
+        }
+      ]
+    },
+    {
+      "unit": 8,
+      "title": "Computational Design,DataCollection",
+      "topics": [
+        {
+          "slug": "u8-computational-design",
+          "title": "Computational UI Design",
+          "summary": "Computational design uses models and algorithms to evaluate or generate interface designs.",
+          "fact": "The lecture described many UI design tasks as optimization problems.",
+          "example": "Using algorithms to improve a menu layout"
+        },
+        {
+          "slug": "u8-menu-optimization",
+          "title": "Computational Design of Menus",
+          "summary": "Menu design can be evaluated and generated computationally based on predicted user performance.",
+          "fact": "The lecture asked both how good a menu is and where items should be placed.",
+          "example": "Assessing and generating menu structures automatically"
+        },
+        {
+          "slug": "u8-user-research-purpose",
+          "title": "Purpose of User Research",
+          "summary": "User research aims to obtain concrete empirical knowledge about users and their tasks for design decisions.",
+          "fact": "The lecture positioned user research as part of understanding tasks in the human-centered design process.",
+          "example": "Identifying and validating tasks before designing features"
+        },
+        {
+          "slug": "u8-research-methods",
+          "title": "Interviews, Observation, and Contextual Inquiry",
+          "summary": "Different user research methods reveal different kinds of evidence, with contextual inquiry combining observation and interview in real context.",
+          "fact": "The lecture describes contextual inquiry as observation plus interview guided by four principles.",
+          "example": "Using observation to address the say-do gap"
+        }
+      ]
+    },
+    {
+      "unit": 9,
+      "title": "Data Analysis, Tasks",
+      "topics": [
+        {
+          "slug": "u9-data-collection-tradeoffs",
+          "title": "Data Collection Tradeoffs",
+          "summary": "Researchers must balance realism, precision, and generalizability while also considering ethics and triangulation.",
+          "fact": "The lecture explicitly names realism, precision, and generalizability as key criteria.",
+          "example": "Triangulating interviews with questionnaires"
+        },
+        {
+          "slug": "u9-quant-qual-analysis",
+          "title": "Quantitative and Qualitative Analysis",
+          "summary": "Quantitative analysis focuses on numbers and trends, while qualitative analysis focuses on text, images, video, and meaning.",
+          "fact": "The lecture separates quantitative and qualitative analysis by data type and purpose.",
+          "example": "Numbers and trends versus interview transcripts and images"
+        },
+        {
+          "slug": "u9-affinity-diagrams",
+          "title": "Affinity Diagrams and Coding Tools",
+          "summary": "Affinity diagrams and coding tools help organize, label, and interpret qualitative findings.",
+          "fact": "The lecture mentions tools such as Miro, Otter.ai, and MAXQDA.",
+          "example": "Grouping related interview observations on a Miro board"
+        },
+        {
+          "slug": "u9-tasks-personas-requirements",
+          "title": "Tasks, Personas, and Requirements",
+          "summary": "After research, teams create task descriptions, prioritize users and tasks, develop personas, and separate functional from non-functional requirements.",
+          "fact": "Good task descriptions focus on what the user wants to do rather than prescribing interface details.",
+          "example": "A task description that describes the complete job from start to finish"
+        }
+      ]
+    },
+    {
+      "unit": 10,
+      "title": "Conceptualizing Interactive Systems",
+      "topics": [
+        {
+          "slug": "u10-functional-requirements",
+          "title": "Functional Requirements",
+          "summary": "Functional requirements describe what the system must do for users.",
+          "fact": "The lecture defines a requirement as a functionality or quality the product must have.",
+          "example": "A roommate-finding system matching compatible users"
+        },
+        {
+          "slug": "u10-nonfunctional-requirements",
+          "title": "Non-Functional Requirements",
+          "summary": "Non-functional requirements specify qualities such as usability, performance, or reliability rather than core features.",
+          "fact": "The lecture describes non-functional requirements as characteristics of the product.",
+          "example": "A system needing to be fast, secure, and easy to use"
+        },
+        {
+          "slug": "u10-mental-models",
+          "title": "Mental Models",
+          "summary": "Conceptual design tries to reduce mismatch among the user's mental model, the designer's model, and the implementation model.",
+          "fact": "The user's model was equated with the mental model in the lecture.",
+          "example": "Users misunderstanding how a fridge or freezer control works"
+        },
+        {
+          "slug": "u10-conceptual-design-sketches",
+          "title": "Conceptual Design and Sketching",
+          "summary": "Conceptual design clarifies how a system should work before detailed implementation, and sketches help explore ideas quickly.",
+          "fact": "The lecture highlights why conceptual design matters before committing to solutions.",
+          "example": "Sketching interaction ideas before building a detailed prototype"
+        }
+      ]
+    },
+    {
+      "unit": 11,
+      "title": "Prototyping I",
+      "topics": [
+        {
+          "slug": "u11-why-prototype",
+          "title": "Why Prototype",
+          "summary": "A prototype is a model of a product built to communicate, improve, or evaluate design ideas before final implementation.",
+          "fact": "The lecture defines prototypes as models built for communication, improvement, or evaluation.",
+          "example": "Using a rough model to test an interaction before coding"
+        },
+        {
+          "slug": "u11-storyboards",
+          "title": "Storyboards",
+          "summary": "Storyboards show how a user moves through a task over time and help teams reason about scenarios and context.",
+          "fact": "The lecture describes storyboards as a series of sketches showing task progression.",
+          "example": "Drawing frames of a user interacting with a kiosk"
+        },
+        {
+          "slug": "u11-paper-prototyping",
+          "title": "Paper Prototyping",
+          "summary": "Paper prototypes simulate interface interaction with physical screens or widgets that can be changed quickly.",
+          "fact": "Paper prototyping was presented as a basic low-fidelity interaction simulation technique.",
+          "example": "Swapping paper screens to mimic navigation"
+        },
+        {
+          "slug": "u11-horizontal-vertical",
+          "title": "Horizontal and Vertical Prototypes",
+          "summary": "Horizontal prototypes explore breadth across features, while vertical prototypes explore one feature in depth.",
+          "fact": "The lecture asks students to describe the main purpose of horizontal and vertical prototypes.",
+          "example": "Broad coverage of many screens versus deep testing of one workflow"
+        }
+      ]
+    },
+    {
+      "unit": 12,
+      "title": "Prototyping II",
+      "topics": [
+        {
+          "slug": "u12-physical-prototyping",
+          "title": "Physical Prototyping",
+          "summary": "Physical prototypes are especially useful when the form, feel, or embodied interaction of a system matters.",
+          "fact": "The lecture explicitly says physical prototyping is best suited when physical form and feel matter.",
+          "example": "Mocking up a tangible object to test grip and manipulation"
+        },
+        {
+          "slug": "u12-wizard-of-oz",
+          "title": "Wizard of Oz Prototyping",
+          "summary": "Wizard of Oz prototyping lets a hidden human simulate system intelligence or automation during testing.",
+          "fact": "The lecture describes Wizard of Oz as a behavioral prototyping technique for technically complex systems.",
+          "example": "A person secretly acting as the speech recognizer"
+        },
+        {
+          "slug": "u12-fidelity",
+          "title": "Prototype Fidelity",
+          "summary": "Low, medium, and high fidelity prototypes support different stages and goals in the design process.",
+          "fact": "The lecture notes that low fidelity is common earlier and medium or high fidelity later.",
+          "example": "Paper sketches early versus polished interactive mockups later"
+        },
+        {
+          "slug": "u12-usability-testing-range",
+          "title": "Range of Evaluation Methods",
+          "summary": "Usability testing methods vary in realism, control, cost, and what they reveal, from informal tests to controlled experiments and A/B testing.",
+          "fact": "The lecture introduces usability testing methods and basics of controlled experiments and A/B testing.",
+          "example": "Comparing two interface variants with users"
+        }
+      ]
+    },
+    {
+      "unit": 13,
+      "title": "Controlled Experiments",
+      "topics": [
+        {
+          "slug": "u13-experiment-components",
+          "title": "Controlled Experiment Components",
+          "summary": "Controlled experiments define questions, hypotheses, variables, conditions, measurements, and possible confounds.",
+          "fact": "The lecture lists conditions, dependent variables, and influencing factors as key components.",
+          "example": "Comparing interface A versus B using completion time and error rate"
+        },
+        {
+          "slug": "u13-study-design",
+          "title": "Study Design Choices",
+          "summary": "Study design choices such as between-subjects structure affect learning effects, participant workload, and validity.",
+          "fact": "The lecture explicitly discusses between-subjects design and its pros and cons.",
+          "example": "Each participant seeing only one interface condition"
+        },
+        {
+          "slug": "u13-hypothesis-testing",
+          "title": "Hypothesis Testing",
+          "summary": "Statistical hypothesis testing helps determine whether observed differences are likely due to chance.",
+          "fact": "The lecture describes hypothesis testing as using established statistical procedures to reject or fail to reject hypotheses.",
+          "example": "Testing whether two interface samples likely come from the same distribution"
+        },
+        {
+          "slug": "u13-data-types-stat-tests",
+          "title": "Data Types and Statistical Tests",
+          "summary": "Choosing a statistical test depends on the type of data and the study design.",
+          "fact": "The lecture links categorical and numerical data types to different analysis choices such as the independent-samples t-test.",
+          "example": "Using a two independent sample t-test for two groups"
+        }
+      ]
+    },
+    {
+      "unit": 14,
+      "title": "Expert Evaluation",
+      "topics": [
+        {
+          "slug": "u14-evaluation-categories",
+          "title": "Participant-Based versus Expert-Based Evaluation",
+          "summary": "Evaluation methods can either directly involve users or rely on expert inspection without users present.",
+          "fact": "The lecture contrasts participant-based empirical methods with expert-based inspection methods.",
+          "example": "User testing versus heuristic evaluation"
+        },
+        {
+          "slug": "u14-cognitive-walkthrough",
+          "title": "Cognitive Walkthrough",
+          "summary": "A cognitive walkthrough evaluates how easily a user can discover and execute a task sequence step by step.",
+          "fact": "The lecture includes preparation and analysis phases for walkthroughs.",
+          "example": "Checking whether users know what to do at each action"
+        },
+        {
+          "slug": "u14-heuristic-evaluation",
+          "title": "Heuristic Evaluation",
+          "summary": "Heuristic evaluation inspects an interface against established usability rules of thumb.",
+          "fact": "The lecture defines a heuristic as a rule of thumb.",
+          "example": "Inspecting a website against Nielsen's heuristics"
+        },
+        {
+          "slug": "u14-nielsen-heuristics",
+          "title": "Nielsen's Heuristics",
+          "summary": "Nielsen's heuristics provide a structured lens for spotting usability problems such as poor visibility or mismatch with the real world.",
+          "fact": "The lecture presents the 10 usability heuristics from Nielsen.",
+          "example": "Visibility of system status"
+        }
+      ]
+    },
+    {
+      "unit": 15,
+      "title": "Accessibility",
+      "topics": [
+        {
+          "slug": "u15-accessibility-definition",
+          "title": "Accessibility as Barrier Removal",
+          "summary": "Accessibility focuses on removing barriers that would otherwise exclude people from using a system at all.",
+          "fact": "The lecture quotes accessibility as removing barriers that would exclude some people from use.",
+          "example": "Design changes that let more people access the system"
+        },
+        {
+          "slug": "u15-accessibility-barriers",
+          "title": "Types of Accessibility Barriers",
+          "summary": "Barriers can be physical, conceptual, economic, and tied to mismatches between user needs and system assumptions.",
+          "fact": "The lecture explicitly categorizes several kinds of barriers rather than limiting accessibility to one issue.",
+          "example": "A conceptual barrier caused by confusing instructions"
+        },
+        {
+          "slug": "u15-situational-impairment",
+          "title": "Situational Impairment",
+          "summary": "People can experience accessibility challenges temporarily or contextually even without a permanent disability.",
+          "fact": "The lecture states that disability or impairment can be situational.",
+          "example": "Using a system in glare, noise, or with one hand occupied"
+        },
+        {
+          "slug": "u15-curb-cut-effect",
+          "title": "Curb Cut Effect and Inclusive Design",
+          "summary": "Designing for accessibility often produces broader benefits for many users, not just the initially targeted group.",
+          "fact": "The lecture uses the curb cut effect to show how inclusive design helps wider populations.",
+          "example": "Curb cuts helping strollers and deliveries as well as wheelchairs"
+        }
+      ]
+    },
+    {
+      "unit": 16,
+      "title": "Social Computing",
+      "topics": [
+        {
+          "slug": "u16-value-social-computing",
+          "title": "Value of Social Computing",
+          "summary": "Social computing adds a social layer to interaction and supports communication, collaboration, and broader participation.",
+          "fact": "The lecture describes social computing as computing with significant social interaction.",
+          "example": "Systems that support collaboration beyond an individual user"
+        },
+        {
+          "slug": "u16-groupware-time-space",
+          "title": "Groupware Time-Space Matrix",
+          "summary": "Groupware can be classified by whether collaboration happens in the same or different place and at the same or different time.",
+          "fact": "The lecture uses time and space to classify groupware technologies.",
+          "example": "Video conferencing as different place, same time"
+        },
+        {
+          "slug": "u16-awareness-tailoring-failure",
+          "title": "Awareness, Tailoring, and Failure Modes",
+          "summary": "Collaborative systems need awareness and tailoring, and they can fail when work and benefit are misaligned or evaluation is difficult.",
+          "fact": "The lecture names awareness and tailoring as key considerations for groupware.",
+          "example": "A system failing because contributors do work without seeing enough benefit"
+        },
+        {
+          "slug": "u16-crowdsourcing",
+          "title": "Crowdsourcing and Data Quality",
+          "summary": "Crowdsourcing opens work to large groups, but task structure and quality controls strongly influence result validity.",
+          "fact": "The lecture discusses random answers and quality controls in crowdsourced work.",
+          "example": "Embedding quality checks in a crowd task"
+        }
+      ]
+    },
+    {
+      "unit": 17,
+      "title": "Human AI Interaction I",
+      "topics": [
+        {
+          "slug": "u17-hai-definition-history",
+          "title": "HAI and Historical Framing",
+          "summary": "Human-AI interaction sits at the intersection of HCI and AI and has roots in debates about intelligence augmentation and interface agents.",
+          "fact": "The lecture cites the divide between AI and HCI while keeping a common focus on human work.",
+          "example": "Direct manipulation versus interface agents"
+        },
+        {
+          "slug": "u17-mixed-initiative",
+          "title": "Mixed-Initiative Design",
+          "summary": "Mixed-initiative systems let humans and AI agents share initiative rather than giving all control to one side.",
+          "fact": "The lecture defines mixed-initiative interfaces as ones where users and intelligent agents collaborate.",
+          "example": "Email scheduling assistance in LookOut"
+        },
+        {
+          "slug": "u17-dialog-timing",
+          "title": "Action, Dialog, and Timing",
+          "summary": "Designers must decide when AI should act automatically, when it should ask, and how timing affects user trust and burden.",
+          "fact": "The lecture discusses when to engage in dialog to resolve uncertainties.",
+          "example": "A calendar pop-up that asks at the right moment"
+        },
+        {
+          "slug": "u17-augment-versus-automate",
+          "title": "Augment versus Automate",
+          "summary": "Some tasks are better supported through augmentation while others can be automated, depending on uncertainty, stakes, and user goals.",
+          "fact": "The lecture explicitly asks students to choose whether AI should automate or augment tasks such as spam filtering.",
+          "example": "Filtering spam emails"
+        }
+      ]
+    },
+    {
+      "unit": 18,
+      "title": "Human-AI Interaction II",
+      "topics": [
+        {
+          "slug": "u18-design-challenges",
+          "title": "Design Challenges for AI Systems",
+          "summary": "AI-powered systems are hard to design because of limited AI literacy, prototyping difficulty, error communication challenges, and coordination with engineers.",
+          "fact": "The lecture lists lack of AI knowledge and difficulty of prototyping for AI among the challenges.",
+          "example": "Communicating AI errors and impact to users"
+        },
+        {
+          "slug": "u18-complexity-map",
+          "title": "AI Design Complexity Map",
+          "summary": "AI systems vary in output complexity and how much they evolve over time, which affects design difficulty.",
+          "fact": "The lecture contrasts limited fixed-output systems with evolving adaptive systems.",
+          "example": "Level 1 probabilistic systems versus Level 4 evolving adaptive systems"
+        },
+        {
+          "slug": "u18-guidelines-over-time",
+          "title": "Human-AI Interaction Guidelines",
+          "summary": "Guidelines for HAI cover setting expectations, taking context into account during use, supporting recovery when wrong, and handling feedback over time.",
+          "fact": "The lecture uses Microsoft's guideline groups such as initially, during interaction, when wrong, and over time.",
+          "example": "Setting user expectations before the system acts"
+        },
+        {
+          "slug": "u18-hai-collaboration",
+          "title": "Characteristics of HAI Collaboration",
+          "summary": "Good collaboration depends on complementary performance, alignment, cooperative interaction, reasonable task allocation, and appropriate trust.",
+          "fact": "The lecture lists five desirable characteristics for human-AI collaboration.",
+          "example": "Complementary performance between human and AI strengths"
+        }
+      ]
+    },
+    {
+      "unit": 19,
+      "title": "Virtual Reality I",
+      "topics": [
+        {
+          "slug": "u19-appropriate-trust",
+          "title": "Appropriate Trust in HAI",
+          "summary": "People should rely on AI when it is correct but remain able to notice and override mistakes.",
+          "fact": "The lecture discusses appropriate trust and factors that cause inappropriate reliance.",
+          "example": "Accepting AI recommendations only when they make sense"
+        },
+        {
+          "slug": "u19-wimp-direct-manipulation",
+          "title": "WIMP and Direct Manipulation",
+          "summary": "Classic GUIs use windows, icons, menus, and pointers and are closely tied to direct manipulation interaction.",
+          "fact": "The lecture uses WIMP to explain the structure of traditional graphical user interfaces.",
+          "example": "Windows, icons, menus, and pointers"
+        },
+        {
+          "slug": "u19-post-wimp-ubiquitous",
+          "title": "Post-WIMP and Ubiquitous Computing",
+          "summary": "Post-WIMP interaction expands beyond traditional widgets into richer modalities and more embedded forms of computing.",
+          "fact": "The lecture describes post-WIMP interfaces as building on pre-existing knowledge but introducing many new modalities.",
+          "example": "Touch, body input, and other non-WIMP modalities"
+        },
+        {
+          "slug": "u19-xr-terminology-vr",
+          "title": "XR Terminology and VR Basics",
+          "summary": "The lecture distinguishes VR, AR, MR, and XR and defines VR around strong illusions of presence and interaction.",
+          "fact": "A chief goal of VR was described as creating a strong illusion for users.",
+          "example": "VR, AR, MR, and XR terminology"
+        }
+      ]
+    },
+    {
+      "unit": 20,
+      "title": "Virtual Reality II",
+      "topics": [
+        {
+          "slug": "u20-locomotion",
+          "title": "Locomotion in VR",
+          "summary": "VR locomotion concerns how users move through virtual environments despite physical-world limits.",
+          "fact": "The lecture lists room-scale, redirected walking, joystick movement, teleportation, gesture, and specialized hardware schemes.",
+          "example": "Teleportation as a locomotion technique"
+        },
+        {
+          "slug": "u20-reality-illusory-magical",
+          "title": "Reality-Based, Illusory, and Magical Interaction",
+          "summary": "VR techniques can mimic real-world actions, exploit perceptual illusions, or give users superhuman capabilities.",
+          "fact": "The lecture explicitly distinguishes reality-based, illusory, and beyond-real interactions.",
+          "example": "Scaling space or user movement for magical interaction"
+        },
+        {
+          "slug": "u20-vr-sickness",
+          "title": "VR Sickness",
+          "summary": "VR sickness can result from conflicts such as vergence-accommodation mismatch or visual-vestibular mismatch.",
+          "fact": "The lecture names vergence-accommodation conflict and visual-vestibular mismatch as causes.",
+          "example": "Motion discomfort caused by conflicting sensory cues"
+        },
+        {
+          "slug": "u20-object-interaction",
+          "title": "Object Selection and Manipulation in VR",
+          "summary": "VR interaction design includes choosing techniques for nearby and distant object selection and manipulation.",
+          "fact": "The lecture covers ray casting, Go-Go, Ninja Hands, World in Miniature, and haptic retargeting.",
+          "example": "Ray casting for far object selection"
+        }
+      ]
+    },
+    {
+      "unit": 21,
+      "title": "Hand and Body Based Input",
+      "topics": [
+        {
+          "slug": "u21-xr-accessibility",
+          "title": "XR Accessibility",
+          "summary": "Accessible XR design must consider content accessibility, input accessibility, and inclusive representation.",
+          "fact": "The lecture notes that accessibility of VR is still in its infancy.",
+          "example": "Accessible input techniques and inclusive avatars"
+        },
+        {
+          "slug": "u21-touchscreens",
+          "title": "Touchscreen Input",
+          "summary": "Touchscreens support direct hand-based interaction but introduce challenges such as reduced tactile cues and execution difficulty.",
+          "fact": "The lecture contrasts resistive sensing, multi-touch, and touchscreen challenges.",
+          "example": "Multi-touch sensing and the gulf of execution"
+        },
+        {
+          "slug": "u21-gesture-interfaces",
+          "title": "Gesture Interfaces",
+          "summary": "Gesture-based systems rely on sensing and interpreting hand or body movements, but they face sensing and design challenges.",
+          "fact": "The lecture names lack of a universal gesture language as an engineering challenge.",
+          "example": "Wearable sensors for hand-gesture sensing"
+        },
+        {
+          "slug": "u21-tracking",
+          "title": "Hand and Full-Body Tracking",
+          "summary": "Tracking continuous motion requires mapping sensed movement into accurate and efficient interaction techniques.",
+          "fact": "The lecture distinguishes gesture recognition from continuous hand tracking and full-body tracking.",
+          "example": "Improving accuracy and efficiency in hand tracking"
+        }
+      ]
+    },
+    {
+      "unit": 22,
+      "title": "Haptics",
+      "topics": [
+        {
+          "slug": "u22-speech-interfaces",
+          "title": "Speech-Based Interfaces",
+          "summary": "Speech interfaces can be efficient and natural, but they are sequential and raise recognition and feedback challenges.",
+          "fact": "The lecture mentions directed dialog, high speaking rate, and the problem of voice-mail-like deep hierarchies.",
+          "example": "Directed-dialog systems controlling the conversation"
+        },
+        {
+          "slug": "u22-gaze-interaction",
+          "title": "Gaze-Based Interaction",
+          "summary": "Gaze can indicate attention and support selection, but it is often combined with another modality to avoid errors.",
+          "fact": "The lecture explicitly points out that gaze-based interaction can require training and be error-prone.",
+          "example": "Combining gaze with another input modality for selection"
+        },
+        {
+          "slug": "u22-haptic-sense",
+          "title": "Haptic Sense and Exploration",
+          "summary": "Haptic perception is distributed across the body and depends on active exploratory procedures rather than passive contact alone.",
+          "fact": "The lecture introduces exploratory procedures and tactile stereognosis.",
+          "example": "Using hand movements to infer texture or shape"
+        },
+        {
+          "slug": "u22-receptors-illusions",
+          "title": "Receptors and Haptic Illusions",
+          "summary": "Different receptors and illusions help explain how tactile and kinesthetic haptic perception can be designed or manipulated.",
+          "fact": "The lecture covers mechanoreceptors, C-tactile afferents, and tactile apparent motion illusion.",
+          "example": "Creating motion sensation from two actuators"
+        }
+      ]
+    },
+    {
+      "unit": 23,
+      "title": "Haptics II",
+      "topics": [
+        {
+          "slug": "u23-haptics-subareas",
+          "title": "Subareas of Haptics",
+          "summary": "Haptics spans human, machine, computer, and interaction haptics as an interdisciplinary field.",
+          "fact": "The lecture repeatedly shows haptics as an interdisciplinary field with multiple subareas.",
+          "example": "Human, machine, computer, and interaction haptics"
+        },
+        {
+          "slug": "u23-haptic-illusions",
+          "title": "Haptic Illusions",
+          "summary": "Illusions such as the rubber hand illusion and tactile apparent motion reveal how haptic perception can be shaped.",
+          "fact": "The lecture covers rubber hand illusion and apparent motion illusion in tactile perception.",
+          "example": "Rubber hand illusion"
+        },
+        {
+          "slug": "u23-machine-haptics",
+          "title": "Machine Haptics and Device Types",
+          "summary": "Machine haptics focuses on building touch technologies including grounded, wearable, cable-driven, EMS, and pin-array devices.",
+          "fact": "The lecture surveys several device classes and asks whether examples are tactile or kinesthetic.",
+          "example": "PhanToM Omni force-feedback device"
+        },
+        {
+          "slug": "u23-computer-haptics",
+          "title": "Computer Haptics and Rendering",
+          "summary": "Computer haptics studies how to render haptic stimuli and simulate contact such as rigid surfaces.",
+          "fact": "The lecture includes rendering a wall or rigid surface as a computer haptics example.",
+          "example": "Rendering a rigid wall in a haptic system"
+        }
+      ]
+    },
+    {
+      "unit": 24,
+      "title": "Haptics III",
+      "topics": [
+        {
+          "slug": "u24-haptics-applications",
+          "title": "Applications of Haptics",
+          "summary": "Haptics is used in domains such as surgery, prosthetics, VR, MR, accessibility, education, and teleoperation.",
+          "fact": "The lecture gives example applications including robot-assisted surgery and physical feedback for prosthetics.",
+          "example": "Robot-assisted surgery"
+        },
+        {
+          "slug": "u24-multisensory-role",
+          "title": "Role of Haptics in Multisensory Interaction",
+          "summary": "Haptic feedback can complement or reinforce information from vision, audio, and other modalities.",
+          "fact": "The lecture asks students to identify when haptics plays complementary or reinforcing roles.",
+          "example": "Complementary versus reinforcing haptic feedback"
+        },
+        {
+          "slug": "u24-design-process",
+          "title": "Haptic Interaction Design Process",
+          "summary": "Designing haptic interactions involves browsing, sketching, refining, and sharing or evaluating ideas.",
+          "fact": "The lecture presents a four-activity design process for haptics.",
+          "example": "Browsing with Haptipedia and sketching vibrotactile stimuli"
+        },
+        {
+          "slug": "u24-generation-evaluation",
+          "title": "Generating and Evaluating Haptics",
+          "summary": "Modern work generates haptics from text, video, audio, VR scenes, or AI methods and evaluates signals with human or AI-assisted approaches.",
+          "fact": "The lecture includes text-to-vibration, sound-to-vibration, video-based generation, and human-based versus AI-powered evaluation.",
+          "example": "Sound2Hap audio-to-vibration generation"
+        }
+      ]
+    }
+  ]
+}
