@@ -77,6 +77,7 @@
 
           <div class="button-row">
             <button class="primary-button start-button" id="start-button">Start Quiz</button>
+            <button class="ghost-button" id="listen-mode-button">Listen Mode</button>
             <button class="ghost-button" id="open-stats-button">Open Stats</button>
           </div>
 
@@ -116,6 +117,12 @@
             <p class="question-text" id="question-text"></p>
             <div class="options" id="options"></div>
           </article>
+
+          <div class="button-row quiz-audio-row">
+            <button class="ghost-button" id="read-question-button">Read Question + Choices</button>
+            <button class="ghost-button" id="read-explanation-button">Read Explanation</button>
+            <button class="ghost-button" id="pause-audio-button">Pause Audio</button>
+          </div>
 
           <section class="feedback hidden" id="feedback">
             <p class="feedback-result" id="feedback-result"></p>
@@ -187,6 +194,85 @@
           </div>
 
           <div class="review-list" id="stats-history-list"></div>
+        </section>
+
+        <section class="quiz-card app-view hidden" id="listen-view">
+          <div class="page-topbar">
+            <button class="ghost-button" id="listen-home-button">Back Home</button>
+            <button class="ghost-button" id="listen-stats-button">Stats</button>
+          </div>
+
+          <div class="quiz-topline">
+            <div>
+              <p class="eyebrow">Listen Mode</p>
+              <h2 id="listen-title">Audio Review</h2>
+              <p class="topic-line" id="listen-topic-line">Topic</p>
+            </div>
+            <span class="unit-badge" id="listen-unit-badge">Unit</span>
+          </div>
+
+          <div class="progress-meta">
+            <span id="listen-progress-text">Question 1 of 10</span>
+            <span id="listen-status-text">Loading voice...</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="listen-progress-fill"></div>
+          </div>
+
+          <div class="listen-toolbar">
+            <label class="field listen-speed-field">
+              <span>Playback Speed</span>
+              <input id="listen-speed" type="range" min="0.7" max="1.5" step="0.1" value="1" />
+            </label>
+            <span class="listen-speed-value" id="listen-speed-value">1.0x</span>
+
+            <label class="field listen-delay-field">
+              <span>Delay Before Answer</span>
+              <input id="listen-answer-delay" type="range" min="0.5" max="6" step="0.5" value="0.9" />
+            </label>
+            <span class="listen-speed-value" id="listen-answer-delay-value">0.9s</span>
+          </div>
+
+          <label class="field checkbox-field listen-toggle-field">
+            <input type="checkbox" id="listen-read-options-toggle" checked />
+            <span>Read options aloud before the answer</span>
+          </label>
+
+          <section class="listen-stage">
+            <div class="title-card hidden" id="listen-title-card">
+              <p class="eyebrow" id="listen-title-card-eyebrow">Unit</p>
+              <h2 id="listen-title-card-title">Title</h2>
+              <p id="listen-title-card-subtitle">Topic</p>
+            </div>
+
+            <article class="listen-panel">
+              <div class="listen-block">
+                <p class="listen-label">Question</p>
+                <p class="question-text speech-text" id="listen-question-text"></p>
+              </div>
+
+              <div class="listen-block" id="listen-options-block">
+                <p class="listen-label">Options</p>
+                <div class="options listen-options" id="listen-options-list"></div>
+              </div>
+
+              <div class="listen-block hidden" id="listen-answer-block">
+                <p class="listen-label">Answer</p>
+                <p class="question-text speech-text" id="listen-answer-text"></p>
+              </div>
+
+              <div class="listen-block hidden" id="listen-explanation-block">
+                <p class="listen-label">Explanation</p>
+                <p class="question-text speech-text" id="listen-explanation-text"></p>
+              </div>
+            </article>
+          </section>
+
+          <div class="button-row">
+            <button class="ghost-button" id="listen-prev-button">Previous</button>
+            <button class="primary-button" id="listen-toggle-button">Pause</button>
+            <button class="ghost-button" id="listen-next-button">Next</button>
+          </div>
         </section>
       </main>
     </div>

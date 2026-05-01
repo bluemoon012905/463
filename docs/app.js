@@ -15,6 +15,29 @@ const state = {
   answered: false,
   missed: [],
   attempts: [],
+  speech: {
+    supported: "speechSynthesis" in window && "SpeechSynthesisUtterance" in window,
+    voices: [],
+    voice: null,
+    currentUtterance: null,
+    mode: "idle",
+  },
+  listenMode: {
+    activeQuestions: [],
+    currentIndex: 0,
+    phase: "idle",
+    section: null,
+    isPaused: false,
+    rate: 1,
+    speakOptions: true,
+    answerDelay: 900,
+    timerId: null,
+    timerDuration: 0,
+    timerStartedAt: 0,
+    timerCallback: null,
+    currentWordIndex: -1,
+    titleCardKey: null,
+  },
 };
 
 const ui = {
@@ -42,6 +65,9 @@ const ui = {
   progressFill: document.getElementById("progress-fill"),
   questionText: document.getElementById("question-text"),
   options: document.getElementById("options"),
+  readQuestionButton: document.getElementById("read-question-button"),
+  readExplanationButton: document.getElementById("read-explanation-button"),
+  pauseAudioButton: document.getElementById("pause-audio-button"),
   feedback: document.getElementById("feedback"),
   feedbackResult: document.getElementById("feedback-result"),
   feedbackExplanation: document.getElementById("feedback-explanation"),
@@ -63,6 +89,42 @@ const ui = {
   statsHomeButton: document.getElementById("stats-home-button"),
   clearStatsButton: document.getElementById("clear-stats-button"),
   dopamineToggle: document.getElementById("dopamine-toggle"),
+  listenModeButton: document.getElementById("listen-mode-button"),
+  listenView: document.getElementById("listen-view"),
+  listenHomeButton: document.getElementById("listen-home-button"),
+  listenStatsButton: document.getElementById("listen-stats-button"),
+  listenTitle: document.getElementById("listen-title"),
+  listenTopicLine: document.getElementById("listen-topic-line"),
+  listenUnitBadge: document.getElementById("listen-unit-badge"),
+  listenProgressText: document.getElementById("listen-progress-text"),
+  listenStatusText: document.getElementById("listen-status-text"),
+  listenProgressFill: document.getElementById("listen-progress-fill"),
+  listenSpeed: document.getElementById("listen-speed"),
+  listenSpeedValue: document.getElementById("listen-speed-value"),
+  listenAnswerDelay: document.getElementById("listen-answer-delay"),
+  listenAnswerDelayValue: document.getElementById("listen-answer-delay-value"),
+  listenReadOptionsToggle: document.getElementById("listen-read-options-toggle"),
+  listenTitleCard: document.getElementById("listen-title-card"),
+  listenTitleCardEyebrow: document.getElementById("listen-title-card-eyebrow"),
+  listenTitleCardTitle: document.getElementById("listen-title-card-title"),
+  listenTitleCardSubtitle: document.getElementById("listen-title-card-subtitle"),
+  listenQuestionText: document.getElementById("listen-question-text"),
+  listenOptionsBlock: document.getElementById("listen-options-block"),
+  listenOptionsList: document.getElementById("listen-options-list"),
+  listenAnswerBlock: document.getElementById("listen-answer-block"),
+  listenAnswerText: document.getElementById("listen-answer-text"),
+  listenExplanationBlock: document.getElementById("listen-explanation-block"),
+  listenExplanationText: document.getElementById("listen-explanation-text"),
+  listenPrevButton: document.getElementById("listen-prev-button"),
+  listenToggleButton: document.getElementById("listen-toggle-button"),
+  listenNextButton: document.getElementById("listen-next-button"),
+};
+
+const LISTEN_DELAYS = {
+  titleCard: 1800,
+  betweenQuestionAndAnswer: 900,
+  betweenAnswerAndExplanation: 700,
+  betweenQuestions: 1400,
 };
 
 function shuffle(array) {
@@ -194,6 +256,69 @@ function renderSelectionControls() {
   ui.clearUnitsButton.textContent = isTopicMode ? "Clear Topics" : "Clear Units";
 }
 
+function getWordRanges(text) {
+  return [...text.matchAll(/\S+/g)].map((match) => ({
+    start: match.index,
+    end: match.index + match[0].length,
+    word: match[0],
+  }));
+}
+
+function renderSpeechText(container, text, sectionName) {
+  container.textContent = "";
+  const wordRanges = getWordRanges(text);
+
+  if (wordRanges.length === 0) {
+    container.textContent = text;
+    return;
+  }
+
+  let lastIndex = 0;
+  wordRanges.forEach((range, index) => {
+    if (range.start > lastIndex) {
+      container.append(document.createTextNode(text.slice(lastIndex, range.start)));
+    }
+
+    const span = document.createElement("span");
+    span.textContent = range.word;
+    span.dataset.wordIndex = String(index);
+    span.dataset.section = sectionName;
+    span.className = "speech-word";
+    container.append(span);
+    lastIndex = range.end;
+  });
+
+  if (lastIndex < text.length) {
+    container.append(document.createTextNode(text.slice(lastIndex)));
+  }
+}
+
+function clearSpeechHighlights() {
+  document.querySelectorAll(".speech-word.current").forEach((word) => {
+    word.classList.remove("current");
+  });
+}
+
+function setSpeechHighlight(sectionName, wordIndex) {
+  clearSpeechHighlights();
+  if (!sectionName || wordIndex < 0) {
+    return;
+  }
+
+  const activeWord = document.querySelector(
+    `.speech-word[data-section="${sectionName}"][data-word-index="${wordIndex}"]`,
+  );
+  if (activeWord) {
+    activeWord.classList.add("current");
+    activeWord.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+}
+
+function findWordIndexFromChar(text, charIndex) {
+  const wordRanges = getWordRanges(text);
+  return wordRanges.findIndex((range) => charIndex >= range.start && charIndex < range.end);
+}
+
 function buildQuestionPool() {
   const flatQuestions =
     state.selectionMode === "topics"
@@ -249,6 +374,185 @@ function resetQuizState() {
   state.missed = [];
 }
 
+function resetListenModeState() {
+  state.listenMode.currentIndex = 0;
+  state.listenMode.phase = "idle";
+  state.listenMode.section = null;
+  state.listenMode.isPaused = false;
+  state.listenMode.currentWordIndex = -1;
+  state.listenMode.titleCardKey = null;
+  clearScheduledListenTask();
+}
+
+function clearScheduledListenTask() {
+  if (state.listenMode.timerId) {
+    window.clearTimeout(state.listenMode.timerId);
+  }
+  state.listenMode.timerId = null;
+  state.listenMode.timerDuration = 0;
+  state.listenMode.timerStartedAt = 0;
+  state.listenMode.timerCallback = null;
+}
+
+function scheduleListenTask(callback, delay) {
+  clearScheduledListenTask();
+  state.listenMode.timerDuration = delay;
+  state.listenMode.timerStartedAt = window.performance.now();
+  state.listenMode.timerCallback = callback;
+  state.listenMode.timerId = window.setTimeout(() => {
+    clearScheduledListenTask();
+    callback();
+  }, delay);
+}
+
+function pauseScheduledListenTask() {
+  if (!state.listenMode.timerId) {
+    return;
+  }
+
+  const elapsed = window.performance.now() - state.listenMode.timerStartedAt;
+  state.listenMode.timerDuration = Math.max(0, state.listenMode.timerDuration - elapsed);
+  window.clearTimeout(state.listenMode.timerId);
+  state.listenMode.timerId = null;
+}
+
+function resumeScheduledListenTask() {
+  if (!state.listenMode.timerCallback || state.listenMode.timerId) {
+    return;
+  }
+
+  const callback = state.listenMode.timerCallback;
+  const delay = state.listenMode.timerDuration;
+  state.listenMode.timerStartedAt = window.performance.now();
+  state.listenMode.timerId = window.setTimeout(() => {
+    clearScheduledListenTask();
+    callback();
+  }, delay);
+}
+
+function cancelSpeechPlayback() {
+  if (state.speech.supported) {
+    window.speechSynthesis.cancel();
+  }
+  state.speech.currentUtterance = null;
+  state.speech.mode = "idle";
+  clearSpeechHighlights();
+  updatePauseAudioButton();
+}
+
+function stopListenPlayback() {
+  clearScheduledListenTask();
+  cancelSpeechPlayback();
+  state.listenMode.phase = "idle";
+  state.listenMode.section = null;
+  state.listenMode.currentWordIndex = -1;
+  state.listenMode.isPaused = false;
+  renderListenTransportState();
+}
+
+function formatPlaybackRate(value) {
+  return `${Number(value).toFixed(1)}x`;
+}
+
+function formatDelayLabel(milliseconds) {
+  return `${(milliseconds / 1000).toFixed(1)}s`;
+}
+
+function updatePauseAudioButton() {
+  if (!state.speech.supported) {
+    ui.pauseAudioButton.textContent = "Audio Unavailable";
+    ui.pauseAudioButton.disabled = true;
+    return;
+  }
+
+  ui.pauseAudioButton.disabled = state.speech.mode === "idle";
+  ui.pauseAudioButton.textContent = window.speechSynthesis.paused ? "Resume Audio" : "Pause Audio";
+}
+
+function renderListenTransportState() {
+  if (state.listenMode.phase === "finished") {
+    ui.listenToggleButton.textContent = "Replay";
+    return;
+  }
+  ui.listenToggleButton.textContent = state.listenMode.isPaused ? "Resume" : "Pause";
+}
+
+function ensureSpeechVoices() {
+  if (!state.speech.supported) {
+    return;
+  }
+
+  state.speech.voices = window.speechSynthesis.getVoices();
+  state.speech.voice =
+    state.speech.voices.find((voice) => voice.localService && voice.lang.startsWith("en")) ||
+    state.speech.voices.find((voice) => voice.lang.startsWith("en")) ||
+    state.speech.voices[0] ||
+    null;
+}
+
+function getSpeechStatusLabel() {
+  if (!state.speech.supported) {
+    return "Speech synthesis is not available in this browser.";
+  }
+  if (state.listenMode.isPaused) {
+    return "Paused";
+  }
+  if (!state.speech.voice) {
+    return "Using browser voice";
+  }
+  return `Voice: ${state.speech.voice.name}`;
+}
+
+function speakText(text, { mode = "general", sectionName = null, rate = 1, onEnd = null } = {}) {
+  if (!state.speech.supported || !text) {
+    if (onEnd) {
+      onEnd();
+    }
+    return;
+  }
+
+  cancelSpeechPlayback();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.rate = rate;
+  utterance.voice = state.speech.voice;
+  utterance.onboundary = (event) => {
+    if (typeof event.charIndex !== "number") {
+      return;
+    }
+    const wordIndex = findWordIndexFromChar(text, event.charIndex);
+    state.listenMode.currentWordIndex = wordIndex;
+    setSpeechHighlight(sectionName, wordIndex);
+  };
+  utterance.onend = () => {
+    if (state.speech.currentUtterance !== utterance) {
+      return;
+    }
+    state.speech.currentUtterance = null;
+    state.speech.mode = "idle";
+    state.listenMode.currentWordIndex = -1;
+    clearSpeechHighlights();
+    updatePauseAudioButton();
+    if (onEnd) {
+      onEnd();
+    }
+  };
+  utterance.onerror = () => {
+    if (state.speech.currentUtterance === utterance) {
+      state.speech.currentUtterance = null;
+      state.speech.mode = "idle";
+      updatePauseAudioButton();
+    }
+    if (onEnd) {
+      onEnd();
+    }
+  };
+
+  state.speech.currentUtterance = utterance;
+  state.speech.mode = mode;
+  updatePauseAudioButton();
+  window.speechSynthesis.speak(utterance);
+}
+
 function setRoute(route) {
   window.location.hash = route;
 }
@@ -258,10 +562,20 @@ function renderRoute() {
   const isHome = route === "#home";
   const isQuiz = route === "#quiz";
   const isStats = route === "#stats";
+  const isListen = route === "#listen";
 
   ui.homeView.classList.toggle("hidden", !isHome);
   ui.quizView.classList.toggle("hidden", !isQuiz);
   ui.statsView.classList.toggle("hidden", !isStats);
+  ui.listenView.classList.toggle("hidden", !isListen);
+
+  if (!isListen) {
+    stopListenPlayback();
+  }
+
+  if (!isStats) {
+    renderStatsPreview();
+  }
 }
 
 function hideFeedback() {
@@ -292,6 +606,197 @@ function renderQuestion() {
     button.textContent = option;
     button.addEventListener("click", (e) => handleAnswer(index, e));
     ui.options.appendChild(button);
+  });
+
+  updatePauseAudioButton();
+}
+
+function getListenQuestion() {
+  return state.listenMode.activeQuestions[state.listenMode.currentIndex];
+}
+
+function formatListenAnswer(question) {
+  return `The correct answer is: ${question.options[question.answerIndex]}.`;
+}
+
+function formatListenOption(option, index) {
+  return `${index + 1}. ${option}`;
+}
+
+function formatListenOptionsSpeech(question) {
+  return question.options
+    .map((option, index) => `Option ${index + 1}. ${option}.`)
+    .join(" ");
+}
+
+function renderListenTextSections(question) {
+  renderSpeechText(ui.listenQuestionText, question.prompt, "question");
+  renderSpeechText(ui.listenAnswerText, formatListenAnswer(question), "answer");
+  renderSpeechText(ui.listenExplanationText, question.explanation, "explanation");
+}
+
+function renderListenOptions(question) {
+  ui.listenOptionsList.innerHTML = "";
+  question.options.forEach((option, index) => {
+    const button = document.createElement("div");
+    button.className = "option-button neutral listen-option-card";
+    button.textContent = formatListenOption(option, index);
+    ui.listenOptionsList.appendChild(button);
+  });
+}
+
+function renderListenTitleCard(question) {
+  ui.listenTitleCardEyebrow.textContent = `Unit ${question.unit}`;
+  ui.listenTitleCardTitle.textContent = question.unitTitle;
+  ui.listenTitleCardSubtitle.textContent = question.topic;
+}
+
+function renderListenView() {
+  const question = getListenQuestion();
+  if (!question) {
+    ui.listenStatusText.textContent = "No questions available.";
+    return;
+  }
+
+  const total = state.listenMode.activeQuestions.length;
+  ui.listenTitle.textContent = question.unitTitle;
+  ui.listenTopicLine.textContent = `Topic: ${question.topic}`;
+  ui.listenUnitBadge.textContent = `Unit ${question.unit}`;
+  ui.listenProgressText.textContent = `Question ${state.listenMode.currentIndex + 1} of ${total}`;
+  ui.listenProgressFill.style.width = `${((state.listenMode.currentIndex + 1) / total) * 100}%`;
+  ui.listenStatusText.textContent = getSpeechStatusLabel();
+  ui.listenSpeedValue.textContent = formatPlaybackRate(state.listenMode.rate);
+  ui.listenSpeed.value = String(state.listenMode.rate);
+  ui.listenAnswerDelayValue.textContent = formatDelayLabel(state.listenMode.answerDelay);
+  ui.listenAnswerDelay.value = String(state.listenMode.answerDelay / 1000);
+  ui.listenReadOptionsToggle.checked = state.listenMode.speakOptions;
+
+  ui.listenAnswerBlock.classList.toggle(
+    "hidden",
+    !["answer", "explanation", "complete", "finished"].includes(state.listenMode.phase),
+  );
+  ui.listenExplanationBlock.classList.toggle(
+    "hidden",
+    !["explanation", "complete", "finished"].includes(state.listenMode.phase),
+  );
+
+  renderListenTitleCard(question);
+  renderListenTextSections(question);
+  renderListenOptions(question);
+  renderListenTransportState();
+
+  if (state.listenMode.section && state.listenMode.currentWordIndex >= 0) {
+    setSpeechHighlight(state.listenMode.section, state.listenMode.currentWordIndex);
+  }
+}
+
+function maybeShowListenTitleCard(question) {
+  const titleCardKey = `${question.unit}::${question.topic}`;
+  const previousQuestion = state.listenMode.activeQuestions[state.listenMode.currentIndex - 1];
+  const previousKey = previousQuestion ? `${previousQuestion.unit}::${previousQuestion.topic}` : null;
+
+  if (state.listenMode.currentIndex !== 0 && titleCardKey === previousKey) {
+    ui.listenTitleCard.classList.add("hidden");
+    playListenQuestionSequence();
+    return;
+  }
+
+  state.listenMode.titleCardKey = titleCardKey;
+  ui.listenTitleCard.classList.remove("hidden");
+  scheduleListenTask(() => {
+    ui.listenTitleCard.classList.add("hidden");
+    playListenQuestionSequence();
+  }, LISTEN_DELAYS.titleCard);
+}
+
+function playListenQuestionSequence() {
+  if (state.listenMode.isPaused) {
+    return;
+  }
+
+  const question = getListenQuestion();
+  if (!question) {
+    return;
+  }
+
+  state.listenMode.phase = "question";
+  state.listenMode.section = "question";
+  state.listenMode.currentWordIndex = -1;
+  renderListenView();
+  const spokenQuestion = state.listenMode.speakOptions
+    ? `${question.prompt} ${formatListenOptionsSpeech(question)}`
+    : question.prompt;
+  speakText(spokenQuestion, {
+    mode: "listen",
+    sectionName: "question",
+    rate: state.listenMode.rate,
+    onEnd: () => {
+      if (window.location.hash !== "#listen") {
+        return;
+      }
+      scheduleListenTask(playListenAnswerSequence, state.listenMode.answerDelay);
+    },
+  });
+}
+
+function playListenAnswerSequence() {
+  if (state.listenMode.isPaused) {
+    return;
+  }
+
+  const question = getListenQuestion();
+  state.listenMode.phase = "answer";
+  state.listenMode.section = "answer";
+  state.listenMode.currentWordIndex = -1;
+  renderListenView();
+  speakText(formatListenAnswer(question), {
+    mode: "listen",
+    sectionName: "answer",
+    rate: state.listenMode.rate,
+    onEnd: () => {
+      if (window.location.hash !== "#listen") {
+        return;
+      }
+      scheduleListenTask(playListenExplanationSequence, LISTEN_DELAYS.betweenAnswerAndExplanation);
+    },
+  });
+}
+
+function playListenExplanationSequence() {
+  if (state.listenMode.isPaused) {
+    return;
+  }
+
+  const question = getListenQuestion();
+  state.listenMode.phase = "explanation";
+  state.listenMode.section = "explanation";
+  state.listenMode.currentWordIndex = -1;
+  renderListenView();
+  speakText(question.explanation, {
+    mode: "listen",
+    sectionName: "explanation",
+    rate: state.listenMode.rate,
+    onEnd: () => {
+      if (window.location.hash !== "#listen") {
+        return;
+      }
+      state.listenMode.phase = "complete";
+      renderListenView();
+      scheduleListenTask(() => {
+        if (state.listenMode.currentIndex >= state.listenMode.activeQuestions.length - 1) {
+          state.listenMode.phase = "finished";
+          ui.listenStatusText.textContent = "Listen mode finished.";
+          renderListenTransportState();
+          return;
+        }
+        state.listenMode.currentIndex += 1;
+        state.listenMode.phase = "idle";
+        state.listenMode.section = null;
+        state.listenMode.currentWordIndex = -1;
+        renderListenView();
+        maybeShowListenTitleCard(getListenQuestion());
+      }, LISTEN_DELAYS.betweenQuestions);
+    },
   });
 }
 
@@ -485,9 +990,83 @@ function startQuiz() {
     return;
   }
 
+  stopListenPlayback();
+  cancelSpeechPlayback();
   resetQuizState();
   setRoute("#quiz");
   renderQuestion();
+}
+
+function startListenMode() {
+  const hasSelection =
+    state.selectionMode === "topics" ? state.selectedTopics.size > 0 : state.selectedUnits.size > 0;
+
+  if (!hasSelection) {
+    return;
+  }
+
+  state.listenMode.activeQuestions = buildQuestionPool();
+  if (state.listenMode.activeQuestions.length === 0) {
+    return;
+  }
+
+  cancelSpeechPlayback();
+  resetListenModeState();
+  setRoute("#listen");
+  renderListenView();
+  maybeShowListenTitleCard(getListenQuestion());
+}
+
+function restartListenAt(index) {
+  if (!state.listenMode.activeQuestions.length) {
+    return;
+  }
+
+  stopListenPlayback();
+  state.listenMode.currentIndex = Math.max(0, Math.min(index, state.listenMode.activeQuestions.length - 1));
+  state.listenMode.phase = "idle";
+  state.listenMode.section = null;
+  state.listenMode.currentWordIndex = -1;
+  state.listenMode.isPaused = false;
+  renderListenView();
+  maybeShowListenTitleCard(getListenQuestion());
+}
+
+function toggleListenPause() {
+  if (!state.listenMode.activeQuestions.length) {
+    return;
+  }
+
+  if (state.listenMode.phase === "finished") {
+    restartListenAt(0);
+    return;
+  }
+
+  state.listenMode.isPaused = !state.listenMode.isPaused;
+
+  if (state.listenMode.isPaused) {
+    pauseScheduledListenTask();
+    if (state.speech.currentUtterance) {
+      window.speechSynthesis.pause();
+    }
+  } else if (window.speechSynthesis.paused) {
+    window.speechSynthesis.resume();
+  } else if (state.listenMode.timerCallback) {
+    resumeScheduledListenTask();
+  } else if (!state.speech.currentUtterance) {
+    if (state.listenMode.phase === "question") {
+      playListenQuestionSequence();
+    } else if (state.listenMode.phase === "answer") {
+      playListenAnswerSequence();
+    } else if (state.listenMode.phase === "explanation" || state.listenMode.phase === "complete") {
+      playListenExplanationSequence();
+    } else {
+      maybeShowListenTitleCard(getListenQuestion());
+    }
+  }
+
+  ui.listenStatusText.textContent = getSpeechStatusLabel();
+  renderListenTransportState();
 }
 
 let audioCtx = null;
@@ -522,6 +1101,49 @@ function playSound(type) {
     osc.start(audioCtx.currentTime);
     osc.stop(audioCtx.currentTime + 0.4);
   }
+}
+
+function speakQuizQuestionAndChoices() {
+  const question = state.activeQuestions[state.currentIndex];
+  if (!question) {
+    return;
+  }
+
+  const choiceLines = question.options
+    .map((option, index) => `Choice ${index + 1}. ${option}.`)
+    .join(" ");
+  speakText(`${question.prompt} ${choiceLines}`, {
+    mode: "quiz",
+    rate: state.listenMode.rate,
+  });
+}
+
+function speakQuizExplanation() {
+  const question = state.activeQuestions[state.currentIndex];
+  if (!question) {
+    return;
+  }
+
+  speakText(
+    `${formatListenAnswer(question)} Explanation. ${question.explanation}`,
+    {
+      mode: "quiz",
+      rate: state.listenMode.rate,
+    },
+  );
+}
+
+function toggleGeneralSpeechPause() {
+  if (!state.speech.supported || state.speech.mode === "idle") {
+    return;
+  }
+
+  if (window.speechSynthesis.paused) {
+    window.speechSynthesis.resume();
+  } else {
+    window.speechSynthesis.pause();
+  }
+  updatePauseAudioButton();
 }
 
 const CONFETTI_COLORS = ["#5bc8f5", "#28cda0", "#ffd166", "#ef476f", "#a855f7", "#fb923c", "#f8fafc"];
@@ -606,11 +1228,14 @@ function bindEvents() {
     spawnTurtles(e);
     startQuiz();
   });
+  ui.listenModeButton.addEventListener("click", startListenMode);
   ui.openStatsButton.addEventListener("click", () => setRoute("#stats"));
   ui.backHomeButton.addEventListener("click", () => setRoute("#home"));
   ui.openStatsFromQuizButton.addEventListener("click", () => setRoute("#stats"));
   ui.resultsHomeButton.addEventListener("click", () => setRoute("#home"));
   ui.statsHomeButton.addEventListener("click", () => setRoute("#home"));
+  ui.listenHomeButton.addEventListener("click", () => setRoute("#home"));
+  ui.listenStatsButton.addEventListener("click", () => setRoute("#stats"));
 
   ui.allUnitsButton.addEventListener("click", () => {
     if (state.selectionMode === "topics") {
@@ -676,6 +1301,43 @@ function bindEvents() {
   ui.nextButton.addEventListener("click", nextStep);
   ui.restartButton.addEventListener("click", startQuiz);
   ui.tryAgainButton.addEventListener("click", startQuiz);
+  ui.readQuestionButton.addEventListener("click", speakQuizQuestionAndChoices);
+  ui.readExplanationButton.addEventListener("click", speakQuizExplanation);
+  ui.pauseAudioButton.addEventListener("click", toggleGeneralSpeechPause);
+  ui.listenPrevButton.addEventListener("click", () => {
+    restartListenAt(state.listenMode.currentIndex - 1);
+  });
+  ui.listenNextButton.addEventListener("click", () => {
+    restartListenAt(state.listenMode.currentIndex + 1);
+  });
+  ui.listenToggleButton.addEventListener("click", toggleListenPause);
+  ui.listenSpeed.addEventListener("input", () => {
+    state.listenMode.rate = Number(ui.listenSpeed.value);
+    ui.listenSpeedValue.textContent = formatPlaybackRate(state.listenMode.rate);
+    ui.listenStatusText.textContent = getSpeechStatusLabel();
+
+    if (window.location.hash === "#listen" && !state.listenMode.isPaused) {
+      restartListenAt(state.listenMode.currentIndex);
+    }
+  });
+  ui.listenAnswerDelay.addEventListener("input", () => {
+    state.listenMode.answerDelay = Math.round(Number(ui.listenAnswerDelay.value) * 1000);
+    ui.listenAnswerDelayValue.textContent = formatDelayLabel(state.listenMode.answerDelay);
+
+    if (window.location.hash === "#listen" && !state.listenMode.isPaused) {
+      restartListenAt(state.listenMode.currentIndex);
+    }
+  });
+  ui.listenReadOptionsToggle.addEventListener("change", () => {
+    state.listenMode.speakOptions = ui.listenReadOptionsToggle.checked;
+
+    if (window.location.hash === "#listen") {
+      renderListenView();
+      if (!state.listenMode.isPaused) {
+        restartListenAt(state.listenMode.currentIndex);
+      }
+    }
+  });
   ui.clearStatsButton.addEventListener("click", () => {
     state.attempts = [];
     saveAttempts();
@@ -683,7 +1345,10 @@ function bindEvents() {
     renderStatsPage();
   });
 
-  window.addEventListener("hashchange", renderRoute);
+  window.addEventListener("hashchange", () => {
+    cancelSpeechPlayback();
+    renderRoute();
+  });
 }
 
 async function init() {
@@ -712,6 +1377,21 @@ async function init() {
   ui.selectionMode.value = state.selectionMode;
   ui.unitLabelToggle.checked = true;
   ui.dopamineToggle.checked = false;
+  ui.listenSpeed.value = String(state.listenMode.rate);
+  ui.listenSpeedValue.textContent = formatPlaybackRate(state.listenMode.rate);
+  ui.listenAnswerDelay.value = String(state.listenMode.answerDelay / 1000);
+  ui.listenAnswerDelayValue.textContent = formatDelayLabel(state.listenMode.answerDelay);
+  ui.listenReadOptionsToggle.checked = state.listenMode.speakOptions;
+
+  ensureSpeechVoices();
+  if (state.speech.supported) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      ensureSpeechVoices();
+      if (window.location.hash === "#listen") {
+        ui.listenStatusText.textContent = getSpeechStatusLabel();
+      }
+    };
+  }
 
   loadAttempts();
   renderSelectionControls();
@@ -719,6 +1399,8 @@ async function init() {
   updateQuestionCountHelp();
   renderStatsPreview();
   renderStatsPage();
+  renderListenTransportState();
+  updatePauseAudioButton();
   bindEvents();
 
   if (!window.location.hash) {
