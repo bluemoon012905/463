@@ -31,6 +31,7 @@
               <span>Difficulty</span>
               <span class="select-wrap">
                 <select id="difficulty-mode" class="select-control">
+                  <option value="mixed">Mixed Mode</option>
                   <option value="easy">Easy Mode</option>
                   <option value="hard">Hard Mode</option>
                 </select>
@@ -112,7 +113,6 @@
         <section class="quiz-card app-view hidden" id="quiz-view">
           <div class="page-topbar">
             <button class="ghost-button" id="back-home-button">Back Home</button>
-            <button class="ghost-button hidden" id="remove-current-mistake-button">Remove From Mistake Book</button>
             <button class="ghost-button" id="open-stats-from-quiz-button">Stats</button>
           </div>
 
@@ -151,6 +151,7 @@
 
           <div class="button-row">
             <button class="primary-button hidden" id="next-button">Next Question</button>
+            <button class="hidden" id="remove-current-mistake-button">Remove From Mistake Book</button>
             <button class="ghost-button" id="restart-button">Restart</button>
           </div>
 

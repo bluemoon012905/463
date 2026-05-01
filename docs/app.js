@@ -7,7 +7,7 @@ const state = {
   units: [],
   topics: [],
   selectionMode: "units",
-  difficulty: "easy",
+  difficulty: "mixed",
   selectedUnits: new Set(),
   selectedTopics: new Set(),
   showUnitNumbersOnly: true,
@@ -332,8 +332,23 @@ function findWordIndexFromChar(text, charIndex) {
 }
 
 function rebuildUnitsFromData() {
-  const source = state.difficulty === "hard" && state.hardData ? state.hardData : state.data;
-  state.units = source.units;
+  let units;
+  if (state.difficulty === "mixed" && state.data && state.hardData) {
+    units = state.data.units.map((easyUnit) => {
+      const hardUnit = state.hardData.units.find((u) => u.unit === easyUnit.unit);
+      const mergedQuestions = [...easyUnit.questions, ...(hardUnit ? hardUnit.questions : [])];
+      const seenTopics = [];
+      [...easyUnit.topics, ...(hardUnit ? hardUnit.topics : [])].forEach((t) => {
+        if (!seenTopics.includes(t)) seenTopics.push(t);
+      });
+      return { ...easyUnit, topics: seenTopics, questions: mergedQuestions };
+    });
+  } else if (state.difficulty === "hard" && state.hardData) {
+    units = state.hardData.units;
+  } else {
+    units = state.data.units;
+  }
+  state.units = units;
   state.topics = state.units.flatMap((unit) => {
     const questionsByTopic = new Map();
     unit.questions.forEach((question) => {
