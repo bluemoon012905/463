@@ -3,7 +3,10 @@ const STORAGE_KEY = "cse463_quiz_attempts";
 const state = {
   data: null,
   units: [],
+  topics: [],
+  selectionMode: "units",
   selectedUnits: new Set(),
+  selectedTopics: new Set(),
   showUnitNumbersOnly: true,
   activeQuestions: [],
   currentIndex: 0,
@@ -17,6 +20,8 @@ const ui = {
   homeView: document.getElementById("home-view"),
   quizView: document.getElementById("quiz-view"),
   statsView: document.getElementById("stats-view"),
+  selectionCopy: document.getElementById("selection-copy"),
+  selectionMode: document.getElementById("selection-mode"),
   questionCount: document.getElementById("question-count"),
   questionCountHelp: document.getElementById("question-count-help"),
   shuffleToggle: document.getElementById("shuffle-toggle"),
@@ -71,32 +76,90 @@ function formatUnitLabel(unit) {
   return state.showUnitNumbersOnly ? `Unit ${unit.unit}` : `Unit ${unit.unit}: ${unit.title}`;
 }
 
+function getTopicKey(unitNumber, topic) {
+  return `${unitNumber}::${topic}`;
+}
+
+function formatTopicLabel(topicEntry) {
+  return state.showUnitNumbersOnly
+    ? `Unit ${topicEntry.unit} • ${topicEntry.topic}`
+    : `Unit ${topicEntry.unit}: ${topicEntry.unitTitle} • ${topicEntry.topic}`;
+}
+
+function getSelectedItems() {
+  if (state.selectionMode === "topics") {
+    return state.topics.filter((topicEntry) => state.selectedTopics.has(topicEntry.key));
+  }
+
+  return state.units.filter((unit) => state.selectedUnits.has(unit.unit));
+}
+
 function getSelectedUnits() {
   return state.units.filter((unit) => state.selectedUnits.has(unit.unit));
 }
 
 function getSelectionStats() {
-  const selectedUnits = getSelectedUnits();
+  const selectedItems = getSelectedItems();
+
+  if (state.selectionMode === "topics") {
+    return {
+      selectedItems,
+      selectionCount: selectedItems.length,
+      topicCount: selectedItems.length,
+      questionCount: selectedItems.reduce((sum, topicEntry) => sum + topicEntry.questions.length, 0),
+    };
+  }
+
+  const selectedUnits = selectedItems;
   return {
     selectedUnits,
+    selectionCount: selectedUnits.length,
     topicCount: selectedUnits.reduce((sum, unit) => sum + unit.topics.length, 0),
     questionCount: selectedUnits.reduce((sum, unit) => sum + unit.questions.length, 0),
   };
 }
 
 function updateQuestionCountHelp() {
-  const { topicCount, questionCount } = getSelectionStats();
+  const { selectionCount, topicCount, questionCount } = getSelectionStats();
+  const modeLabel = state.selectionMode === "topics" ? "topic" : "unit";
   ui.questionCount.max = String(questionCount || 1);
 
   if (topicCount === 0) {
-    ui.questionCountHelp.textContent = "Select at least one unit to enable a question count.";
+    ui.questionCountHelp.textContent = `Select at least one ${modeLabel} to enable a question count.`;
     return;
   }
 
-  ui.questionCountHelp.textContent = `Type a number from 1 to ${questionCount}. Current selection covers ${topicCount} topics.`;
+  ui.questionCountHelp.textContent =
+    `Type a number from 1 to ${questionCount}. Current selection covers ${selectionCount} ` +
+    `${modeLabel}${selectionCount === 1 ? "" : "s"} and ${topicCount} topic${topicCount === 1 ? "" : "s"}.`;
 }
 
 function renderUnitStrip() {
+  if (state.selectionMode === "topics") {
+    ui.unitStrip.innerHTML = state.topics
+      .map(
+        (topicEntry) =>
+          `<button class="unit-pill selectable ${
+            state.selectedTopics.has(topicEntry.key) ? "active" : ""
+          }" type="button" data-topic-key="${topicEntry.key}">${formatTopicLabel(topicEntry)}</button>`,
+      )
+      .join("");
+
+    ui.unitStrip.querySelectorAll("[data-topic-key]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const { topicKey } = button.dataset;
+        if (state.selectedTopics.has(topicKey)) {
+          state.selectedTopics.delete(topicKey);
+        } else {
+          state.selectedTopics.add(topicKey);
+        }
+        renderUnitStrip();
+        updateQuestionCountHelp();
+      });
+    });
+    return;
+  }
+
   ui.unitStrip.innerHTML = state.units
     .map(
       (unit) =>
@@ -120,15 +183,32 @@ function renderUnitStrip() {
   });
 }
 
+function renderSelectionControls() {
+  const isTopicMode = state.selectionMode === "topics";
+  ui.selectionCopy.textContent = isTopicMode
+    ? "Select the topics you want to practice."
+    : "Select the units you want to practice.";
+  ui.allUnitsButton.textContent = isTopicMode ? "Select All Topics" : "Select All Units";
+  ui.clearUnitsButton.textContent = isTopicMode ? "Clear Topics" : "Clear Units";
+}
+
 function buildQuestionPool() {
-  const chosenUnits = getSelectedUnits();
-  const flatQuestions = chosenUnits.flatMap((unit) =>
-    unit.questions.map((question) => ({
-      ...question,
-      unit: unit.unit,
-      unitTitle: unit.title,
-    })),
-  );
+  const flatQuestions =
+    state.selectionMode === "topics"
+      ? getSelectedItems().flatMap((topicEntry) =>
+          topicEntry.questions.map((question) => ({
+            ...question,
+            unit: topicEntry.unit,
+            unitTitle: topicEntry.unitTitle,
+          })),
+        )
+      : getSelectedUnits().flatMap((unit) =>
+          unit.questions.map((question) => ({
+            ...question,
+            unit: unit.unit,
+            unitTitle: unit.title,
+          })),
+        );
 
   let pool = ui.shuffleToggle.checked ? shuffle(flatQuestions) : [...flatQuestions];
   const rawRequestedCount = Number.parseInt(ui.questionCount.value, 10);
@@ -379,7 +459,10 @@ function nextStep() {
 }
 
 function startQuiz() {
-  if (state.selectedUnits.size === 0) {
+  const hasSelection =
+    state.selectionMode === "topics" ? state.selectedTopics.size > 0 : state.selectedUnits.size > 0;
+
+  if (!hasSelection) {
     return;
   }
 
@@ -430,13 +513,28 @@ function bindEvents() {
   ui.statsHomeButton.addEventListener("click", () => setRoute("#home"));
 
   ui.allUnitsButton.addEventListener("click", () => {
-    state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
+    if (state.selectionMode === "topics") {
+      state.selectedTopics = new Set(state.topics.map((topicEntry) => topicEntry.key));
+    } else {
+      state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
+    }
     renderUnitStrip();
     updateQuestionCountHelp();
   });
 
   ui.clearUnitsButton.addEventListener("click", () => {
-    state.selectedUnits = new Set();
+    if (state.selectionMode === "topics") {
+      state.selectedTopics = new Set();
+    } else {
+      state.selectedUnits = new Set();
+    }
+    renderUnitStrip();
+    updateQuestionCountHelp();
+  });
+
+  ui.selectionMode.addEventListener("change", () => {
+    state.selectionMode = ui.selectionMode.value;
+    renderSelectionControls();
     renderUnitStrip();
     updateQuestionCountHelp();
   });
@@ -461,11 +559,14 @@ function bindEvents() {
     }
 
     if (rawValue > questionCount) {
-      ui.questionCountHelp.textContent = `Max is ${questionCount} for the selected units.`;
+      ui.questionCountHelp.textContent =
+        `Max is ${questionCount} for the selected ${state.selectionMode}.`;
       return;
     }
 
-    ui.questionCountHelp.textContent = `${rawValue} question${rawValue === 1 ? "" : "s"} requested from ${topicCount} selected topics.`;
+    ui.questionCountHelp.textContent =
+      `${rawValue} question${rawValue === 1 ? "" : "s"} requested from ${topicCount} selected ` +
+      `topic${topicCount === 1 ? "" : "s"}.`;
   });
 
   ui.nextButton.addEventListener("click", nextStep);
@@ -485,10 +586,30 @@ async function init() {
   const response = await fetch("./data/quiz_questions.json");
   state.data = await response.json();
   state.units = state.data.units;
+  state.topics = state.units.flatMap((unit) => {
+    const questionsByTopic = new Map();
+    unit.questions.forEach((question) => {
+      if (!questionsByTopic.has(question.topic)) {
+        questionsByTopic.set(question.topic, []);
+      }
+      questionsByTopic.get(question.topic).push(question);
+    });
+
+    return unit.topics.map((topic) => ({
+      key: getTopicKey(unit.unit, topic),
+      unit: unit.unit,
+      unitTitle: unit.title,
+      topic,
+      questions: questionsByTopic.get(topic) || [],
+    }));
+  });
   state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
+  state.selectedTopics = new Set(state.topics.map((topicEntry) => topicEntry.key));
+  ui.selectionMode.value = state.selectionMode;
   ui.unitLabelToggle.checked = true;
 
   loadAttempts();
+  renderSelectionControls();
   renderUnitStrip();
   updateQuestionCountHelp();
   renderStatsPreview();

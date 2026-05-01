@@ -133,6 +133,15 @@ h2 {
   font-weight: 600;
 }
 
+.select-field {
+  gap: 8px;
+}
+
+.select-wrap {
+  position: relative;
+  display: block;
+}
+
 .field select,
 .field input[type="number"],
 .field input[type="text"] {
@@ -145,6 +154,23 @@ h2 {
   color: var(--ink);
   font: inherit;
   outline: none;
+}
+
+.select-control {
+  cursor: pointer;
+  padding-right: 46px;
+}
+
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
 }
 
 .field select:focus,

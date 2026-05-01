@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -22,10 +23,21 @@
           </div>
 
           <div class="card-header">
-            <p>Select the units you want to practice.</p>
+            <p id="selection-copy">Select the units or topics you want to practice.</p>
           </div>
 
           <div class="control-grid">
+            <label class="field select-field">
+              <span>Practice By</span>
+              <span class="select-wrap">
+                <select id="selection-mode" class="select-control">
+                  <option value="units">Units</option>
+                  <option value="topics">Topics</option>
+                </select>
+                <span class="select-arrow" aria-hidden="true"></span>
+              </span>
+            </label>
+
             <label class="field">
               <span>Question Count</span>
               <input
@@ -36,7 +48,7 @@
                 placeholder="Type a number"
               />
               <small class="field-help" id="question-count-help">
-                Type a number up to the available max for the selected units.
+                Type a number up to the available max for the selected units or topics.
               </small>
             </label>
 
