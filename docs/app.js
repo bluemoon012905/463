@@ -13,6 +13,7 @@ const state = {
   showUnitNumbersOnly: true,
   maxDopamine: false,
   showQuizAudioControls: false,
+  showHomeSettings: true,
   activeQuestions: [],
   currentIndex: 0,
   score: 0,
@@ -52,6 +53,8 @@ const ui = {
   quizView: document.getElementById("quiz-view"),
   statsView: document.getElementById("stats-view"),
   selectionCopy: document.getElementById("selection-copy"),
+  toggleSettingsButton: document.getElementById("toggle-settings-button"),
+  controlGrid: document.querySelector("#home-view .control-grid"),
   difficultyMode: document.getElementById("difficulty-mode"),
   selectionMode: document.getElementById("selection-mode"),
   questionCount: document.getElementById("question-count"),
@@ -266,6 +269,11 @@ function renderSelectionControls() {
     : "Select the units you want to practice.";
   ui.allUnitsButton.textContent = isTopicMode ? "Select All Topics" : "Select All Units";
   ui.clearUnitsButton.textContent = isTopicMode ? "Clear Topics" : "Clear Units";
+}
+
+function renderHomeSettingsVisibility() {
+  ui.controlGrid.classList.toggle("hidden", !state.showHomeSettings);
+  ui.toggleSettingsButton.textContent = state.showHomeSettings ? "Hide Settings" : "Show Settings";
 }
 
 function getWordRanges(text) {
@@ -1452,6 +1460,10 @@ function bindEvents() {
     spawnTurtles(e);
     startQuiz();
   });
+  ui.toggleSettingsButton.addEventListener("click", () => {
+    state.showHomeSettings = !state.showHomeSettings;
+    renderHomeSettingsVisibility();
+  });
   ui.listenModeButton.addEventListener("click", startListenMode);
   ui.openStatsButton.addEventListener("click", () => setRoute("#stats"));
   ui.startMistakeQuizButton.addEventListener("click", startMistakeQuiz);
@@ -1628,6 +1640,7 @@ async function init() {
   renderStatsPreview();
   renderStatsPage();
   renderMistakeBookState();
+  renderHomeSettingsVisibility();
   renderListenTransportState();
   updatePauseAudioButton();
   bindEvents();

@@ -263,6 +263,11 @@ h2 {
   margin-top: 22px;
 }
 
+.settings-toggle-row {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
 .page-topbar {
   display: flex;
   gap: 12px;
