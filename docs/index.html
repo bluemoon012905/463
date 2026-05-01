@@ -3,79 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSE 463 Self Quiz</title>
+    <title>463 Quizzes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="page-shell">
-      <header class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">CSE 463 Final Review</p>
-          <h1>Self-quizzing for all 24 units.</h1>
-          <p class="lede">
-            Static GitHub Pages app with multiple-choice review questions based on the lecture units.
-          </p>
-        </div>
-        <div class="hero-panel">
-          <div class="stat">
-            <span class="stat-label">Units</span>
-            <strong id="stat-units">24</strong>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Questions</span>
-            <strong id="stat-questions">288</strong>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Topics</span>
-            <strong id="stat-topics">96</strong>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Mode</span>
-            <strong>Multiple Choice</strong>
-          </div>
-        </div>
-      </header>
-
       <main class="layout">
         <section class="control-card">
+          <div class="hero-copy merged">
+            <p class="eyebrow">CSE 463 Final Review</p>
+            <h1>463 Quizzes</h1>
+          </div>
+
           <div class="card-header">
-            <h2>Quiz Setup</h2>
-            <p>Choose one unit or mix the entire course.</p>
+            <p>Select the units you want to practice.</p>
           </div>
 
           <div class="control-grid">
             <label class="field">
-              <span>Unit</span>
-              <select id="unit-select"></select>
-            </label>
-
-            <label class="field">
               <span>Question Count</span>
-              <select id="question-count">
-                <option value="all">All available questions</option>
-                <option value="10">10 questions</option>
-                <option value="20">20 questions</option>
-                <option value="30">30 questions</option>
-              </select>
+              <input
+                id="question-count"
+                type="number"
+                min="1"
+                inputmode="numeric"
+                placeholder="Type a number"
+              />
+              <small class="field-help" id="question-count-help">
+                Type a number up to the available max for the selected units.
+              </small>
             </label>
 
             <label class="field checkbox-field">
               <input type="checkbox" id="shuffle-toggle" checked />
               <span>Shuffle questions and answer choices</span>
             </label>
+
+            <label class="field checkbox-field">
+              <input type="checkbox" id="unit-label-toggle" />
+              <span>Show unit numbers only</span>
+            </label>
           </div>
 
-          <div class="unit-strip" id="unit-strip"></div>
+          <div class="unit-strip selectable" id="unit-strip"></div>
 
           <div class="button-row">
             <button class="primary-button" id="start-button">Start Quiz</button>
-            <button class="ghost-button" id="all-units-button">Load All Units</button>
+            <button class="ghost-button" id="all-units-button">Select All Units</button>
+            <button class="ghost-button" id="clear-units-button">Clear Units</button>
           </div>
         </section>
 

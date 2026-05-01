@@ -1,6 +1,8 @@
 const state = {
   data: null,
   units: [],
+  selectedUnits: new Set(),
+  showUnitNumbersOnly: false,
   activeQuestions: [],
   currentIndex: 0,
   score: 0,
@@ -9,15 +11,14 @@ const state = {
 };
 
 const ui = {
-  statUnits: document.getElementById("stat-units"),
-  statQuestions: document.getElementById("stat-questions"),
-  statTopics: document.getElementById("stat-topics"),
-  unitSelect: document.getElementById("unit-select"),
   questionCount: document.getElementById("question-count"),
+  questionCountHelp: document.getElementById("question-count-help"),
   shuffleToggle: document.getElementById("shuffle-toggle"),
+  unitLabelToggle: document.getElementById("unit-label-toggle"),
   unitStrip: document.getElementById("unit-strip"),
   startButton: document.getElementById("start-button"),
   allUnitsButton: document.getElementById("all-units-button"),
+  clearUnitsButton: document.getElementById("clear-units-button"),
   quizCard: document.getElementById("quiz-card"),
   quizTitle: document.getElementById("quiz-title"),
   topicLine: document.getElementById("topic-line"),
@@ -50,28 +51,63 @@ function shuffle(array) {
   return copy;
 }
 
-function populateControls() {
-  const allOption = new Option("All units", "all");
-  ui.unitSelect.add(allOption);
+function formatUnitLabel(unit) {
+  return state.showUnitNumbersOnly ? `Unit ${unit.unit}` : `Unit ${unit.unit}: ${unit.title}`;
+}
 
-  state.units.forEach((unit) => {
-    ui.unitSelect.add(new Option(`Unit ${unit.unit}: ${unit.title}`, String(unit.unit)));
-  });
+function getSelectedUnits() {
+  return state.units.filter((unit) => state.selectedUnits.has(unit.unit));
+}
 
+function getSelectionStats() {
+  const selectedUnits = getSelectedUnits();
+  const topicCount = selectedUnits.reduce((sum, unit) => sum + unit.topics.length, 0);
+  const questionCount = selectedUnits.reduce((sum, unit) => sum + unit.questions.length, 0);
+  return { selectedUnits, topicCount, questionCount };
+}
+
+function updateQuestionCountHelp() {
+  const { topicCount, questionCount } = getSelectionStats();
+  ui.questionCount.max = String(questionCount || 1);
+
+  if (topicCount === 0) {
+    ui.questionCountHelp.textContent = "Select at least one unit to enable a question count.";
+    return;
+  }
+
+  ui.questionCountHelp.textContent = `Type a number from 1 to ${questionCount}. Current selection covers ${topicCount} topics.`;
+}
+
+function renderUnitStrip() {
   ui.unitStrip.innerHTML = state.units
     .map(
       (unit) =>
-        `<span class="unit-pill">Unit ${unit.unit}: ${unit.title} (${unit.topics.length} topics, ${unit.questions.length} questions)</span>`,
+        `<button class="unit-pill selectable ${
+          state.selectedUnits.has(unit.unit) ? "active" : ""
+        }" type="button" data-unit="${unit.unit}">${formatUnitLabel(unit)}</button>`,
     )
     .join("");
+
+  ui.unitStrip.querySelectorAll("[data-unit]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const unitNumber = Number(button.dataset.unit);
+      if (state.selectedUnits.has(unitNumber)) {
+        state.selectedUnits.delete(unitNumber);
+      } else {
+        state.selectedUnits.add(unitNumber);
+      }
+      renderUnitStrip();
+      updateQuestionCountHelp();
+    });
+  });
+}
+
+function populateControls() {
+  renderUnitStrip();
 }
 
 function buildQuestionPool() {
-  const selection = ui.unitSelect.value;
-  const chooseAllUnits = selection === "all";
-  const chosenUnits = chooseAllUnits
-    ? state.units
-    : state.units.filter((unit) => String(unit.unit) === selection);
+  const chosenUnits = getSelectedUnits();
 
   const flatQuestions = chosenUnits.flatMap((unit) =>
     unit.questions.map((question) => ({
@@ -82,10 +118,13 @@ function buildQuestionPool() {
   );
 
   let pool = ui.shuffleToggle.checked ? shuffle(flatQuestions) : [...flatQuestions];
-  const requestedCount = ui.questionCount.value;
+  const rawRequestedCount = Number.parseInt(ui.questionCount.value, 10);
+  const requestedCount = Number.isFinite(rawRequestedCount)
+    ? Math.max(1, Math.min(rawRequestedCount, flatQuestions.length))
+    : flatQuestions.length;
 
-  if (requestedCount !== "all") {
-    pool = pool.slice(0, Number(requestedCount));
+  if (pool.length > requestedCount) {
+    pool = pool.slice(0, requestedCount);
   }
 
   if (ui.shuffleToggle.checked) {
@@ -235,6 +274,10 @@ function nextStep() {
 }
 
 function startQuiz() {
+  if (state.selectedUnits.size === 0) {
+    return;
+  }
+
   state.activeQuestions = buildQuestionPool();
   if (state.activeQuestions.length === 0) {
     return;
@@ -249,20 +292,47 @@ async function init() {
   const response = await fetch("./data/quiz_questions.json");
   state.data = await response.json();
   state.units = state.data.units;
-
-  ui.statUnits.textContent = String(state.units.length);
-  ui.statQuestions.textContent = String(
-    state.units.reduce((sum, unit) => sum + unit.questions.length, 0),
-  );
-  ui.statTopics.textContent = String(
-    state.units.reduce((sum, unit) => sum + unit.topics.length, 0),
-  );
+  state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
 
   populateControls();
+  updateQuestionCountHelp();
 
   ui.startButton.addEventListener("click", startQuiz);
   ui.allUnitsButton.addEventListener("click", () => {
-    ui.unitSelect.value = "all";
+    state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
+    renderUnitStrip();
+    updateQuestionCountHelp();
+  });
+  ui.clearUnitsButton.addEventListener("click", () => {
+    state.selectedUnits = new Set();
+    renderUnitStrip();
+    updateQuestionCountHelp();
+  });
+  ui.unitLabelToggle.addEventListener("change", () => {
+    state.showUnitNumbersOnly = ui.unitLabelToggle.checked;
+    renderUnitStrip();
+  });
+  ui.questionCount.addEventListener("input", () => {
+    const { questionCount } = getSelectionStats();
+    const rawValue = Number.parseInt(ui.questionCount.value, 10);
+
+    if (!ui.questionCount.value) {
+      updateQuestionCountHelp();
+      return;
+    }
+
+    if (!Number.isFinite(rawValue) || rawValue < 1) {
+      ui.questionCountHelp.textContent = "Enter a whole number greater than or equal to 1.";
+      return;
+    }
+
+    if (rawValue > questionCount) {
+      ui.questionCountHelp.textContent = `Max is ${questionCount} for the selected units.`;
+      return;
+    }
+
+    const { topicCount } = getSelectionStats();
+    ui.questionCountHelp.textContent = `${rawValue} question${rawValue === 1 ? "" : "s"} requested from ${topicCount} selected topics.`;
   });
   ui.nextButton.addEventListener("click", nextStep);
   ui.restartButton.addEventListener("click", startQuiz);
