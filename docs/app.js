@@ -431,6 +431,7 @@ function showResults() {
   const accuracy = Math.round((state.score / total) * 100);
   const uniqueUnits = new Set(state.activeQuestions.map((question) => question.unit));
 
+  spawnEndConfetti();
   recordAttempt();
   renderStatsPreview();
   renderStatsPage();
@@ -543,6 +544,36 @@ function spawnConfetti(x, y) {
     document.body.appendChild(el);
     el.addEventListener("animationend", () => el.remove());
   }
+}
+
+function spawnEndConfetti() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const cannons = [
+    { x: vw * 0.15, y: vh * 0.35 },
+    { x: vw * 0.5,  y: vh * 0.25 },
+    { x: vw * 0.85, y: vh * 0.35 },
+  ];
+  cannons.forEach(({ x, y }, i) => {
+    setTimeout(() => {
+      for (let j = 0; j < 75; j++) {
+        const el = document.createElement("div");
+        el.className = "confetti-particle";
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 120 + Math.random() * 280;
+        const dx = Math.cos(angle) * speed;
+        const dy = Math.sin(angle) * speed;
+        const w = 7 + Math.random() * 11;
+        const h = w * (0.3 + Math.random() * 0.75);
+        const rot = (Math.random() - 0.5) * 900;
+        const dur = 900 + Math.random() * 800;
+        const color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+        el.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:${color};--dx:${dx}px;--dy:${dy}px;--rot:${rot}deg;--dur:${dur}ms`;
+        document.body.appendChild(el);
+        el.addEventListener("animationend", () => el.remove());
+      }
+    }, i * 220);
+  });
 }
 
 function spawnTurtles(event) {
