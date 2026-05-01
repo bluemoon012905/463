@@ -12,7 +12,7 @@ const state = {
   selectedTopics: new Set(),
   showUnitNumbersOnly: true,
   maxDopamine: false,
-  showQuizAudioControls: true,
+  showQuizAudioControls: false,
   activeQuestions: [],
   currentIndex: 0,
   score: 0,

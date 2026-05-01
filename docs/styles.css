@@ -197,6 +197,12 @@ h2 {
   background: var(--paper-strong);
 }
 
+.checkbox-field span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .checkbox-field input {
   inline-size: 18px;
   block-size: 18px;
@@ -764,6 +770,21 @@ button:hover {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.setting-icon {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.2rem;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.setting-icon-image {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 
 @media (max-width: 860px) {
