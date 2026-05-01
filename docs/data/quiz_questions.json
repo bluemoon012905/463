@@ -1,0 +1,1015 @@
+{
+  "course": "CSE 463",
+  "title": "Self Quiz Question Bank",
+  "description": "Multiple-choice review questions aligned to the 24 lecture units.",
+  "units": [
+    {
+      "unit": 1,
+      "title": "Introduction to Interaction Design",
+      "questions": [
+        {
+          "id": "u1q1",
+          "prompt": "What does human-centered design put first?",
+          "options": [
+            "Human needs, capabilities, and behavior",
+            "The newest available technology",
+            "Developer convenience",
+            "Marketing trends"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture defines human-centered design as putting human needs, capabilities, and behavior first, then designing around them."
+        },
+        {
+          "id": "u1q2",
+          "prompt": "Which set of fields was used in the lecture's 'three-legged stool' view of HCI?",
+          "options": [
+            "Computer science, design, and behavioral sciences",
+            "Biology, chemistry, and physics",
+            "Accounting, finance, and economics",
+            "Journalism, law, and architecture"
+          ],
+          "answerIndex": 0,
+          "explanation": "The slide presents HCI as combining computer science, design, and behavioral sciences."
+        },
+        {
+          "id": "u1q3",
+          "prompt": "In the lecture's interaction sequence examples, an interactive system is characterized by repeated exchanges of what?",
+          "options": [
+            "Input and output between human and system",
+            "Only system output",
+            "Only human input",
+            "Purely physical movement without feedback"
+          ],
+          "answerIndex": 0,
+          "explanation": "The slides use input and output loops to explain how people interact with systems over a sequence of actions."
+        }
+      ]
+    },
+    {
+      "unit": 2,
+      "title": "Usability",
+      "questions": [
+        {
+          "id": "u2q1",
+          "prompt": "Which three elements appear in the ISO definition of usability discussed in class?",
+          "options": [
+            "Effectiveness, efficiency, and satisfaction",
+            "Speed, novelty, and cost",
+            "Power, storage, and bandwidth",
+            "Accuracy, privacy, and security"
+          ],
+          "answerIndex": 0,
+          "explanation": "Usability was framed around effectiveness, efficiency, and satisfaction for specified users doing specified tasks."
+        },
+        {
+          "id": "u2q2",
+          "prompt": "Why does human-centered design matter in HCI?",
+          "options": [
+            "Because systems should be designed around human needs and behavior",
+            "Because all users prefer complex interfaces",
+            "Because algorithms remove the need for design",
+            "Because interface design is only about graphics"
+          ],
+          "answerIndex": 0,
+          "explanation": "The usability lecture emphasizes starting with people rather than forcing people to adapt to the system."
+        },
+        {
+          "id": "u2q3",
+          "prompt": "When analyzing usability, what should you pay attention to besides the interface itself?",
+          "options": [
+            "The specified users and the tasks they are trying to complete",
+            "Only the color palette",
+            "Only the underlying database",
+            "Only the app store ranking"
+          ],
+          "answerIndex": 0,
+          "explanation": "Usability is contextual. The lecture stresses specified users and tasks, not abstract judgments detached from use."
+        }
+      ]
+    },
+    {
+      "unit": 3,
+      "title": "Usability & User Experience",
+      "questions": [
+        {
+          "id": "u3q1",
+          "prompt": "The gulf of execution is mainly about the difficulty of:",
+          "options": [
+            "Translating goals into actions",
+            "Remembering old passwords",
+            "Comparing competing products",
+            "Choosing a color theme"
+          ],
+          "answerIndex": 0,
+          "explanation": "Norman's gulf of execution concerns how easily users can figure out what actions to take to achieve their goals."
+        },
+        {
+          "id": "u3q2",
+          "prompt": "What is a signifier in interface design?",
+          "options": [
+            "A clue that makes an affordance known to users",
+            "A method for compressing video",
+            "A security warning shown after login",
+            "A hidden developer setting"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture distinguishes affordances from signifiers, where signifiers communicate what actions are possible."
+        },
+        {
+          "id": "u3q3",
+          "prompt": "According to the lecture, good systems should be discoverable and provide understandable:",
+          "options": [
+            "Feedback",
+            "Advertisements",
+            "Animations only",
+            "Pricing tiers"
+          ],
+          "answerIndex": 0,
+          "explanation": "Discoverability and feedback help users know what actions are available and whether those actions succeeded."
+        }
+      ]
+    },
+    {
+      "unit": 4,
+      "title": "Intro to IxD-PACT",
+      "questions": [
+        {
+          "id": "u4q1",
+          "prompt": "What does PACT stand for?",
+          "options": [
+            "People, Activities, Context, Technology",
+            "Process, Analysis, Coding, Testing",
+            "People, Access, Content, Trust",
+            "Planning, Architecture, Components, Timing"
+          ],
+          "answerIndex": 0,
+          "explanation": "PACT is the framework introduced for thinking about human-centered systems in terms of people, activities, context, and technology."
+        },
+        {
+          "id": "u4q2",
+          "prompt": "What is the primary purpose of the User Experience Questionnaire (UEQ) shown in class?",
+          "options": [
+            "To measure user experience dimensions of a system",
+            "To benchmark processor speed",
+            "To encrypt sensitive data",
+            "To estimate project cost"
+          ],
+          "answerIndex": 0,
+          "explanation": "The UEQ was presented as a way to evaluate user experience rather than raw technical performance."
+        },
+        {
+          "id": "u4q3",
+          "prompt": "In PACT analysis, 'context' mainly refers to:",
+          "options": [
+            "The setting and circumstances in which interaction happens",
+            "The source code repository",
+            "Only the screen resolution",
+            "The age of the operating system"
+          ],
+          "answerIndex": 0,
+          "explanation": "Context includes the physical, social, and organizational circumstances around interaction."
+        }
+      ]
+    },
+    {
+      "unit": 5,
+      "title": "Visual Perception",
+      "questions": [
+        {
+          "id": "u5q1",
+          "prompt": "Which Gestalt law explains why nearby elements are often perceived as a group?",
+          "options": [
+            "Proximity",
+            "Closure",
+            "Symmetry",
+            "Continuation"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture uses Gestalt principles such as proximity to explain how visual structure communicates relationships."
+        },
+        {
+          "id": "u5q2",
+          "prompt": "Why is visual hierarchy important in interface design?",
+          "options": [
+            "It helps communicate importance and guide attention",
+            "It guarantees all users will like the design",
+            "It removes the need for content organization",
+            "It replaces accessibility guidelines"
+          ],
+          "answerIndex": 0,
+          "explanation": "Visual hierarchy supports perception by helping users notice what matters first and interpret the layout more efficiently."
+        },
+        {
+          "id": "u5q3",
+          "prompt": "What is a practical implication of limited human attention for interface design?",
+          "options": [
+            "Too much clutter can hide important information",
+            "Users can reliably process everything on screen at once",
+            "Animation always improves comprehension",
+            "Text labels are usually unnecessary"
+          ],
+          "answerIndex": 0,
+          "explanation": "Because attention is limited, designers should reduce clutter and structure information deliberately."
+        }
+      ]
+    },
+    {
+      "unit": 6,
+      "title": "Cognition, Motor Control",
+      "questions": [
+        {
+          "id": "u6q1",
+          "prompt": "Which retrieval mechanism is generally easier for users than recall?",
+          "options": [
+            "Recognition",
+            "Memorization",
+            "Prediction",
+            "Guessing"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture explicitly contrasts recognition and recall, noting that recognition is easier for users."
+        },
+        {
+          "id": "u6q2",
+          "prompt": "Working memory is best described as:",
+          "options": [
+            "A limited-capacity short-term memory system",
+            "Permanent storage for all experiences",
+            "A purely motor control mechanism",
+            "A database of interface widgets"
+          ],
+          "answerIndex": 0,
+          "explanation": "The cognition lecture covers working memory as a short-term, limited-capacity part of human cognition."
+        },
+        {
+          "id": "u6q3",
+          "prompt": "What is one role of rehearsal in memory?",
+          "options": [
+            "It helps keep or strengthen information for later retrieval",
+            "It eliminates the need for interface cues",
+            "It increases the number of simultaneous goals a user can track without limit",
+            "It only matters for motor tasks, not cognition"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture connects rehearsal to reducing forgetting and supporting retrieval from memory."
+        }
+      ]
+    },
+    {
+      "unit": 7,
+      "title": "Motor Control, Modelling",
+      "questions": [
+        {
+          "id": "u7q1",
+          "prompt": "According to Fitts' Law, movement time for pointing depends strongly on target distance and target:",
+          "options": [
+            "Width",
+            "Color",
+            "Label length",
+            "Brightness"
+          ],
+          "answerIndex": 0,
+          "explanation": "Fitts' Law models pointing time using target distance and width through the index of difficulty."
+        },
+        {
+          "id": "u7q2",
+          "prompt": "Which target is generally faster to acquire under Fitts' Law?",
+          "options": [
+            "A larger target that is closer",
+            "A smaller target that is farther away",
+            "A hidden target without feedback",
+            "A target with lower contrast"
+          ],
+          "answerIndex": 0,
+          "explanation": "Larger and closer targets reduce index of difficulty and therefore reduce movement time."
+        },
+        {
+          "id": "u7q3",
+          "prompt": "Steering Law is most relevant when the task involves:",
+          "options": [
+            "Following a constrained trajectory such as a tunnel",
+            "Reading a long document",
+            "Remembering menu labels",
+            "Choosing between color palettes"
+          ],
+          "answerIndex": 0,
+          "explanation": "Steering Law extends pointing models to trajectory-based tasks such as moving through tunnels or paths."
+        }
+      ]
+    },
+    {
+      "unit": 8,
+      "title": "Computational Design, Data Collection",
+      "questions": [
+        {
+          "id": "u8q1",
+          "prompt": "What does the power law of practice predict?",
+          "options": [
+            "People get faster as they repeat a task",
+            "Errors always increase with repetition",
+            "Users prefer speech to touch",
+            "All menu structures become equally efficient"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture describes the power law of practice as the pattern that repeated performance tends to become faster."
+        },
+        {
+          "id": "u8q2",
+          "prompt": "The Keystroke-Level Model (KLM) is mainly used to:",
+          "options": [
+            "Predict expert, error-free task execution time",
+            "Measure user emotions from facial expressions",
+            "Compress typed text",
+            "Generate random keyboard layouts"
+          ],
+          "answerIndex": 0,
+          "explanation": "KLM is a predictive HCI model for estimating how long expert users take to perform tasks."
+        },
+        {
+          "id": "u8q3",
+          "prompt": "What is computational UI design?",
+          "options": [
+            "Using models and algorithms to evaluate or generate interface designs",
+            "Writing any code that happens to run in a browser",
+            "Converting sketches directly into finished products without iteration",
+            "Collecting only qualitative interview data"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture frames computational design as applying models and optimization to design problems such as menu layout."
+        }
+      ]
+    },
+    {
+      "unit": 9,
+      "title": "Data Analysis, Tasks",
+      "questions": [
+        {
+          "id": "u9q1",
+          "prompt": "Which kind of data analysis primarily deals with numbers and trends?",
+          "options": [
+            "Quantitative analysis",
+            "Qualitative analysis",
+            "Narrative analysis only",
+            "Ethnographic sketching"
+          ],
+          "answerIndex": 0,
+          "explanation": "Quantitative analysis focuses on numerical data, measurements, and trends."
+        },
+        {
+          "id": "u9q2",
+          "prompt": "An affinity diagram is most associated with which type of analysis?",
+          "options": [
+            "Qualitative analysis",
+            "Signal processing",
+            "Algorithmic complexity analysis",
+            "Version control analysis"
+          ],
+          "answerIndex": 0,
+          "explanation": "Affinity diagramming is a common qualitative analysis method for grouping and interpreting findings."
+        },
+        {
+          "id": "u9q3",
+          "prompt": "What does triangulation mean in user research?",
+          "options": [
+            "Using multiple data sources or perspectives to study the same issue",
+            "Recruiting exactly three participants",
+            "Only analyzing numerical data",
+            "Running the same interview script three times"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture defines triangulation as combining methods or perspectives to strengthen findings."
+        }
+      ]
+    },
+    {
+      "unit": 10,
+      "title": "Conceptualizing Interactive Systems",
+      "questions": [
+        {
+          "id": "u10q1",
+          "prompt": "A functional requirement describes:",
+          "options": [
+            "What the product will do",
+            "How attractive the product looks",
+            "Who graded the prototype",
+            "What font family the app uses"
+          ],
+          "answerIndex": 0,
+          "explanation": "Functional requirements describe the product's actions or capabilities."
+        },
+        {
+          "id": "u10q2",
+          "prompt": "A non-functional requirement is mainly about:",
+          "options": [
+            "Quality characteristics of the product",
+            "The number of team members",
+            "The unit test count",
+            "The course schedule"
+          ],
+          "answerIndex": 0,
+          "explanation": "Non-functional requirements describe qualities such as performance, usability, reliability, or accessibility."
+        },
+        {
+          "id": "u10q3",
+          "prompt": "What is a mental model in HCI?",
+          "options": [
+            "How a user thinks the system works",
+            "The system's database schema",
+            "A designer's visual mood board",
+            "A hardware wiring diagram"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture distinguishes the user's mental model from the designer's and implementation models."
+        }
+      ]
+    },
+    {
+      "unit": 11,
+      "title": "Prototyping I",
+      "questions": [
+        {
+          "id": "u11q1",
+          "prompt": "What is a storyboard in HCI prototyping?",
+          "options": [
+            "A series of sketches showing how a user progresses through a task",
+            "A high-fidelity coded prototype",
+            "A list of backend API endpoints",
+            "A statistical summary of user study data"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture introduces storyboards as sequential sketches used to communicate task flow and experience."
+        },
+        {
+          "id": "u11q2",
+          "prompt": "A horizontal prototype is mainly used to explore:",
+          "options": [
+            "Breadth across many features",
+            "Deep functionality of one feature only",
+            "Server response time",
+            "Production deployment steps"
+          ],
+          "answerIndex": 0,
+          "explanation": "Horizontal prototypes cover wide surface area, while vertical prototypes go deep into a narrower slice."
+        },
+        {
+          "id": "u11q3",
+          "prompt": "Why are paper prototypes useful early in design?",
+          "options": [
+            "They let teams simulate interactions quickly and cheaply",
+            "They automatically produce deployment-ready code",
+            "They guarantee accessibility compliance",
+            "They remove the need for evaluation"
+          ],
+          "answerIndex": 0,
+          "explanation": "Paper prototyping is valuable because it is fast, low-cost, and easy to revise during early design."
+        }
+      ]
+    },
+    {
+      "unit": 12,
+      "title": "Prototyping II",
+      "questions": [
+        {
+          "id": "u12q1",
+          "prompt": "What is a Wizard of Oz prototype?",
+          "options": [
+            "A prototype in which a hidden human simulates system intelligence or behavior",
+            "A finished product released to the public",
+            "A prototype built only with physical materials",
+            "A prototype generated entirely by telemetry logs"
+          ],
+          "answerIndex": 0,
+          "explanation": "Wizard of Oz prototyping uses a hidden person to mimic behavior that the future system may automate."
+        },
+        {
+          "id": "u12q2",
+          "prompt": "Physical prototyping is especially useful when:",
+          "options": [
+            "The product's form and feel matter to the interaction",
+            "Only spreadsheet formulas are being tested",
+            "No user interaction is involved",
+            "The system already has a complete codebase"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture points to physical prototypes when shape, feel, or embodied interaction matters."
+        },
+        {
+          "id": "u12q3",
+          "prompt": "Which statement best matches the lecture's discussion of fidelity?",
+          "options": [
+            "Low fidelity is common earlier; medium and high fidelity are more common later",
+            "High fidelity should always be used before any user feedback",
+            "Fidelity only matters for physical products",
+            "Low fidelity prototypes are more expensive than high fidelity ones"
+          ],
+          "answerIndex": 0,
+          "explanation": "The course frames fidelity as a design-stage choice, with lower fidelity common earlier and higher fidelity later."
+        }
+      ]
+    },
+    {
+      "unit": 13,
+      "title": "Controlled Experiments",
+      "questions": [
+        {
+          "id": "u13q1",
+          "prompt": "In a controlled experiment, the independent variable is the factor that is:",
+          "options": [
+            "Manipulated by the researcher",
+            "Measured as the outcome",
+            "Kept secret from participants forever",
+            "Always equal to the sample size"
+          ],
+          "answerIndex": 0,
+          "explanation": "Independent variables are the conditions or factors that researchers change to observe their effects."
+        },
+        {
+          "id": "u13q2",
+          "prompt": "What defines a between-subjects design?",
+          "options": [
+            "Each participant experiences only one study condition",
+            "Each participant experiences every condition",
+            "Participants are tested in pairs only",
+            "Only qualitative feedback is collected"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture contrasts between-subjects with designs in which participants encounter multiple conditions."
+        },
+        {
+          "id": "u13q3",
+          "prompt": "Which statistical test from the lecture is appropriate for comparing the means of two independent samples?",
+          "options": [
+            "Two independent sample t-test",
+            "A/B sketching test",
+            "Affinity clustering test",
+            "Heuristic checklist test"
+          ],
+          "answerIndex": 0,
+          "explanation": "The t-test lecture material specifically covers comparing two independent samples."
+        }
+      ]
+    },
+    {
+      "unit": 14,
+      "title": "Expert Evaluation",
+      "questions": [
+        {
+          "id": "u14q1",
+          "prompt": "Why are expert-based evaluation methods often used?",
+          "options": [
+            "They can be faster and cheaper than user evaluations",
+            "They always replace user testing entirely",
+            "They require no design knowledge",
+            "They only focus on visual style"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture highlights expert methods as relatively fast and cheap, while also noting they do not replace user evaluation."
+        },
+        {
+          "id": "u14q2",
+          "prompt": "A cognitive walkthrough mainly evaluates:",
+          "options": [
+            "How easy it is for users to learn and complete an action sequence",
+            "Whether the code passes unit tests",
+            "How many users can fit in a room",
+            "How quickly a database query runs"
+          ],
+          "answerIndex": 0,
+          "explanation": "Cognitive walkthroughs step through tasks and ask whether users will know what to do at each step."
+        },
+        {
+          "id": "u14q3",
+          "prompt": "Heuristic evaluation is based on:",
+          "options": [
+            "Rules of thumb such as Nielsen's usability heuristics",
+            "Randomized controlled trials only",
+            "Purely quantitative logs",
+            "Hardware stress testing"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture describes heuristic evaluation as an inspection method grounded in usability heuristics."
+        }
+      ]
+    },
+    {
+      "unit": 15,
+      "title": "Accessibility",
+      "questions": [
+        {
+          "id": "u15q1",
+          "prompt": "Which statement best captures the course definition of accessibility?",
+          "options": [
+            "Removing barriers that would otherwise exclude some people from using the system",
+            "Making all screens look identical",
+            "Optimizing only for expert users",
+            "Reducing interface color variety"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture frames accessibility as removing barriers that can otherwise exclude people from use."
+        },
+        {
+          "id": "u15q2",
+          "prompt": "What is the curb cut effect?",
+          "options": [
+            "An accessibility improvement designed for one group also benefits many others",
+            "A method for cutting down app loading time",
+            "A street-mapping algorithm",
+            "A touch-target sizing formula"
+          ],
+          "answerIndex": 0,
+          "explanation": "Curb cuts help wheelchair users, but the lecture uses them to show how inclusive design often benefits broader populations."
+        },
+        {
+          "id": "u15q3",
+          "prompt": "What does it mean to say disability or impairment can be situational?",
+          "options": [
+            "Context can temporarily create accessibility barriers for many users",
+            "Accessibility only matters outdoors",
+            "Disability is always permanent and identical across users",
+            "Accessible design is only relevant in specialized products"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture emphasizes that context can create temporary or situational limitations, broadening why accessibility matters."
+        }
+      ]
+    },
+    {
+      "unit": 16,
+      "title": "Social Computing",
+      "questions": [
+        {
+          "id": "u16q1",
+          "prompt": "How did the lecture classify groupware systems?",
+          "options": [
+            "By time and space",
+            "By file size and latency",
+            "By operating system only",
+            "By whether they use AI"
+          ],
+          "answerIndex": 0,
+          "explanation": "Groupware was organized using the classic time-space matrix."
+        },
+        {
+          "id": "u16q2",
+          "prompt": "Which example fits the 'different place, same time' category of groupware?",
+          "options": [
+            "Video conferencing or instant messaging",
+            "A shared whiteboard in one physical room",
+            "Email and blogs",
+            "A solo spreadsheet on a laptop"
+          ],
+          "answerIndex": 0,
+          "explanation": "Different place, same time tools support synchronous collaboration across distance."
+        },
+        {
+          "id": "u16q3",
+          "prompt": "What is crowdsourcing?",
+          "options": [
+            "Taking work traditionally done by specific agents and opening it to a large crowd",
+            "Adding more tabs to a browser interface",
+            "A method for compressing video streams",
+            "Running expert heuristic evaluations in parallel"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture defines crowdsourcing as opening work to a broad crowd through platforms and distributed participation."
+        }
+      ]
+    },
+    {
+      "unit": 17,
+      "title": "Human AI Interaction I",
+      "questions": [
+        {
+          "id": "u17q1",
+          "prompt": "What is mixed-initiative design?",
+          "options": [
+            "Designing interfaces where humans and intelligent agents collaborate",
+            "Replacing all users with automation",
+            "Showing two interfaces side by side for comparison",
+            "Testing only speech-based interfaces"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture presents mixed-initiative interfaces as systems where users and agents both contribute to the interaction."
+        },
+        {
+          "id": "u17q2",
+          "prompt": "Direct manipulation is most closely associated with which interaction tradition?",
+          "options": [
+            "Graphical user interfaces",
+            "Command-line batch processing only",
+            "Database replication",
+            "Paper prototyping"
+          ],
+          "answerIndex": 0,
+          "explanation": "Direct manipulation is a core idea in GUI design and was contrasted with interface agents in the lecture."
+        },
+        {
+          "id": "u17q3",
+          "prompt": "When should a system favor augmentation over full automation?",
+          "options": [
+            "When the user should remain involved and AI uncertainty or cost of error matters",
+            "When the system has no interface",
+            "When only file storage is needed",
+            "When the goal is to remove all user choice regardless of consequences"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture asks designers to decide when AI should assist users versus act autonomously, especially when uncertainty and stakes are high."
+        }
+      ]
+    },
+    {
+      "unit": 18,
+      "title": "Human-AI Interaction II",
+      "questions": [
+        {
+          "id": "u18q1",
+          "prompt": "Which of the following was listed as a challenge in designing AI-powered systems?",
+          "options": [
+            "Lack of AI knowledge",
+            "Too many standardized accessibility rules for AI",
+            "Interfaces never change over time",
+            "Users always trust AI perfectly"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture names lack of AI knowledge, prototyping difficulty, and communicating impact or errors as design challenges."
+        },
+        {
+          "id": "u18q2",
+          "prompt": "One Microsoft-inspired guideline discussed in class is to initially:",
+          "options": [
+            "Set user expectations",
+            "Hide all system limitations",
+            "Avoid feedback entirely",
+            "Force automation before explaining the system"
+          ],
+          "answerIndex": 0,
+          "explanation": "A core early-stage AI guideline is to set expectations so users are not surprised by system behavior."
+        },
+        {
+          "id": "u18q3",
+          "prompt": "Which characteristic of human-AI collaboration focuses on leveraging the strengths of both sides?",
+          "options": [
+            "Complementary performance",
+            "Silent automation",
+            "Fixed output restriction",
+            "Single-user isolation"
+          ],
+          "answerIndex": 0,
+          "explanation": "Complementary performance means combining the strengths of humans and AI to outperform either alone."
+        }
+      ]
+    },
+    {
+      "unit": 19,
+      "title": "Virtual Reality I",
+      "questions": [
+        {
+          "id": "u19q1",
+          "prompt": "What does WIMP stand for?",
+          "options": [
+            "Windows, Icons, Menus, Pointers",
+            "Web, Input, Motion, Processing",
+            "Widgets, Interaction, Mapping, Perception",
+            "Worlds, Images, Motion, Presence"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture contrasts classic WIMP interfaces with later post-WIMP interaction styles."
+        },
+        {
+          "id": "u19q2",
+          "prompt": "Post-WIMP interfaces are characterized by:",
+          "options": [
+            "Interaction modalities beyond classic GUI widgets",
+            "The removal of all input devices",
+            "Only keyboard shortcuts",
+            "No visual output"
+          ],
+          "answerIndex": 0,
+          "explanation": "Post-WIMP interfaces extend beyond windows, icons, menus, and pointers into modalities such as touch, speech, and body input."
+        },
+        {
+          "id": "u19q3",
+          "prompt": "A key goal of virtual reality is to create:",
+          "options": [
+            "A strong illusion of being in or acting within a virtual world",
+            "A desktop spreadsheet replacement only",
+            "A fully text-based interface",
+            "An interaction with no sensory output"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture frames VR around producing convincing illusions of presence and interaction in virtual environments."
+        }
+      ]
+    },
+    {
+      "unit": 20,
+      "title": "Virtual Reality II",
+      "questions": [
+        {
+          "id": "u20q1",
+          "prompt": "In VR, locomotion refers to:",
+          "options": [
+            "How users move through virtual space",
+            "How menus are color-coded",
+            "How data is encrypted",
+            "How sketches are turned into code"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture defines locomotion as movement in VR and surveys techniques such as room-scale movement, joystick movement, and teleportation."
+        },
+        {
+          "id": "u20q2",
+          "prompt": "What are 'beyond-real' or 'magical' interactions in VR?",
+          "options": [
+            "Interactions that give users superhuman abilities to make tasks easier",
+            "Interactions that always mimic the physical world exactly",
+            "Interactions that remove the need for user input",
+            "Interactions limited to 2D screens"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture contrasts reality-based interaction with magical interaction that intentionally exceeds real-world constraints."
+        },
+        {
+          "id": "u20q3",
+          "prompt": "Which technique is commonly used for selecting far-away objects in VR?",
+          "options": [
+            "Ray casting",
+            "Affinity diagramming",
+            "Paper prototyping",
+            "Keystroke-level modeling"
+          ],
+          "answerIndex": 0,
+          "explanation": "Ray casting is a standard distant-selection technique discussed in the VR interaction lecture."
+        }
+      ]
+    },
+    {
+      "unit": 21,
+      "title": "Hand and Body Based Input",
+      "questions": [
+        {
+          "id": "u21q1",
+          "prompt": "Which of the following was presented as a key XR accessibility area?",
+          "options": [
+            "Accessible input techniques and devices",
+            "Higher polygon counts only",
+            "Reducing all interfaces to text terminals",
+            "Eliminating avatar customization"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture highlights content accessibility, accessible input, and inclusive representations as key XR accessibility areas."
+        },
+        {
+          "id": "u21q2",
+          "prompt": "One challenge of touchscreens discussed in class is that they can increase the:",
+          "options": [
+            "Gulf of execution",
+            "Bandwidth of long-term memory",
+            "Number of physical buttons",
+            "Cost of statistical testing"
+          ],
+          "answerIndex": 0,
+          "explanation": "Without tactile cues, users may have more difficulty translating intentions into confident actions on touchscreens."
+        },
+        {
+          "id": "u21q3",
+          "prompt": "Gesture-based interfaces primarily rely on:",
+          "options": [
+            "Sensing and interpreting hand or body movement",
+            "Only typed command strings",
+            "Only mouse movement on a desktop",
+            "No sensors at all"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture covers gesture input as a category of hand and body based interaction that depends on movement sensing."
+        }
+      ]
+    },
+    {
+      "unit": 22,
+      "title": "Haptics",
+      "questions": [
+        {
+          "id": "u22q1",
+          "prompt": "In a directed-dialog speech interface, who mainly controls the conversation flow?",
+          "options": [
+            "The system",
+            "The user exclusively",
+            "A database administrator",
+            "The hardware vendor"
+          ],
+          "answerIndex": 0,
+          "explanation": "Directed-dialog interfaces were described as systems that guide and constrain the structure of the conversation."
+        },
+        {
+          "id": "u22q2",
+          "prompt": "Which was listed as a major advantage of speech-based interaction?",
+          "options": [
+            "People can usually speak faster than they type",
+            "Speech always gives perfect privacy",
+            "Speech is never sequential",
+            "Speech removes all recognition errors"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture notes that speech input can be fast, while also discussing tradeoffs such as sequential interaction and recognition issues."
+        },
+        {
+          "id": "u22q3",
+          "prompt": "Why is gaze often combined with another input modality?",
+          "options": [
+            "Because gaze alone can be error-prone and may trigger unintended selections",
+            "Because gaze cannot indicate attention",
+            "Because gaze only works on paper",
+            "Because gaze has no relationship to selection tasks"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture discusses combining gaze with other inputs to reduce errors and avoid unintended activation."
+        }
+      ]
+    },
+    {
+      "unit": 23,
+      "title": "Haptics II",
+      "questions": [
+        {
+          "id": "u23q1",
+          "prompt": "How was haptics characterized in the lecture?",
+          "options": [
+            "As an interdisciplinary field spanning human, machine, computer, and interaction haptics",
+            "As a purely visual design method",
+            "As a kind of database indexing",
+            "As a replacement for all other modalities"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture explicitly presents haptics as an interdisciplinary field with multiple subareas."
+        },
+        {
+          "id": "u23q2",
+          "prompt": "What is tactile apparent motion illusion?",
+          "options": [
+            "A perceived sense of continuous tactile movement created from separate actuations",
+            "A screen animation that looks like touch",
+            "A way to make objects visually disappear",
+            "A speech recognition error pattern"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture explains that a sense of motion can be created through carefully timed stimulation from multiple actuators."
+        },
+        {
+          "id": "u23q3",
+          "prompt": "C-tactile afferents are associated in the lecture with:",
+          "options": [
+            "Pleasant social touch",
+            "Only pain sensation",
+            "Visual depth perception",
+            "Menu optimization"
+          ],
+          "answerIndex": 0,
+          "explanation": "The haptics material mentions C-tactile afferents in relation to affective and pleasant social touch."
+        }
+      ]
+    },
+    {
+      "unit": 24,
+      "title": "Haptics III",
+      "questions": [
+        {
+          "id": "u24q1",
+          "prompt": "In multisensory interaction, haptic feedback can play what kind of role?",
+          "options": [
+            "Complementary or reinforcing role alongside other modalities",
+            "Only decorative role with no perceptual value",
+            "A role unrelated to user performance or experience",
+            "A role limited to audio playback"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture asks students to analyze when haptic feedback complements or reinforces information from other modalities."
+        },
+        {
+          "id": "u24q2",
+          "prompt": "Which set of activities was used to describe the haptic interaction design process?",
+          "options": [
+            "Browsing, sketching, refining, and sharing or evaluating",
+            "Compiling, deploying, scaling, and monetizing",
+            "Typing, printing, scanning, and shredding",
+            "Observing, ignoring, shipping, and forgetting"
+          ],
+          "answerIndex": 0,
+          "explanation": "The lecture introduces four activities for haptic design: browsing, sketching, refining, and sharing or evaluating."
+        },
+        {
+          "id": "u24q3",
+          "prompt": "What is Haptipedia used for in the haptics design process?",
+          "options": [
+            "Browsing and exploring haptic examples or design ideas",
+            "Running statistical t-tests",
+            "Rendering 3D graphics",
+            "Creating social media campaigns"
+          ],
+          "answerIndex": 0,
+          "explanation": "Haptipedia is presented as a resource for browsing haptic effects and inspiration during design."
+        }
+      ]
+    }
+  ]
+}
