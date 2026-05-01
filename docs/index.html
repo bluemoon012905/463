@@ -15,7 +15,7 @@
   <body>
     <div class="page-shell">
       <main class="layout">
-        <section class="control-card">
+        <section class="control-card app-view" id="home-view">
           <div class="hero-copy merged">
             <p class="eyebrow">CSE 463 Final Review</p>
             <h1>463 Quizzes</h1>
@@ -60,10 +60,24 @@
 
           <div class="button-row">
             <button class="primary-button start-button" id="start-button">Start Quiz</button>
+            <button class="ghost-button" id="open-stats-button">Open Stats</button>
           </div>
+
+          <section class="stats-preview">
+            <div class="card-header">
+              <h2>Stats</h2>
+              <p>Completed quizzes are saved in this browser.</p>
+            </div>
+            <div class="stats-preview-list" id="stats-preview-list"></div>
+          </section>
         </section>
 
-        <section class="quiz-card hidden" id="quiz-card">
+        <section class="quiz-card app-view hidden" id="quiz-view">
+          <div class="page-topbar">
+            <button class="ghost-button" id="back-home-button">Back Home</button>
+            <button class="ghost-button" id="open-stats-from-quiz-button">Stats</button>
+          </div>
+
           <div class="quiz-topline">
             <div>
               <p class="eyebrow">Current Question</p>
@@ -95,34 +109,67 @@
             <button class="primary-button hidden" id="next-button">Next Question</button>
             <button class="ghost-button" id="restart-button">Restart</button>
           </div>
+
+          <section class="results-card hidden" id="results-card">
+            <div class="card-header">
+              <h2>Results</h2>
+              <p id="results-summary"></p>
+            </div>
+
+            <div class="results-grid">
+              <div class="result-stat">
+                <span class="stat-label">Correct</span>
+                <strong id="correct-count">0</strong>
+              </div>
+              <div class="result-stat">
+                <span class="stat-label">Accuracy</span>
+                <strong id="accuracy-count">0%</strong>
+              </div>
+              <div class="result-stat">
+                <span class="stat-label">Reviewed Units</span>
+                <strong id="reviewed-units">0</strong>
+              </div>
+            </div>
+
+            <div class="review-list" id="review-list"></div>
+
+            <div class="button-row">
+              <button class="primary-button" id="try-again-button">Try Again</button>
+              <button class="ghost-button" id="results-home-button">Home</button>
+            </div>
+          </section>
         </section>
 
-        <section class="results-card hidden" id="results-card">
+        <section class="control-card app-view hidden" id="stats-view">
+          <div class="page-topbar">
+            <button class="ghost-button" id="stats-home-button">Back Home</button>
+          </div>
+
           <div class="card-header">
-            <h2>Results</h2>
-            <p id="results-summary"></p>
+            <h2>Stats</h2>
+            <p>Saved quiz attempts in this browser.</p>
           </div>
 
-          <div class="results-grid">
+          <div class="results-grid stats-grid" id="stats-summary-grid">
             <div class="result-stat">
-              <span class="stat-label">Correct</span>
-              <strong id="correct-count">0</strong>
+              <span class="stat-label">Attempts</span>
+              <strong id="stats-attempts">0</strong>
             </div>
             <div class="result-stat">
-              <span class="stat-label">Accuracy</span>
-              <strong id="accuracy-count">0%</strong>
+              <span class="stat-label">Average Accuracy</span>
+              <strong id="stats-average-accuracy">0%</strong>
             </div>
             <div class="result-stat">
-              <span class="stat-label">Reviewed Units</span>
-              <strong id="reviewed-units">0</strong>
+              <span class="stat-label">Questions Answered</span>
+              <strong id="stats-total-questions">0</strong>
             </div>
           </div>
-
-          <div class="review-list" id="review-list"></div>
 
           <div class="button-row">
-            <button class="primary-button" id="try-again-button">Try Again</button>
+            <button class="ghost-button" id="clear-stats-button">Clear Saved Stats</button>
           </div>
+
+          <div class="review-list" id="stats-history-list"></div>
         </section>
       </main>
     </div>

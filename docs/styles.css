@@ -10,7 +10,6 @@
   --accent-soft: #f3d4bf;
   --success: #216b46;
   --danger: #9e2e2e;
-  --shadow: 0 20px 60px rgba(88, 48, 19, 0.12);
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
@@ -44,8 +43,6 @@ body {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--paper);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow);
 }
 
 .hero-copy,
@@ -104,6 +101,10 @@ h2 {
 .layout {
   display: grid;
   gap: 22px;
+}
+
+.app-view {
+  display: block;
 }
 
 .card-header {
@@ -190,8 +191,7 @@ h2 {
     transform 160ms ease,
     background 160ms ease,
     color 160ms ease,
-    border-color 160ms ease,
-    box-shadow 160ms ease;
+    border-color 160ms ease;
 }
 
 .unit-pill.selectable:hover {
@@ -202,7 +202,6 @@ h2 {
   background: linear-gradient(180deg, var(--accent), var(--accent-deep));
   color: #fff8f0;
   border-color: transparent;
-  box-shadow: 0 12px 24px rgba(141, 52, 21, 0.18);
 }
 
 .button-row {
@@ -210,6 +209,12 @@ h2 {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 22px;
+}
+
+.page-topbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
 }
 
 button {
@@ -220,7 +225,6 @@ button {
   cursor: pointer;
   transition:
     transform 160ms ease,
-    box-shadow 160ms ease,
     background 160ms ease,
     color 160ms ease;
 }
@@ -233,7 +237,6 @@ button:hover {
 .option-button {
   background: linear-gradient(180deg, var(--accent), var(--accent-deep));
   color: #fff8f0;
-  box-shadow: 0 14px 30px rgba(141, 52, 21, 0.22);
 }
 
 .primary-button {
@@ -243,7 +246,6 @@ button:hover {
 .start-button {
   background: linear-gradient(180deg, #0f7b72, #0b5d57);
   color: #f4fffd;
-  box-shadow: 0 16px 32px rgba(11, 93, 87, 0.22);
 }
 
 .ghost-button {
@@ -324,7 +326,6 @@ button:hover {
   background: rgba(255, 248, 239, 0.92);
   color: var(--ink);
   border: 1px solid var(--line);
-  box-shadow: none;
 }
 
 .option-button.correct {
@@ -365,6 +366,18 @@ button:hover {
   border-radius: var(--radius-md);
   background: rgba(255, 248, 239, 0.92);
   border-color: var(--line);
+}
+
+.stats-preview {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.stats-preview-list,
+.stats-history-list {
+  display: grid;
+  gap: 14px;
 }
 
 .result-stat strong {

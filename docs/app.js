@@ -1,25 +1,33 @@
+const STORAGE_KEY = "cse463_quiz_attempts";
+
 const state = {
   data: null,
   units: [],
   selectedUnits: new Set(),
-  showUnitNumbersOnly: false,
+  showUnitNumbersOnly: true,
   activeQuestions: [],
   currentIndex: 0,
   score: 0,
   answered: false,
   missed: [],
+  attempts: [],
 };
 
 const ui = {
+  homeView: document.getElementById("home-view"),
+  quizView: document.getElementById("quiz-view"),
+  statsView: document.getElementById("stats-view"),
   questionCount: document.getElementById("question-count"),
   questionCountHelp: document.getElementById("question-count-help"),
   shuffleToggle: document.getElementById("shuffle-toggle"),
   unitLabelToggle: document.getElementById("unit-label-toggle"),
   unitStrip: document.getElementById("unit-strip"),
   startButton: document.getElementById("start-button"),
+  openStatsButton: document.getElementById("open-stats-button"),
   allUnitsButton: document.getElementById("all-units-button"),
   clearUnitsButton: document.getElementById("clear-units-button"),
-  quizCard: document.getElementById("quiz-card"),
+  backHomeButton: document.getElementById("back-home-button"),
+  openStatsFromQuizButton: document.getElementById("open-stats-from-quiz-button"),
   quizTitle: document.getElementById("quiz-title"),
   topicLine: document.getElementById("topic-line"),
   unitBadge: document.getElementById("unit-badge"),
@@ -40,13 +48,21 @@ const ui = {
   reviewedUnits: document.getElementById("reviewed-units"),
   reviewList: document.getElementById("review-list"),
   tryAgainButton: document.getElementById("try-again-button"),
+  resultsHomeButton: document.getElementById("results-home-button"),
+  statsPreviewList: document.getElementById("stats-preview-list"),
+  statsAttempts: document.getElementById("stats-attempts"),
+  statsAverageAccuracy: document.getElementById("stats-average-accuracy"),
+  statsTotalQuestions: document.getElementById("stats-total-questions"),
+  statsHistoryList: document.getElementById("stats-history-list"),
+  statsHomeButton: document.getElementById("stats-home-button"),
+  clearStatsButton: document.getElementById("clear-stats-button"),
 };
 
 function shuffle(array) {
   const copy = [...array];
-  for (let i = copy.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
   }
   return copy;
 }
@@ -61,9 +77,11 @@ function getSelectedUnits() {
 
 function getSelectionStats() {
   const selectedUnits = getSelectedUnits();
-  const topicCount = selectedUnits.reduce((sum, unit) => sum + unit.topics.length, 0);
-  const questionCount = selectedUnits.reduce((sum, unit) => sum + unit.questions.length, 0);
-  return { selectedUnits, topicCount, questionCount };
+  return {
+    selectedUnits,
+    topicCount: selectedUnits.reduce((sum, unit) => sum + unit.topics.length, 0),
+    questionCount: selectedUnits.reduce((sum, unit) => sum + unit.questions.length, 0),
+  };
 }
 
 function updateQuestionCountHelp() {
@@ -102,13 +120,8 @@ function renderUnitStrip() {
   });
 }
 
-function populateControls() {
-  renderUnitStrip();
-}
-
 function buildQuestionPool() {
   const chosenUnits = getSelectedUnits();
-
   const flatQuestions = chosenUnits.flatMap((unit) =>
     unit.questions.map((question) => ({
       ...question,
@@ -154,9 +167,19 @@ function resetQuizState() {
   state.missed = [];
 }
 
-function showQuiz() {
-  ui.quizCard.classList.remove("hidden");
-  ui.resultsCard.classList.add("hidden");
+function setRoute(route) {
+  window.location.hash = route;
+}
+
+function renderRoute() {
+  const route = window.location.hash || "#home";
+  const isHome = route === "#home";
+  const isQuiz = route === "#quiz";
+  const isStats = route === "#stats";
+
+  ui.homeView.classList.toggle("hidden", !isHome);
+  ui.quizView.classList.toggle("hidden", !isQuiz);
+  ui.statsView.classList.toggle("hidden", !isStats);
 }
 
 function hideFeedback() {
@@ -170,8 +193,9 @@ function renderQuestion() {
 
   state.answered = false;
   hideFeedback();
+  ui.resultsCard.classList.add("hidden");
 
-  ui.quizTitle.textContent = `${question.unitTitle}`;
+  ui.quizTitle.textContent = question.unitTitle;
   ui.topicLine.textContent = `Topic: ${question.topic}`;
   ui.unitBadge.textContent = `Unit ${question.unit}`;
   ui.progressText.textContent = `Question ${state.currentIndex + 1} of ${total}`;
@@ -230,22 +254,103 @@ function handleAnswer(selectedIndex) {
   ui.nextButton.classList.remove("hidden");
 }
 
-function showResults() {
-  ui.quizCard.classList.add("hidden");
-  ui.resultsCard.classList.remove("hidden");
+function loadAttempts() {
+  try {
+    state.attempts = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || "[]");
+  } catch {
+    state.attempts = [];
+  }
+}
 
+function saveAttempts() {
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.attempts));
+}
+
+function recordAttempt() {
+  const total = state.activeQuestions.length;
+  const uniqueUnits = [...new Set(state.activeQuestions.map((question) => question.unit))];
+  const attempt = {
+    completedAt: new Date().toISOString(),
+    score: state.score,
+    total,
+    accuracy: Math.round((state.score / total) * 100),
+    units: uniqueUnits,
+  };
+  state.attempts.unshift(attempt);
+  state.attempts = state.attempts.slice(0, 50);
+  saveAttempts();
+}
+
+function renderStatsPreview() {
+  if (state.attempts.length === 0) {
+    ui.statsPreviewList.innerHTML =
+      '<div class="review-item"><h3>No saved quizzes yet</h3><p>Complete a quiz and it will show up here.</p></div>';
+    return;
+  }
+
+  ui.statsPreviewList.innerHTML = state.attempts
+    .slice(0, 3)
+    .map(
+      (attempt) => `
+        <article class="review-item">
+          <h3>${attempt.score}/${attempt.total} correct</h3>
+          <p><strong>Accuracy:</strong> ${attempt.accuracy}%</p>
+          <p><strong>Units:</strong> ${attempt.units.join(", ")}</p>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+function renderStatsPage() {
+  const attempts = state.attempts;
+  const totalQuestions = attempts.reduce((sum, attempt) => sum + attempt.total, 0);
+  const totalAccuracy =
+    attempts.length === 0
+      ? 0
+      : Math.round(attempts.reduce((sum, attempt) => sum + attempt.accuracy, 0) / attempts.length);
+
+  ui.statsAttempts.textContent = String(attempts.length);
+  ui.statsAverageAccuracy.textContent = `${totalAccuracy}%`;
+  ui.statsTotalQuestions.textContent = String(totalQuestions);
+
+  if (attempts.length === 0) {
+    ui.statsHistoryList.innerHTML =
+      '<div class="review-item"><h3>No stats yet</h3><p>Completed quizzes will be saved here automatically.</p></div>';
+    return;
+  }
+
+  ui.statsHistoryList.innerHTML = attempts
+    .map(
+      (attempt) => `
+        <article class="review-item">
+          <h3>${new Date(attempt.completedAt).toLocaleString()}</h3>
+          <p><strong>Score:</strong> ${attempt.score}/${attempt.total} (${attempt.accuracy}%)</p>
+          <p><strong>Units:</strong> ${attempt.units.join(", ")}</p>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+function showResults() {
   const total = state.activeQuestions.length;
   const accuracy = Math.round((state.score / total) * 100);
   const uniqueUnits = new Set(state.activeQuestions.map((question) => question.unit));
+
+  recordAttempt();
+  renderStatsPreview();
+  renderStatsPage();
 
   ui.resultsSummary.textContent = `You answered ${state.score} out of ${total} correctly.`;
   ui.correctCount.textContent = String(state.score);
   ui.accuracyCount.textContent = `${accuracy}%`;
   ui.reviewedUnits.textContent = String(uniqueUnits.size);
+  ui.resultsCard.classList.remove("hidden");
 
   if (state.missed.length === 0) {
     ui.reviewList.innerHTML =
-      '<div class="review-item"><h3>No missed questions</h3><p>You cleared this set. Run another shuffled round or switch units.</p></div>';
+      '<div class="review-item"><h3>No missed questions</h3><p>You cleared this set. Run another round or return home.</p></div>';
     return;
   }
 
@@ -284,38 +389,37 @@ function startQuiz() {
   }
 
   resetQuizState();
-  showQuiz();
+  setRoute("#quiz");
   renderQuestion();
 }
 
-async function init() {
-  const response = await fetch("./data/quiz_questions.json");
-  state.data = await response.json();
-  state.units = state.data.units;
-  state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
-  state.showUnitNumbersOnly = true;
-  ui.unitLabelToggle.checked = true;
-
-  populateControls();
-  updateQuestionCountHelp();
-
+function bindEvents() {
   ui.startButton.addEventListener("click", startQuiz);
+  ui.openStatsButton.addEventListener("click", () => setRoute("#stats"));
+  ui.backHomeButton.addEventListener("click", () => setRoute("#home"));
+  ui.openStatsFromQuizButton.addEventListener("click", () => setRoute("#stats"));
+  ui.resultsHomeButton.addEventListener("click", () => setRoute("#home"));
+  ui.statsHomeButton.addEventListener("click", () => setRoute("#home"));
+
   ui.allUnitsButton.addEventListener("click", () => {
     state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
     renderUnitStrip();
     updateQuestionCountHelp();
   });
+
   ui.clearUnitsButton.addEventListener("click", () => {
     state.selectedUnits = new Set();
     renderUnitStrip();
     updateQuestionCountHelp();
   });
+
   ui.unitLabelToggle.addEventListener("change", () => {
     state.showUnitNumbersOnly = ui.unitLabelToggle.checked;
     renderUnitStrip();
   });
+
   ui.questionCount.addEventListener("input", () => {
-    const { questionCount } = getSelectionStats();
+    const { questionCount, topicCount } = getSelectionStats();
     const rawValue = Number.parseInt(ui.questionCount.value, 10);
 
     if (!ui.questionCount.value) {
@@ -333,12 +437,41 @@ async function init() {
       return;
     }
 
-    const { topicCount } = getSelectionStats();
     ui.questionCountHelp.textContent = `${rawValue} question${rawValue === 1 ? "" : "s"} requested from ${topicCount} selected topics.`;
   });
+
   ui.nextButton.addEventListener("click", nextStep);
   ui.restartButton.addEventListener("click", startQuiz);
   ui.tryAgainButton.addEventListener("click", startQuiz);
+  ui.clearStatsButton.addEventListener("click", () => {
+    state.attempts = [];
+    saveAttempts();
+    renderStatsPreview();
+    renderStatsPage();
+  });
+
+  window.addEventListener("hashchange", renderRoute);
+}
+
+async function init() {
+  const response = await fetch("./data/quiz_questions.json");
+  state.data = await response.json();
+  state.units = state.data.units;
+  state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
+  ui.unitLabelToggle.checked = true;
+
+  loadAttempts();
+  renderUnitStrip();
+  updateQuestionCountHelp();
+  renderStatsPreview();
+  renderStatsPage();
+  bindEvents();
+
+  if (!window.location.hash) {
+    setRoute("#home");
+  } else {
+    renderRoute();
+  }
 }
 
 init();
