@@ -2,13 +2,16 @@ const STORAGE_KEY = "cse463_quiz_attempts";
 
 const state = {
   data: null,
+  hardData: null,
   units: [],
   topics: [],
   selectionMode: "units",
+  difficulty: "easy",
   selectedUnits: new Set(),
   selectedTopics: new Set(),
   showUnitNumbersOnly: true,
   maxDopamine: false,
+  showQuizAudioControls: true,
   activeQuestions: [],
   currentIndex: 0,
   score: 0,
@@ -45,6 +48,7 @@ const ui = {
   quizView: document.getElementById("quiz-view"),
   statsView: document.getElementById("stats-view"),
   selectionCopy: document.getElementById("selection-copy"),
+  difficultyMode: document.getElementById("difficulty-mode"),
   selectionMode: document.getElementById("selection-mode"),
   questionCount: document.getElementById("question-count"),
   questionCountHelp: document.getElementById("question-count-help"),
@@ -89,6 +93,7 @@ const ui = {
   statsHomeButton: document.getElementById("stats-home-button"),
   clearStatsButton: document.getElementById("clear-stats-button"),
   dopamineToggle: document.getElementById("dopamine-toggle"),
+  quizAudioToggle: document.getElementById("quiz-audio-toggle"),
   listenModeButton: document.getElementById("listen-mode-button"),
   listenView: document.getElementById("listen-view"),
   listenHomeButton: document.getElementById("listen-home-button"),
@@ -317,6 +322,27 @@ function setSpeechHighlight(sectionName, wordIndex) {
 function findWordIndexFromChar(text, charIndex) {
   const wordRanges = getWordRanges(text);
   return wordRanges.findIndex((range) => charIndex >= range.start && charIndex < range.end);
+}
+
+function rebuildUnitsFromData() {
+  const source = state.difficulty === "hard" && state.hardData ? state.hardData : state.data;
+  state.units = source.units;
+  state.topics = state.units.flatMap((unit) => {
+    const questionsByTopic = new Map();
+    unit.questions.forEach((question) => {
+      if (!questionsByTopic.has(question.topic)) {
+        questionsByTopic.set(question.topic, []);
+      }
+      questionsByTopic.get(question.topic).push(question);
+    });
+    return unit.topics.map((topic) => ({
+      key: getTopicKey(unit.unit, topic),
+      unit: unit.unit,
+      unitTitle: unit.title,
+      topic,
+      questions: questionsByTopic.get(topic) || [],
+    }));
+  });
 }
 
 function buildQuestionPool() {
@@ -583,6 +609,13 @@ function hideFeedback() {
   ui.nextButton.classList.add("hidden");
 }
 
+function renderQuizAudioControls() {
+  const shouldShowRow = state.showQuizAudioControls;
+  ui.readQuestionButton.parentElement.classList.toggle("hidden", !shouldShowRow);
+  ui.readExplanationButton.classList.toggle("hidden", !shouldShowRow || !state.answered);
+  ui.pauseAudioButton.classList.toggle("hidden", !shouldShowRow);
+}
+
 function renderQuestion() {
   const question = state.activeQuestions[state.currentIndex];
   const total = state.activeQuestions.length;
@@ -608,6 +641,7 @@ function renderQuestion() {
     ui.options.appendChild(button);
   });
 
+  renderQuizAudioControls();
   updatePauseAudioButton();
 }
 
@@ -850,6 +884,7 @@ function handleAnswer(selectedIndex, event) {
   ui.feedbackResult.style.color = isCorrect ? "var(--success)" : "var(--danger)";
   ui.feedbackExplanation.textContent = question.explanation;
   ui.nextButton.classList.remove("hidden");
+  renderQuizAudioControls();
 }
 
 function loadAttempts() {
@@ -1257,6 +1292,13 @@ function bindEvents() {
     updateQuestionCountHelp();
   });
 
+  ui.difficultyMode.addEventListener("change", () => {
+    state.difficulty = ui.difficultyMode.value;
+    rebuildUnitsFromData();
+    renderUnitStrip();
+    updateQuestionCountHelp();
+  });
+
   ui.selectionMode.addEventListener("change", () => {
     state.selectionMode = ui.selectionMode.value;
     renderSelectionControls();
@@ -1271,6 +1313,11 @@ function bindEvents() {
 
   ui.dopamineToggle.addEventListener("change", () => {
     state.maxDopamine = ui.dopamineToggle.checked;
+  });
+
+  ui.quizAudioToggle.addEventListener("change", () => {
+    state.showQuizAudioControls = ui.quizAudioToggle.checked;
+    renderQuizAudioControls();
   });
 
   ui.questionCount.addEventListener("input", () => {
@@ -1352,31 +1399,20 @@ function bindEvents() {
 }
 
 async function init() {
-  const response = await fetch("./data/quiz_questions.json");
-  state.data = await response.json();
-  state.units = state.data.units;
-  state.topics = state.units.flatMap((unit) => {
-    const questionsByTopic = new Map();
-    unit.questions.forEach((question) => {
-      if (!questionsByTopic.has(question.topic)) {
-        questionsByTopic.set(question.topic, []);
-      }
-      questionsByTopic.get(question.topic).push(question);
-    });
-
-    return unit.topics.map((topic) => ({
-      key: getTopicKey(unit.unit, topic),
-      unit: unit.unit,
-      unitTitle: unit.title,
-      topic,
-      questions: questionsByTopic.get(topic) || [],
-    }));
-  });
+  const [easyResponse, hardResponse] = await Promise.all([
+    fetch("./data/quiz_questions.json"),
+    fetch("./data/quiz_questions_hard.json"),
+  ]);
+  state.data = await easyResponse.json();
+  state.hardData = await hardResponse.json();
+  rebuildUnitsFromData();
   state.selectedUnits = new Set(state.units.map((unit) => unit.unit));
   state.selectedTopics = new Set(state.topics.map((topicEntry) => topicEntry.key));
   ui.selectionMode.value = state.selectionMode;
+  ui.difficultyMode.value = state.difficulty;
   ui.unitLabelToggle.checked = true;
   ui.dopamineToggle.checked = false;
+  ui.quizAudioToggle.checked = state.showQuizAudioControls;
   ui.listenSpeed.value = String(state.listenMode.rate);
   ui.listenSpeedValue.textContent = formatPlaybackRate(state.listenMode.rate);
   ui.listenAnswerDelay.value = String(state.listenMode.answerDelay / 1000);

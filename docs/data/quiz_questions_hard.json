@@ -1,0 +1,1823 @@
+{
+  "course": "CSE 463",
+  "title": "Hard Mode Question Bank",
+  "description": "Challenging multiple-choice questions requiring conceptual understanding, not keyword matching. Distractors are plausible and test fine distinctions between related ideas.",
+  "units": [
+    {
+      "unit": 1,
+      "title": "Introduction to Interaction Design",
+      "topics": [
+        "Human-Centered Design",
+        "Interaction Sequence",
+        "HCI as an Interdisciplinary Field",
+        "Human-Centered Design Process"
+      ],
+      "questions": [
+        {
+          "id": "u1-hard-1",
+          "topic": "Human-Centered Design",
+          "prompt": "A startup builds a productivity app by listing all the features engineers want, ships it, then creates tutorials to help users adapt. A colleague argues this violates HCD. The STRONGEST reason they could give is:",
+          "options": [
+            "The design started from technical capabilities rather than from users' actual needs and behaviors",
+            "No iterative prototyping occurred before launch",
+            "The team skipped the interdisciplinary review required by HCI practice",
+            "Users were not involved in the tutorial-writing process"
+          ],
+          "answerIndex": 0,
+          "explanation": "HCD's core principle is to start with human needs and adapt the system to people \u2014 not adapt people to the system. Tutorials to compensate for a hard-to-use system are the opposite of that philosophy."
+        },
+        {
+          "id": "u1-hard-2",
+          "topic": "Interaction Sequence",
+          "prompt": "Which of the following scenarios illustrates a failure of the INTERACTION SEQUENCE specifically, rather than a failure of HCD philosophy?",
+          "options": [
+            "A medical device was designed primarily around regulatory requirements rather than how nurses use it",
+            "An ATM interface was designed by engineers who never observed bank customers",
+            "A microwave gives no visual or auditory feedback after a button press, leaving users uncertain whether input was registered",
+            "A social app was built without any user research into what people actually want to share"
+          ],
+          "answerIndex": 2,
+          "explanation": "The interaction sequence is the cycle of human input \u2192 system output \u2192 human input. Missing feedback breaks this cycle at the output step. The other options describe failures of HCD philosophy (not centering users in design decisions)."
+        },
+        {
+          "id": "u1-hard-3",
+          "topic": "HCI as an Interdisciplinary Field",
+          "prompt": "The lecture organizes HCI around three aspects that recur throughout the course. A colleague says these are 'User Research, Prototyping, and Evaluation.' What is wrong with this answer?",
+          "options": [
+            "Those are design process phases, not the three core HCI aspects \u2014 the correct aspects are Usability, User Experience, and Accessibility",
+            "The list is correct but in the wrong order \u2014 Evaluation should come first",
+            "User Research is a method, not an aspect of HCI",
+            "The lecture lists four aspects, not three"
+          ],
+          "answerIndex": 0,
+          "explanation": "Usability, User Experience, and Accessibility are the three recurring aspects of HCI in this course. User Research, Prototyping, and Evaluation are phases of the design process \u2014 a different level of abstraction."
+        },
+        {
+          "id": "u1-hard-4",
+          "topic": "Human-Centered Design",
+          "prompt": "Norman's definition of HCD states it concerns itself specifically with two things. Which answer is correct?",
+          "options": [
+            "User needs AND business requirements",
+            "Affordances AND signifiers",
+            "The design of system functionalities AND the interaction sequence",
+            "Usability AND user experience"
+          ],
+          "answerIndex": 2,
+          "explanation": "Norman specifically defines HCD as concerning itself with the design of system functionalities and the interaction sequence \u2014 not just user needs broadly, and not the UX concepts that came later."
+        },
+        {
+          "id": "u1-hard-5",
+          "topic": "Human-Centered Design Process",
+          "prompt": "Why is it significant that HCI is described as an interdisciplinary field rather than a subfield of computer science?",
+          "options": [
+            "It means HCI researchers must publish across multiple journals to gain recognition",
+            "No single discipline fully equips a practitioner \u2014 effective HCI requires integrating technical, behavioral, and design knowledge",
+            "It implies that usability and accessibility are separate disciplines from HCI",
+            "It reflects that HCI is newer and lacks an established theoretical foundation"
+          ],
+          "answerIndex": 1,
+          "explanation": "Calling HCI interdisciplinary means that computer science, psychology, and design each contribute necessary but insufficient perspectives. No single background covers what effective HCI practice requires."
+        }
+      ]
+    },
+    {
+      "unit": 2,
+      "title": "Usability",
+      "topics": [
+        "Components of Usability",
+        "Common Design Mistakes"
+      ],
+      "questions": [
+        {
+          "id": "u2-hard-1",
+          "topic": "Components of Usability",
+          "prompt": "After six months away from an internal tool, a returning user needs 20 minutes to reorient before completing their first task. Which usability dimension is MOST at risk?",
+          "options": [
+            "Learnability \u2014 it took too long to learn the system originally",
+            "Efficiency \u2014 expert users should complete tasks faster",
+            "Memorability \u2014 difficulty re-establishing proficiency after a period of non-use",
+            "Error rate \u2014 the user will make mistakes because of forgotten workflows"
+          ],
+          "answerIndex": 2,
+          "explanation": "Memorability specifically measures how easily users can re-establish proficiency after a period of not using the system. Learnability covers first-time learning; memorability covers returning users."
+        },
+        {
+          "id": "u2-hard-2",
+          "topic": "Common Design Mistakes",
+          "prompt": "Gould & Lewis (1985) propose three principles for designing usable systems. A team that runs twelve iterative prototyping cycles, using each round of user feedback to revise the design, MOST directly exemplifies which principle?",
+          "options": [
+            "Early focus on users",
+            "Empirical measurement",
+            "Iterative design",
+            "Participatory design"
+          ],
+          "answerIndex": 2,
+          "explanation": "Iterative design is the principle of repeated cycles of design, testing, and refinement. Early focus on users refers to involving users from the start; empirical measurement refers to collecting quantitative performance data."
+        },
+        {
+          "id": "u2-hard-3",
+          "topic": "Components of Usability",
+          "prompt": "Which of the following is an OBJECTIVE measure of usability rather than a subjective one?",
+          "options": [
+            "Post-task satisfaction ratings",
+            "Voluntary continued use of the system",
+            "Time on task",
+            "User-reported ease of use on a Likert scale"
+          ],
+          "answerIndex": 2,
+          "explanation": "Time on task is a directly observable, objective performance measure. Satisfaction ratings, ease-of-use scales, and voluntary use are all subjective or behavioral proxies for satisfaction."
+        },
+        {
+          "id": "u2-hard-4",
+          "topic": "Components of Usability",
+          "prompt": "According to the lecture, the two distinct strategies for reducing errors in an interface are:",
+          "options": [
+            "Training users to avoid errors AND providing undo functionality",
+            "Constraining inputs AND providing clear error messages",
+            "Preventing errors from occurring AND reducing the impact when errors do occur",
+            "Reducing affordances for dangerous actions AND making critical actions reversible"
+          ],
+          "answerIndex": 2,
+          "explanation": "The lecture distinguishes two strategies: (1) reduce the chance an error happens, and (2) reduce the impact/severity when an error does happen. The other options are examples of techniques, not the two high-level strategies."
+        },
+        {
+          "id": "u2-hard-5",
+          "topic": "Common Design Mistakes",
+          "prompt": "A 'good design' per the lecture fulfills four criteria. Which of the following is NOT one of them?",
+          "options": [
+            "Know the real users",
+            "Fit human capabilities and context",
+            "Be visually attractive and on-brand",
+            "Let people recover from errors easily"
+          ],
+          "answerIndex": 2,
+          "explanation": "The four criteria are: know real users, fit human capabilities and context, be easy to discover and understand, and let people recover from errors. Visual attractiveness is a UX/aesthetics concern, not part of this specific usability framework."
+        }
+      ]
+    },
+    {
+      "unit": 3,
+      "title": "Usability & User Experience",
+      "topics": [
+        "Affordances, Signifiers, Mapping, and Feedback",
+        "Seven Stages of Action and Gulfs",
+        "User Experience Beyond Usability"
+      ],
+      "questions": [
+        {
+          "id": "u3-hard-1",
+          "topic": "Affordances, Signifiers, Mapping, and Feedback",
+          "prompt": "A stove has four burners arranged in a 2\u00d72 grid but four control knobs arranged in a horizontal line. Users consistently turn on the wrong burner. This is a failure of:",
+          "options": [
+            "Affordance \u2014 the knobs don't physically signal which burner they control",
+            "Natural mapping \u2014 the spatial arrangement of controls doesn't correspond to the arrangement of burners",
+            "Feedback \u2014 users aren't told which burner activated",
+            "Signifiers \u2014 the controls lack visible indicators of their function"
+          ],
+          "answerIndex": 1,
+          "explanation": "Natural mapping is the correspondence between controls and their effects based on spatial or physical layout. When knobs are in a line but burners are in a grid, the mapping is unnatural and causes errors. Affordance relates to what actions an object invites, not spatial correspondence."
+        },
+        {
+          "id": "u3-hard-2",
+          "topic": "Seven Stages of Action and Gulfs",
+          "prompt": "The 'gulf of execution' in Norman's model refers to:",
+          "options": [
+            "The difficulty of interpreting system feedback to know if a goal was achieved",
+            "The cognitive load required to construct a plan of action",
+            "The difficulty of translating a goal into the specific actions needed to operate the system",
+            "The gap between what the system can do and what the user wants to accomplish"
+          ],
+          "answerIndex": 2,
+          "explanation": "The gulf of execution is about the difficulty of knowing WHAT TO DO \u2014 translating a goal into interface actions. The gulf of evaluation (not execution) is about interpreting feedback to know if the goal succeeded."
+        },
+        {
+          "id": "u3-hard-3",
+          "topic": "Seven Stages of Action and Gulfs",
+          "prompt": "A user clicks 'Submit' on a form. The page goes blank with no message. The user doesn't know whether the form submitted or crashed. Which gulf does this primarily illustrate?",
+          "options": [
+            "Gulf of execution \u2014 the user doesn't know what action to take next",
+            "Gulf of evaluation \u2014 the user cannot interpret the system's state to know if the goal was achieved",
+            "Gulf of mapping \u2014 the control doesn't correspond to the expected outcome",
+            "Gulf of affordance \u2014 the Submit button doesn't clearly signal what it does"
+          ],
+          "answerIndex": 1,
+          "explanation": "The gulf of evaluation is the difficulty of interpreting system state or feedback after acting. A blank page with no feedback leaves users unable to evaluate whether their submission succeeded."
+        },
+        {
+          "id": "u3-hard-4",
+          "topic": "User Experience Beyond Usability",
+          "prompt": "Norman's three levels of emotional design \u2014 visceral, behavioural, and reflective \u2014 ordered from most to least immediate are:",
+          "options": [
+            "Reflective \u2192 Behavioural \u2192 Visceral",
+            "Behavioural \u2192 Visceral \u2192 Reflective",
+            "Visceral \u2192 Reflective \u2192 Behavioural",
+            "Visceral \u2192 Behavioural \u2192 Reflective"
+          ],
+          "answerIndex": 3,
+          "explanation": "Visceral is the immediate gut reaction (appearance, feel), behavioural is the experience during use (usability, control), and reflective is the post-use meaning-making and self-image. They occur from most to least immediate in that order."
+        },
+        {
+          "id": "u3-hard-5",
+          "topic": "User Experience Beyond Usability",
+          "prompt": "In Tiger's (1992) four types of pleasure, 'ideo-pleasure' refers to:",
+          "options": [
+            "The physical satisfaction of interacting with a well-crafted object",
+            "The pleasure derived from social status or relationships enabled by a product",
+            "The cognitive satisfaction of mastering a complex tool",
+            "Pleasure derived from a product's alignment with personal values, ethics, or beliefs"
+          ],
+          "answerIndex": 3,
+          "explanation": "Ideo-pleasure comes from a product reflecting the user's ideals, values, or ethical stance (e.g., using a fair-trade product). Physio-pleasure = physical sensations; socio-pleasure = social relationships; psycho-pleasure = cognitive/emotional engagement."
+        }
+      ]
+    },
+    {
+      "unit": 4,
+      "title": "Intro to IxD-PACT",
+      "topics": [
+        "PACT Framework"
+      ],
+      "questions": [
+        {
+          "id": "u4-hard-1",
+          "topic": "PACT Framework",
+          "prompt": "A hospital scheduling system is used daily by nurses. Administrators receive automated weekly reports but never log in. A union representative monitors scheduling policy for labor compliance. Under Eason's (1987) categories, the union representative is classified as:",
+          "options": [
+            "Primary user \u2014 they have a significant stake in the system's output",
+            "Secondary user \u2014 they access system information indirectly",
+            "Tertiary user \u2014 they are affected by the system's decisions without directly interacting with it",
+            "Peripheral user \u2014 they are adjacent to the system but have no formal role"
+          ],
+          "answerIndex": 2,
+          "explanation": "Tertiary users are affected by the system or influence its procurement/policy but don't interact with it directly. Primary users operate the system; secondary users use its output through intermediaries. 'Peripheral user' is not one of Eason's categories."
+        },
+        {
+          "id": "u4-hard-2",
+          "topic": "PACT Framework",
+          "prompt": "A field inspection app study finds that inspectors are frequently interrupted mid-task by radio calls and must resume work. This finding falls under which dimension of Activities analysis in PACT?",
+          "options": [
+            "Safety requirements",
+            "Cooperation",
+            "Complexity",
+            "Temporal aspects"
+          ],
+          "answerIndex": 3,
+          "explanation": "Temporal aspects cover time pressure, whether tasks can be interrupted and resumed, and timing constraints. Interruption patterns are a temporal property of the activity."
+        },
+        {
+          "id": "u4-hard-3",
+          "topic": "PACT Framework",
+          "prompt": "The 'context' element of PACT is divided into three sub-categories. Which set is correct?",
+          "options": [
+            "Technical, environmental, and temporal contexts",
+            "User, task, and domain context",
+            "Physical, social, and organizational context",
+            "Synchronous, asynchronous, and distributed context"
+          ],
+          "answerIndex": 2,
+          "explanation": "Context in PACT covers the physical environment (noise, lighting, space), the social environment (collaboration, cultural norms), and the organizational environment (policies, workflows, power structures)."
+        },
+        {
+          "id": "u4-hard-4",
+          "topic": "PACT Framework",
+          "prompt": "Which of the following is a COMMON MISTAKE in PACT analysis?",
+          "options": [
+            "Analyzing all four PACT elements before proposing design solutions",
+            "Proposing a specific technology as the solution before completing the analysis",
+            "Using PACT to frame stakeholder interviews",
+            "Treating context as a secondary concern after people and activities"
+          ],
+          "answerIndex": 1,
+          "explanation": "A key mistake is jumping to a technology solution before understanding the full problem space through PACT. The analysis should reveal requirements; proposing technology first inverts this and biases the findings."
+        },
+        {
+          "id": "u4-hard-5",
+          "topic": "PACT Framework",
+          "prompt": "A designer argues that for a simple consumer app, PACT analysis should focus only on 'People' and 'Activities' because 'Technology will define itself once we know users and tasks.' What is the strongest objection?",
+          "options": [
+            "Technology must be analyzed first because it constrains all other PACT elements",
+            "People is actually the least important element in consumer contexts",
+            "Context \u2014 physical, social, and organizational environment \u2014 is a separate PACT element that heavily shapes what design solutions are viable",
+            "Activities should be analyzed last, after people and technology are understood"
+          ],
+          "answerIndex": 2,
+          "explanation": "Context is a full PACT element, not a byproduct of understanding users and tasks. Environmental and organizational factors can fundamentally change which designs are feasible or appropriate."
+        }
+      ]
+    },
+    {
+      "unit": 5,
+      "title": "Visual Perception",
+      "topics": [
+        "Attention and Bandwidth Limits",
+        "Perception and Visual Biases",
+        "Gestalt Principles"
+      ],
+      "questions": [
+        {
+          "id": "u5-hard-1",
+          "topic": "Attention and Bandwidth Limits",
+          "prompt": "A UI displays 9 items as a group and expects users to instantly perceive the quantity. A visual perception expert would predict this will fail because:",
+          "options": [
+            "Gestalt grouping requires spatial separation for items beyond 5",
+            "Working memory cannot hold 9 items simultaneously during visual processing",
+            "The preattentive system cannot process quantities above ~4 items without counting \u2014 the subitizing threshold",
+            "Divided attention degrades below chance for displays with more than 7 visual items"
+          ],
+          "answerIndex": 2,
+          "explanation": "Subitizing is the ability to instantly perceive small quantities (up to ~4 objects) without counting. Beyond ~4 items, the visual system must count, so 9 items cannot be quantity-perceived at a glance."
+        },
+        {
+          "id": "u5-hard-2",
+          "topic": "Attention and Bandwidth Limits",
+          "prompt": "A map app changes a user's location marker from green to red when entering a restricted area. User testing shows participants consistently miss this change. Which phenomenon BEST explains this?",
+          "options": [
+            "Inattentional blindness \u2014 users weren't looking at the map at all",
+            "Change blindness \u2014 users can fail to notice even salient changes when not actively monitoring that element",
+            "The Stroop Effect \u2014 red conflicts with a learned association and delays recognition",
+            "Selective attention failure \u2014 the map competed with too many other UI elements"
+          ],
+          "answerIndex": 1,
+          "explanation": "Change blindness is the failure to detect changes in a visual scene, even obvious ones, when attention isn't actively directed there. Inattentional blindness is missing something entirely; the Stroop Effect is about conflicting semantic/perceptual information."
+        },
+        {
+          "id": "u5-hard-3",
+          "topic": "Perception and Visual Biases",
+          "prompt": "The Stroop Effect demonstrates which core principle relevant to interface design?",
+          "options": [
+            "Color perception is processed separately from semantic meaning in the visual cortex",
+            "Attention is a limited resource that must be carefully allocated in interface design",
+            "Conflicting automatic and controlled processing creates interference that slows response time",
+            "Users have a strong bias toward reading text over interpreting color"
+          ],
+          "answerIndex": 2,
+          "explanation": "The Stroop Effect shows that when automatic processing (reading the word) conflicts with controlled processing (naming the color), interference slows responses. This is not simply about limited attention or a text bias."
+        },
+        {
+          "id": "u5-hard-4",
+          "topic": "Gestalt Principles",
+          "prompt": "Two differently shaped and colored objects drift across a screen in the same direction. Users perceive them as belonging together. Which Gestalt principle explains this?",
+          "options": [
+            "Proximity \u2014 they happen to be near each other on screen",
+            "Similarity \u2014 shared visual features suggest a shared category",
+            "Common fate \u2014 objects moving together are perceived as a unit",
+            "Continuity \u2014 their motion paths create a perceptual connection"
+          ],
+          "answerIndex": 2,
+          "explanation": "Common fate states that elements moving in the same direction are grouped perceptually, regardless of other visual differences like shape or color. Proximity and similarity require shared location or appearance, not shared motion."
+        },
+        {
+          "id": "u5-hard-5",
+          "topic": "Attention and Bandwidth Limits",
+          "prompt": "A security guard monitors 12 simultaneous surveillance feeds for rare threats over an 8-hour shift. Which type of visual attention is MOST critically required?",
+          "options": [
+            "Selective attention \u2014 focusing on one feed when a target appears",
+            "Preattentive processing \u2014 detecting threats without conscious focus",
+            "Divided attention \u2014 distributing attention across multiple sources simultaneously",
+            "Vigilance \u2014 sustaining attention over time to detect infrequent events"
+          ],
+          "answerIndex": 2,
+          "explanation": "Divided attention is the ability to distribute attentional resources across multiple simultaneous inputs \u2014 essential when monitoring 12 feeds at once. Vigilance matters for the long shift, but the 12-feed constraint is specifically a divided attention demand."
+        }
+      ]
+    },
+    {
+      "unit": 6,
+      "title": "Cognition, Motor Control",
+      "topics": [
+        "Memory Systems",
+        "Cognitive Workload and Rehearsal",
+        "Recognition versus Recall"
+      ],
+      "questions": [
+        {
+          "id": "u6-hard-1",
+          "topic": "Memory Systems",
+          "prompt": "Miller (1956) estimated working memory capacity as 7\u00b12 items. More recent research suggests a lower estimate. What is that figure and what does it imply for design?",
+          "options": [
+            "5\u00b12 items \u2014 interfaces should avoid presenting more than 5 choices",
+            "4\u00b11 items \u2014 grouping and chunking are critical since working memory is even more limited than classic estimates",
+            "3\u00b11 items \u2014 menus should never exceed 3 options per level",
+            "9\u00b12 items \u2014 practiced users show higher capacity than originally measured"
+          ],
+          "answerIndex": 1,
+          "explanation": "More recent research suggests working memory holds approximately 4\u00b11 items (not 7\u00b12). This makes chunking and minimizing simultaneous information even more important in interface design."
+        },
+        {
+          "id": "u6-hard-2",
+          "topic": "Cognitive Workload and Rehearsal",
+          "prompt": "A user learned to export files via a specific submenu in their old app. After switching apps, they keep opening the wrong submenu \u2014 the old habit persists. Which forgetting theory best explains why the old memory interferes?",
+          "options": [
+            "Decay theory \u2014 the new memory should have replaced the old one over time",
+            "Encoding failure \u2014 the new procedure was never properly encoded",
+            "Interference theory \u2014 the old procedural memory actively competes with retrieval of the new one",
+            "Retrieval failure \u2014 the user knows the new procedure but can't access it under pressure"
+          ],
+          "answerIndex": 2,
+          "explanation": "Interference theory explains forgetting as competition between memories, not fading. The old procedure's strong association with 'export' actively interferes with learning a new route. Decay theory predicts fading over time, not active competition."
+        },
+        {
+          "id": "u6-hard-3",
+          "topic": "Recognition versus Recall",
+          "prompt": "Which interface interaction requires FREE RECALL rather than recognition or cued recall?",
+          "options": [
+            "Selecting a contact from an alphabetical list",
+            "Clicking the correct button in a toolbar after reading its label",
+            "Typing a keyboard shortcut when a tooltip hint is shown on hover",
+            "Entering a command-line command from memory with no prompt, autocomplete, or hint"
+          ],
+          "answerIndex": 3,
+          "explanation": "Free recall requires producing information from memory with no external cues. A command typed from scratch with no hints is free recall. Lists and labels enable recognition; tooltips enable cued recall."
+        },
+        {
+          "id": "u6-hard-4",
+          "topic": "Cognitive Workload and Rehearsal",
+          "prompt": "NASA-TLX is a standard tool used in HCI research. It measures:",
+          "options": [
+            "Motor accuracy and pointing performance across input devices",
+            "User satisfaction and emotional response to a product",
+            "Learnability over time through repeated task performance trials",
+            "Cognitive workload across multiple dimensions including mental demand, effort, and frustration"
+          ],
+          "answerIndex": 3,
+          "explanation": "NASA-TLX (Task Load Index) assesses subjective cognitive workload across six dimensions: mental demand, physical demand, temporal demand, performance, effort, and frustration. It is not a motor, satisfaction, or learnability measure."
+        },
+        {
+          "id": "u6-hard-5",
+          "topic": "Recognition versus Recall",
+          "prompt": "From easiest to hardest, the recognition-to-recall spectrum correctly ordered is:",
+          "options": [
+            "Free recall \u2192 cued recall \u2192 full-cue recognition",
+            "Cued recall \u2192 full-cue recognition \u2192 free recall",
+            "Full-cue recognition \u2192 cued recall \u2192 free recall",
+            "Full-cue recognition \u2192 free recall \u2192 cued recall"
+          ],
+          "answerIndex": 2,
+          "explanation": "Full-cue recognition (e.g., selecting from a list) is easiest because the answer is visible. Cued recall (e.g., a hint is provided) is intermediate. Free recall (e.g., typing from memory with no cues) is hardest."
+        }
+      ]
+    },
+    {
+      "unit": 7,
+      "title": "Motor Control, Modelling",
+      "topics": [
+        "Fitts' Law",
+        "Keystroke-Level Model",
+        "Power Law of Practice"
+      ],
+      "questions": [
+        {
+          "id": "u7-hard-1",
+          "topic": "Fitts' Law",
+          "prompt": "According to Fitts' Law, which target on a desktop interface would be EASIEST to click, all else being equal?",
+          "options": [
+            "A large button in the center of the screen",
+            "A medium button close to the cursor's average starting position",
+            "A large button close to the cursor's starting position",
+            "A small button at a corner of the screen"
+          ],
+          "answerIndex": 3,
+          "explanation": "Screen corners are effectively infinite-width targets because the cursor cannot overshoot them \u2014 moving toward a corner always hits it. This makes corners the highest-value Fitts' Law targets, even with a small button, outperforming large central buttons."
+        },
+        {
+          "id": "u7-hard-2",
+          "topic": "Keystroke-Level Model",
+          "prompt": "A usability evaluator uses KLM to estimate task time for a novice user who makes several mistakes and backtracks. The estimate will be INACCURATE because:",
+          "options": [
+            "KLM requires observational data from real users to calibrate its timing constants",
+            "KLM is calibrated for mouse input and does not model touchscreen interactions",
+            "KLM assumes error-free performance by expert users \u2014 it cannot model errors or novice behavior",
+            "KLM does not include a Mental preparation (M) operator, so it underestimates cognitive time"
+          ],
+          "answerIndex": 2,
+          "explanation": "KLM's two key assumptions are: (1) error-free execution, and (2) expert users. A novice making mistakes violates both assumptions, making the model inapplicable. KLM does include an M operator for mental preparation."
+        },
+        {
+          "id": "u7-hard-3",
+          "topic": "Fitts' Law",
+          "prompt": "In Fitts' Law, MT = a + b \u00d7 ID, where ID = log\u2082(D/W + 1). A designer doubles the width of a button (W) while keeping the distance (D) constant. What happens to ID and MT?",
+          "options": [
+            "ID increases and MT increases \u2014 a wider target requires more precise control",
+            "ID decreases and MT decreases \u2014 doubling W makes the target easier to hit",
+            "ID stays the same \u2014 W and D must change proportionally to affect ID",
+            "MT decreases but ID stays the same \u2014 width affects accuracy, not difficulty"
+          ],
+          "answerIndex": 1,
+          "explanation": "ID = log\u2082(D/W + 1). Doubling W increases D/W's denominator, reducing D/W, reducing the log\u2082 value, reducing ID, and therefore reducing MT. Wider targets are always easier to hit per Fitts' Law."
+        },
+        {
+          "id": "u7-hard-4",
+          "topic": "Power Law of Practice",
+          "prompt": "In the Power Law of Practice, Tn = T1 \u00d7 n^(\u2212a). Two users practice the same task: User A has a = 0.2 and User B has a = 0.5. Which user improves FASTER?",
+          "options": [
+            "User A \u2014 a lower exponent means smoother, more stable improvement",
+            "User B \u2014 a higher exponent means a steeper learning curve and faster initial gains",
+            "Both improve at the same rate \u2014 'a' only affects the starting time T1",
+            "User A \u2014 a lower exponent indicates higher baseline performance"
+          ],
+          "answerIndex": 1,
+          "explanation": "'a' is the learning rate exponent. A higher value of 'a' means Tn drops faster as n increases \u2014 i.e., faster improvement with practice. User B with a = 0.5 improves faster than User A with a = 0.2."
+        },
+        {
+          "id": "u7-hard-5",
+          "topic": "Fitts' Law",
+          "prompt": "Which of the following does Fitts' Law explicitly NOT account for?",
+          "options": [
+            "The width of the target",
+            "The distance from the cursor to the target",
+            "The time needed to visually locate and identify the target before moving",
+            "The user's motor variability"
+          ],
+          "answerIndex": 2,
+          "explanation": "Fitts' Law models the movement phase only \u2014 once the target is identified. It does not account for the visual search time needed to find and recognize the target before the pointing movement begins."
+        }
+      ]
+    },
+    {
+      "unit": 8,
+      "title": "Computational Design, DataCollection",
+      "topics": [
+        "Interviews, Observation, and Contextual Inquiry",
+        "Purpose of User Research"
+      ],
+      "questions": [
+        {
+          "id": "u8-hard-1",
+          "topic": "Interviews, Observation, and Contextual Inquiry",
+          "prompt": "During a Contextual Inquiry session, a participant stops their real work and says 'I would normally just export this and email it to Jim.' The researcher's correct response, per CI principles, is:",
+          "options": [
+            "Thank the participant and move to the next task in the protocol",
+            "Note the comment and probe about their mental model of the export function",
+            "Ask the participant to demonstrate what they would actually do in this situation",
+            "Remind the participant to think aloud about what they are currently doing"
+          ],
+          "answerIndex": 2,
+          "explanation": "Contextual Inquiry's core principle is studying real work in context. When a participant describes what they 'would normally do,' the researcher should redirect them to actually perform that behavior \u2014 the say-do gap means descriptions alone are unreliable."
+        },
+        {
+          "id": "u8-hard-2",
+          "topic": "Interviews, Observation, and Contextual Inquiry",
+          "prompt": "The 'say-do gap' is the core reason CI observes users rather than only interviewing them. Which scenario is the BEST example of the say-do gap?",
+          "options": [
+            "A user prefers the new interface on a survey but task times don't improve",
+            "A user describes a complex workflow verbally that turns out simpler when actually performed",
+            "A user claims they back up files weekly, but observation reveals the last backup was six months ago",
+            "A user can accurately demonstrate a task but cannot verbally explain the steps"
+          ],
+          "answerIndex": 2,
+          "explanation": "The say-do gap is the divergence between what people say they do and what they actually do. Claiming weekly backups while actually doing them rarely is a textbook example: the stated behavior differs systematically from the real behavior."
+        },
+        {
+          "id": "u8-hard-3",
+          "topic": "Interviews, Observation, and Contextual Inquiry",
+          "prompt": "In Contextual Inquiry, the 'partnership' principle specifically means:",
+          "options": [
+            "Multiple researchers conduct sessions together to triangulate findings",
+            "The researcher and participant co-design solutions to observed problems during the session",
+            "Treating the participant as the domain expert \u2014 shifting the relationship so the researcher is the apprentice",
+            "Forming a long-term relationship with participants across multiple research sessions"
+          ],
+          "answerIndex": 2,
+          "explanation": "Partnership in CI refers to the master-apprentice dynamic: the participant (master/expert) does real work and explains it while the researcher (apprentice) observes and asks questions. It is not about multiple researchers or co-design."
+        },
+        {
+          "id": "u8-hard-4",
+          "topic": "Interviews, Observation, and Contextual Inquiry",
+          "prompt": "Which of the following is NOT a standard type of interview used in user research?",
+          "options": [
+            "Structured interview",
+            "Semi-structured interview",
+            "Unstructured interview",
+            "Competitive interview"
+          ],
+          "answerIndex": 3,
+          "explanation": "The three standard interview types are structured (fixed questions), semi-structured (guided but flexible), and unstructured (open conversation). 'Competitive interview' is not an HCI research method."
+        },
+        {
+          "id": "u8-hard-5",
+          "topic": "Purpose of User Research",
+          "prompt": "'Saturation' as a stopping criterion for qualitative data collection means:",
+          "options": [
+            "The sample size has reached statistical significance",
+            "All planned participants in the recruitment screener have been interviewed",
+            "The data has been coded using all relevant theoretical frameworks",
+            "No meaningful new themes or insights are emerging from additional participants"
+          ],
+          "answerIndex": 3,
+          "explanation": "Saturation is a qualitative research concept meaning you keep collecting data until additional data produces no new insights. It is not a statistical threshold \u2014 qualitative research does not use p-values or fixed sample sizes."
+        }
+      ]
+    },
+    {
+      "unit": 9,
+      "title": "Data Analysis, Tasks",
+      "topics": [
+        "Tasks, Personas, and Requirements",
+        "Quantitative and Qualitative Analysis"
+      ],
+      "questions": [
+        {
+          "id": "u9-hard-1",
+          "topic": "Tasks, Personas, and Requirements",
+          "prompt": "A task description reads: 'The user opens the File menu, selects Export, chooses PDF format, and clicks Save.' An HCI practitioner would critique this because:",
+          "options": [
+            "Task descriptions should always be written from the system's perspective",
+            "It is too short \u2014 good task descriptions include context, motivation, and error scenarios",
+            "It describes HOW the interface should be operated rather than WHAT the user wants to achieve",
+            "It focuses on a single format (PDF) and doesn't cover the full range of user needs"
+          ],
+          "answerIndex": 2,
+          "explanation": "A good task description specifies the user's goal (what they want to achieve), not the interface steps (how the current design implements it). Prescribing menu steps biases the design toward the existing solution."
+        },
+        {
+          "id": "u9-hard-2",
+          "topic": "Quantitative and Qualitative Analysis",
+          "prompt": "Affinity diagrams are used in qualitative analysis primarily to:",
+          "options": [
+            "Quantify how frequently each theme appears across participant data",
+            "Map user journeys across the system's different screens",
+            "Group individual observations into higher-level themes through bottom-up clustering",
+            "Prioritize design features based on frequency of user mention"
+          ],
+          "answerIndex": 2,
+          "explanation": "Affinity diagrams organize raw observations (notes, quotes) into emergent themes through bottom-up grouping \u2014 not top-down categorization or frequency counting. The goal is to surface patterns, not to tally occurrences."
+        },
+        {
+          "id": "u9-hard-3",
+          "topic": "Tasks, Personas, and Requirements",
+          "prompt": "What is the CORE purpose of a persona in the design process?",
+          "options": [
+            "To replace the need for user research by synthesizing realistic fictional archetypes",
+            "To satisfy stakeholder requests for deliverables that demonstrate UX process",
+            "To create a shared, concrete reference point that keeps design decisions anchored to specific user needs and behaviors",
+            "To segment the market into distinct user groups for targeted feature development"
+          ],
+          "answerIndex": 2,
+          "explanation": "Personas serve as a shared design target \u2014 a specific, named, detailed user archetype the team can design for. They prevent the team from defaulting to vague 'average users' or making design decisions based on internal preferences."
+        },
+        {
+          "id": "u9-hard-4",
+          "topic": "Tasks, Personas, and Requirements",
+          "prompt": "In the four-level priority scheme for user groups and tasks, 'should include' (level 2) differs from 'absolutely must include' (level 1) in that:",
+          "options": [
+            "Level 2 items serve secondary users rather than primary users",
+            "Level 2 items are desirable but can be dropped without breaking core functionality",
+            "Level 2 items require additional user research before they can be implemented",
+            "Level 2 items are deferred to version 2.0 by default"
+          ],
+          "answerIndex": 1,
+          "explanation": "'Must include' items are core \u2014 the product fails without them. 'Should include' items add significant value but the product can ship without them if necessary. The distinction is about criticality, not user type or research status."
+        },
+        {
+          "id": "u9-hard-5",
+          "topic": "Quantitative and Qualitative Analysis",
+          "prompt": "Beyond affinity diagrams, which qualitative analysis approaches does the lecture mention?",
+          "options": [
+            "Regression analysis and cluster analysis",
+            "Card sorting and tree testing",
+            "Thematic analysis and grounded theory",
+            "Discourse analysis and narrative inquiry"
+          ],
+          "answerIndex": 2,
+          "explanation": "The lecture mentions thematic analysis (identifying patterns across qualitative data) and grounded theory (building theory inductively from data) as qualitative methods beyond affinity diagramming. Card sorting and tree testing are IA methods, not qualitative analysis frameworks."
+        }
+      ]
+    },
+    {
+      "unit": 10,
+      "title": "Conceptualizing Interactive Systems",
+      "topics": [
+        "Mental Models",
+        "Conceptual Design and Sketching"
+      ],
+      "questions": [
+        {
+          "id": "u10-hard-1",
+          "topic": "Mental Models",
+          "prompt": "In conceptual design, usability problems most often arise when:",
+          "options": [
+            "The designer's model is too complex for the implementation to support",
+            "The implementation model is kept invisible from the user",
+            "The user's mental model doesn't match the designer's model, and the system image fails to bridge the gap",
+            "The designer fails to use a metaphor the user already recognizes"
+          ],
+          "answerIndex": 2,
+          "explanation": "The three-model framework (designer's model, user's mental model, system image) identifies the core usability risk as a mismatch between what the designer intended and what the user understands \u2014 caused by a system image that inadequately communicates the designer's model."
+        },
+        {
+          "id": "u10-hard-2",
+          "topic": "Mental Models",
+          "prompt": "Which of the following correctly describes properties of user mental models?",
+          "options": [
+            "They are accurate representations that users build through systematic observation",
+            "They are stable once formed and resistant to change through experience",
+            "They are often incomplete, unstable, and can be factually wrong",
+            "They are primarily shaped by formal instruction rather than hands-on experience"
+          ],
+          "answerIndex": 2,
+          "explanation": "User mental models are typically incomplete (users don't model the full system), unstable (they change with each interaction), and can be incorrect. This is why designs must communicate clearly \u2014 users cannot be assumed to have accurate system models."
+        },
+        {
+          "id": "u10-hard-3",
+          "topic": "Conceptual Design and Sketching",
+          "prompt": "A design team adopts a 'desktop' metaphor with files, folders, and a trash can. Which is the STRONGEST potential DRAWBACK of this approach?",
+          "options": [
+            "Desktop metaphors have been shown to reduce learnability in longitudinal studies",
+            "The metaphor may create false expectations (e.g., that files must be 'put away' or trash must be 'emptied') and limit the designer's thinking to what physical desks can do",
+            "File and folder metaphors violate the Gestalt principle of proximity",
+            "Metaphors always confuse novice users who haven't used physical desktops"
+          ],
+          "answerIndex": 1,
+          "explanation": "Metaphors can constrain both users (creating false expectations from the physical analogy) and designers (by anchoring thinking to what the metaphor's source domain can do, limiting novel digital affordances). This is the key drawback cited in the lecture."
+        },
+        {
+          "id": "u10-hard-4",
+          "topic": "Conceptual Design and Sketching",
+          "prompt": "A conceptual model is composed of which four elements?",
+          "options": [
+            "Affordances, signifiers, mapping, and feedback",
+            "Goals, subgoals, operators, and methods",
+            "Personas, scenarios, tasks, and requirements",
+            "Concepts, actions, relationships, and metaphors"
+          ],
+          "answerIndex": 3,
+          "explanation": "A conceptual model is made up of: the key concepts users need to understand, the actions they can perform, the relationships between those concepts, and the metaphors that frame them. Affordances etc. are design properties of individual elements, not the components of a conceptual model."
+        },
+        {
+          "id": "u10-hard-5",
+          "topic": "Conceptual Design and Sketching",
+          "prompt": "The lecture identifies four attributes that characterize good design sketches. Which set is correct?",
+          "options": [
+            "Detailed, accurate, scalable, and communicative",
+            "Low-fidelity, annotated, iterable, and collaborative",
+            "Quick, timely, disposable, and plentiful",
+            "Rough, varied, evaluated, and documented"
+          ],
+          "answerIndex": 2,
+          "explanation": "Good sketches are quick (fast to make), timely (produced at the right moment in the process), disposable (not precious \u2014 you can throw them away), and plentiful (many, to explore a wide design space). These qualities support free exploration without attachment."
+        }
+      ]
+    },
+    {
+      "unit": 11,
+      "title": "Prototyping I",
+      "topics": [
+        "Paper Prototyping",
+        "Storyboards"
+      ],
+      "questions": [
+        {
+          "id": "u11-hard-1",
+          "topic": "Paper Prototyping",
+          "prompt": "In a paper prototyping session, the person playing the 'computer' role is responsible for:",
+          "options": [
+            "Recording observations about the participant's behavior and errors",
+            "Guiding the participant through the task instructions and scenarios",
+            "Manually advancing paper screens and overlays in response to user actions \u2014 simulating the system",
+            "Operating the camera and logging equipment during the session"
+          ],
+          "answerIndex": 2,
+          "explanation": "The 'computer' role simulates the system \u2014 physically swapping paper components to show what would happen on screen in response to the participant's actions. The facilitator guides the participant; the observer records findings."
+        },
+        {
+          "id": "u11-hard-2",
+          "topic": "Paper Prototyping",
+          "prompt": "During a paper prototype session, a participant says 'I'd probably just click here, but I'm not sure if that's right.' The facilitator's MOST valuable response is:",
+          "options": [
+            "'That's correct, go ahead' \u2014 to keep the session moving efficiently",
+            "'Try clicking there and see what happens' \u2014 to observe the outcome",
+            "'Let's skip that for now' \u2014 to stay on the session schedule",
+            "'What makes you hesitate?' \u2014 to probe the uncertainty without guiding the answer"
+          ],
+          "answerIndex": 3,
+          "explanation": "The goal of think-aloud testing is to surface the user's mental model. When they express uncertainty, probing the uncertainty reveals why the interface is ambiguous \u2014 far more valuable than confirming the action or skipping past it."
+        },
+        {
+          "id": "u11-hard-3",
+          "topic": "Paper Prototyping",
+          "prompt": "A wireframe is BEST described as:",
+          "options": [
+            "An interactive click-through prototype in a tool like Figma or InVision",
+            "A 2D skeletal outline showing screen layout and structure without detailed visual design",
+            "A rough hand-drawn sketch used in early divergent design exploration",
+            "A mid-fidelity mockup used to test visual hierarchy and color"
+          ],
+          "answerIndex": 1,
+          "explanation": "Wireframes are 2D structural documents that show layout, content areas, and navigation without detailed visual styling (no colors, fonts, or imagery). They differ from paper sketches (lower fidelity) and interactive prototypes (higher fidelity)."
+        },
+        {
+          "id": "u11-hard-4",
+          "topic": "Storyboards",
+          "prompt": "Storyboards in interaction design serve a fundamentally different purpose from wireframes. Storyboards PRIMARILY communicate:",
+          "options": [
+            "The layout and content structure of individual screens",
+            "The interaction flow between screens in the navigation model",
+            "The context, use scenario, and human experience of using the system \u2014 often including people, emotions, and environment",
+            "The information hierarchy within a single interface state"
+          ],
+          "answerIndex": 2,
+          "explanation": "Storyboards communicate the broader use scenario \u2014 who is using the system, in what context, for what purpose, and what the experience feels like. Wireframes show interface structure; storyboards show context and story."
+        },
+        {
+          "id": "u11-hard-5",
+          "topic": "Paper Prototyping",
+          "prompt": "The 'think-aloud' technique is valuable in usability testing primarily because:",
+          "options": [
+            "It produces quantitative data on task completion rates",
+            "It is faster than observational methods \u2014 users narrate so less post-session analysis is needed",
+            "It reveals users' mental models and real-time reasoning that behavior observation alone cannot show",
+            "It eliminates the need for post-task interviews since cognitive processes are captured continuously"
+          ],
+          "answerIndex": 2,
+          "explanation": "Think-aloud's primary value is making the invisible visible \u2014 it externalizes users' reasoning, expectations, and confusion as they occur. Behavioral observation shows what users do; think-aloud reveals why."
+        }
+      ]
+    },
+    {
+      "unit": 12,
+      "title": "Prototyping II",
+      "topics": [
+        "Prototype Fidelity"
+      ],
+      "questions": [
+        {
+          "id": "u12-hard-1",
+          "topic": "Prototype Fidelity",
+          "prompt": "A team wants to test whether their novel one-handed thumb-typing method is faster than a standard keyboard. They plan to use a paper prototype. An experienced HCI researcher would object because:",
+          "options": [
+            "Paper prototypes cannot test any timing or speed-related questions",
+            "Speed comparisons require large sample sizes that paper prototyping cannot support",
+            "Testing typing speed requires a functional implementation \u2014 paper cannot simulate the physical motor interaction of the input method",
+            "Paper prototypes are only valid for early concept validation, not comparison studies"
+          ],
+          "answerIndex": 2,
+          "explanation": "Paper prototyping tests conceptual understanding, not physical interaction performance. Typing speed is a motor/physical measure that depends on the actual input mechanism \u2014 you cannot simulate it with paper."
+        },
+        {
+          "id": "u12-hard-2",
+          "topic": "Prototype Fidelity",
+          "prompt": "Which usability question CAN be effectively evaluated with a paper prototype?",
+          "options": [
+            "Whether animation transitions between screens feel smooth and natural",
+            "Whether the typing interaction method reduces repetitive strain compared to alternatives",
+            "Whether users understand the conceptual model and can find the right menu for a task",
+            "Whether response latency affects user satisfaction and trust"
+          ],
+          "answerIndex": 2,
+          "explanation": "Paper prototypes excel at testing conceptual clarity \u2014 do users understand the information architecture, terminology, and mental model the design implies? They cannot test anything involving motion, timing, or physical interaction."
+        },
+        {
+          "id": "u12-hard-3",
+          "topic": "Prototype Fidelity",
+          "prompt": "A 'Wizard of Oz' prototype is BEST used when:",
+          "options": [
+            "You need to hide the prototype technology from participants to reduce demand effects",
+            "The interface has too many states to realistically simulate with paper",
+            "You need to evaluate visual design without involving real users",
+            "You need to test AI or complex backend behavior before building it \u2014 a human operator simulates the system responses"
+          ],
+          "answerIndex": 3,
+          "explanation": "Wizard of Oz prototyping is specifically designed for evaluating complex or AI-driven system behavior before building it. A hidden human operator simulates what the system would do, allowing early evaluation of the interaction model."
+        },
+        {
+          "id": "u12-hard-4",
+          "topic": "Prototype Fidelity",
+          "prompt": "The PRIMARY trade-off when choosing between low-fidelity and high-fidelity prototypes is:",
+          "options": [
+            "Low-fi cannot test interaction concepts; high-fi can \u2014 making high-fi almost always preferable",
+            "Low-fi is for qualitative data only; high-fi enables quantitative measurement",
+            "Low-fi enables rapid, cheap conceptual iteration; high-fi yields more realistic behavioral data but costs more time to build",
+            "Low-fi requires paper; high-fi requires a real coded implementation"
+          ],
+          "answerIndex": 2,
+          "explanation": "The core trade-off is cost/speed vs. realism. Low-fi allows fast exploration of many concepts cheaply but can't test fine interactions; high-fi produces more realistic user behavior and reaction but takes significantly longer to create."
+        },
+        {
+          "id": "u12-hard-5",
+          "topic": "Prototype Fidelity",
+          "prompt": "'Fidelity' in the context of prototyping refers to:",
+          "options": [
+            "The number of screens and states included in the prototype",
+            "Whether the prototype uses real content versus Lorem Ipsum placeholder text",
+            "The resolution and pixel density of the design mockup",
+            "How accurately the prototype represents the look, feel, and behavior of the final intended system"
+          ],
+          "answerIndex": 3,
+          "explanation": "Fidelity is the degree to which a prototype resembles the final product across visual design, interactivity, and functional behavior. It is not about screen count, content type, or resolution specifically."
+        }
+      ]
+    },
+    {
+      "unit": 13,
+      "title": "Controlled Experiments",
+      "topics": [
+        "Experimental Design",
+        "Hypothesis Testing",
+        "Data Types and Statistical Tests"
+      ],
+      "questions": [
+        {
+          "id": "u13-hard-1",
+          "topic": "Experimental Design",
+          "prompt": "A researcher randomly assigns 30 participants to use Interface A and 30 different participants to use Interface B. This is:",
+          "options": [
+            "A within-subjects design \u2014 each participant appears in both conditions",
+            "A mixed design \u2014 random assignment makes it partially within-subjects",
+            "A quasi-experimental design \u2014 true experiments don't use random assignment",
+            "A between-subjects design \u2014 different participants experience different conditions"
+          ],
+          "answerIndex": 3,
+          "explanation": "Between-subjects (independent groups) design uses different participants for each condition. Within-subjects uses the same participants in all conditions. Random assignment is a feature of true experiments but doesn't determine the within/between distinction."
+        },
+        {
+          "id": "u13-hard-2",
+          "topic": "Experimental Design",
+          "prompt": "A researcher compares three menu layouts (A, B, C) using the same participants. To control for order effects, they should:",
+          "options": [
+            "Always present conditions in the same order to ensure consistency across participants",
+            "Add a one-week washout period between conditions",
+            "Use counterbalancing \u2014 presenting conditions in systematically different orders across participants",
+            "Switch to a between-subjects design, since order effects are impossible between different participants"
+          ],
+          "answerIndex": 2,
+          "explanation": "Counterbalancing (e.g., Latin square design) distributes order effects evenly across participants so no one condition is always first, last, or practice-affected. Always using the same order confounds practice and fatigue with condition differences."
+        },
+        {
+          "id": "u13-hard-3",
+          "topic": "Hypothesis Testing",
+          "prompt": "A study tests 15 dependent variables and reports p = 0.03 on one of them (\u03b1 = 0.05). A reviewer flags this as potentially unreliable. The reviewer is concerned about:",
+          "options": [
+            "Type II error \u2014 failing to detect a real effect due to low statistical power",
+            "Confirmation bias in how the hypothesis was framed before data collection",
+            "The multiple comparisons problem \u2014 testing many variables inflates the probability of at least one false positive",
+            "Low effect size \u2014 p < 0.05 is meaningless without a large enough effect"
+          ],
+          "answerIndex": 2,
+          "explanation": "When 15 tests are conducted at \u03b1 = 0.05, the probability of at least one false positive by chance alone is ~54%. Finding p = 0.03 on one of 15 tests without correction (e.g., Bonferroni) is likely a false positive \u2014 this is the multiple comparisons problem."
+        },
+        {
+          "id": "u13-hard-4",
+          "topic": "Data Types and Statistical Tests",
+          "prompt": "Likert scale ratings (e.g., 1\u20137 agreement scale) should be treated as ORDINAL rather than INTERVAL data because:",
+          "options": [
+            "Likert scales have too few response options to be analyzed parametrically",
+            "Self-report measures introduce social desirability bias that invalidates interval assumptions",
+            "The psychological distance between adjacent points (e.g., 3\u21924 vs. 4\u21925) cannot be assumed equal",
+            "Likert scales are collected via surveys, which are inherently less reliable than behavioral measures"
+          ],
+          "answerIndex": 2,
+          "explanation": "Interval data requires equal spacing between values. There is no guarantee that the difference between 'slightly agree' and 'agree' is psychologically equivalent to the difference between 'agree' and 'strongly agree' \u2014 therefore, treating Likert data as interval is an assumption that may not hold."
+        },
+        {
+          "id": "u13-hard-5",
+          "topic": "Hypothesis Testing",
+          "prompt": "A Type II error in hypothesis testing is:",
+          "options": [
+            "Rejecting the null hypothesis when it is actually true \u2014 a false positive",
+            "Using the wrong statistical test for the data type, invalidating the result",
+            "Collecting data from a non-representative sample, biasing the conclusions",
+            "Failing to reject the null hypothesis when it is actually false \u2014 missing a real effect"
+          ],
+          "answerIndex": 3,
+          "explanation": "Type II error (false negative) = failing to detect an effect that is actually there. Type I error (false positive) = concluding an effect exists when it doesn't. Type II is about missing real effects; Type I is about claiming false ones."
+        }
+      ]
+    },
+    {
+      "unit": 14,
+      "title": "Expert Evaluation",
+      "topics": [
+        "Nielsen's Heuristics",
+        "Cognitive Walkthrough",
+        "Heuristic Evaluation"
+      ],
+      "questions": [
+        {
+          "id": "u14-hard-1",
+          "topic": "Nielsen's Heuristics",
+          "prompt": "Which Nielsen heuristic is specifically about designing to PREVENT problems before they occur, rather than helping users recover after an error?",
+          "options": [
+            "User control and freedom",
+            "Help users recognize, diagnose, and recover from errors",
+            "Visibility of system status",
+            "Error prevention"
+          ],
+          "answerIndex": 3,
+          "explanation": "'Error prevention' is about stopping problems before they happen \u2014 through constraints, confirmations, and smart defaults. 'Help users recognize, diagnose, and recover from errors' is the separate heuristic about what to do when an error has already occurred."
+        },
+        {
+          "id": "u14-hard-2",
+          "topic": "Cognitive Walkthrough",
+          "prompt": "During a cognitive walkthrough, the evaluator simulates a new user step by step through a task. At each step, four questions are asked. Which of the following is NOT one of them?",
+          "options": [
+            "Will the user know that this step is needed to reach the goal?",
+            "Will the user notice the correct interface element for this step?",
+            "Will the user recognize that the correct action is available and appropriate?",
+            "Will the user be able to complete this step within a defined time limit?"
+          ],
+          "answerIndex": 3,
+          "explanation": "The four cognitive walkthrough questions are about knowledge (knowing the step is needed), noticeability (seeing the control), recognition (understanding it's the right action), and feedback interpretation (understanding the system's response). Time limits are not one of the four questions."
+        },
+        {
+          "id": "u14-hard-3",
+          "topic": "Heuristic Evaluation",
+          "prompt": "The recommended number of evaluators for heuristic evaluation is 3\u20135. The primary reason adding a 6th evaluator is generally not worth it is:",
+          "options": [
+            "Six evaluators cannot reach consensus on severity ratings without a moderator",
+            "More evaluators introduce disagreement that lowers inter-rater reliability",
+            "Heuristic evaluation requires an odd number of evaluators for tie-breaking on severity scores",
+            "The number of NEW problems found diminishes sharply beyond 3\u20135 evaluators \u2014 the marginal gain is low"
+          ],
+          "answerIndex": 3,
+          "explanation": "Each evaluator finds a different subset of problems. The first 3\u20135 evaluators collectively find the vast majority of issues; additional evaluators find only a few new problems at increasing cost. This is a diminishing returns argument, not a consensus or reliability issue."
+        },
+        {
+          "id": "u14-hard-4",
+          "topic": "Heuristic Evaluation",
+          "prompt": "In heuristic evaluation, a problem's severity is rated on a 0\u20134 scale based on three criteria. Which set correctly names all three?",
+          "options": [
+            "Severity, urgency, and recoverability",
+            "Frequency, impact, and persistence",
+            "Scope, duration, and consequence",
+            "Discoverability, frequency, and impact"
+          ],
+          "answerIndex": 1,
+          "explanation": "Severity is scored based on: frequency (how often the problem occurs), impact (how seriously it affects users when it occurs), and persistence (whether it is a once-only problem or recurs every time). Urgency and recoverability are not the named criteria."
+        },
+        {
+          "id": "u14-hard-5",
+          "topic": "Nielsen's Heuristics",
+          "prompt": "A form validation system marks errors only with a red border and no message. Which heuristic does this most directly violate?",
+          "options": [
+            "Consistency and standards \u2014 red borders are inconsistent with platform conventions",
+            "Error prevention \u2014 the form should have prevented the error from occurring",
+            "Help users recognize, diagnose, and recover from errors \u2014 error messages should describe the problem in plain language and suggest a solution",
+            "Visibility of system status \u2014 the system is not informing users about what is happening"
+          ],
+          "answerIndex": 2,
+          "explanation": "'Help users recognize, diagnose, and recover from errors' requires that error messages clearly state what went wrong and how to fix it. A red border alone fails at diagnosis and recovery. 'Error prevention' would apply if the field allowed invalid input in the first place."
+        }
+      ]
+    },
+    {
+      "unit": 15,
+      "title": "Accessibility",
+      "topics": [
+        "Types of Accessibility Barriers",
+        "Curb Cut Effect and Inclusive Design",
+        "Accessibility as Barrier Removal"
+      ],
+      "questions": [
+        {
+          "id": "u15-hard-1",
+          "topic": "Types of Accessibility Barriers",
+          "prompt": "The Web Content Accessibility Guidelines (WCAG) are organized around four principles. Which set is correct?",
+          "options": [
+            "Visible, Reachable, Understandable, Compliant",
+            "Accessible, Usable, Adaptable, Inclusive",
+            "Perceivable, Operable, Understandable, Robust",
+            "Readable, Navigable, Predictable, Compatible"
+          ],
+          "answerIndex": 2,
+          "explanation": "WCAG's four principles form the acronym POUR: Perceivable, Operable, Understandable, Robust. These are the foundational properties any accessible web content must satisfy."
+        },
+        {
+          "id": "u15-hard-2",
+          "topic": "Types of Accessibility Barriers",
+          "prompt": "A form uses red text for errors and green text for success, with no other indicator. The 'double-coding' principle means this design fails because:",
+          "options": [
+            "The WCAG 4.5:1 contrast ratio may not be met by the chosen red and green shades",
+            "Color must always be paired with another indicator \u2014 shape, text label, or icon \u2014 so color-blind users can distinguish the states",
+            "Red and green are perceptually similar for users with deuteranopia, making both states appear identical",
+            "Double-coding requires that all form fields have both a label and a placeholder"
+          ],
+          "answerIndex": 1,
+          "explanation": "Double-coding means never conveying information through color alone \u2014 always pair color with a second channel (text, shape, icon, or pattern) so users who cannot perceive color still get the information. Option C is true but describes the consequence, not the principle."
+        },
+        {
+          "id": "u15-hard-3",
+          "topic": "Curb Cut Effect and Inclusive Design",
+          "prompt": "The 'curb cut effect' in accessible design means:",
+          "options": [
+            "Accessibility features add complexity that must be balanced against the needs of non-disabled users",
+            "Physical accessibility (curb cuts for wheelchairs) served as the historical model for digital accessibility standards",
+            "Removing accessibility barriers requires 'cutting into' existing design to accommodate constraints",
+            "Design changes made for accessibility often end up improving usability for all users"
+          ],
+          "answerIndex": 3,
+          "explanation": "Curb cuts (ramps at sidewalks) were built for wheelchair users but are also used by cyclists, delivery workers, and parents with strollers. In digital design, accessibility features (captions, keyboard navigation, high contrast) similarly benefit a broader population than originally intended."
+        },
+        {
+          "id": "u15-hard-4",
+          "topic": "Types of Accessibility Barriers",
+          "prompt": "The minimum color contrast ratio for normal-size body text required by W3C accessibility guidelines is:",
+          "options": [
+            "3:1",
+            "7:1",
+            "2:1",
+            "4.5:1"
+          ],
+          "answerIndex": 3,
+          "explanation": "WCAG 2.1 Level AA requires a minimum 4.5:1 contrast ratio for normal text. Large text (18pt+ or 14pt+ bold) requires only 3:1. The enhanced Level AAA standard requires 7:1 for normal text."
+        },
+        {
+          "id": "u15-hard-5",
+          "topic": "Accessibility as Barrier Removal",
+          "prompt": "Why does using standard Apple UIKit elements (instead of custom-drawn components) automatically improve VoiceOver accessibility?",
+          "options": [
+            "UIKit enforces the WCAG 4.5:1 contrast ratio requirement on all text elements automatically",
+            "UIKit elements automatically enable all alternative input methods including switch access and eye tracking",
+            "Custom components require additional rendering passes that slow screen reader performance",
+            "Standard UIKit components have built-in accessibility metadata that VoiceOver can read and announce"
+          ],
+          "answerIndex": 3,
+          "explanation": "Apple's standard UIKit controls (buttons, labels, sliders) include accessibility attributes (labels, traits, values) that VoiceOver uses automatically. Custom-drawn components have no such metadata unless the developer adds it manually."
+        }
+      ]
+    },
+    {
+      "unit": 16,
+      "title": "Social Computing",
+      "topics": [
+        "Awareness, Tailoring, and Failure Modes",
+        "Groupware Time-Space Matrix",
+        "Crowdsourcing and Data Quality"
+      ],
+      "questions": [
+        {
+          "id": "u16-hard-1",
+          "topic": "Awareness, Tailoring, and Failure Modes",
+          "prompt": "Mark Ackerman's 'sociotechnical gap' refers to:",
+          "options": [
+            "The difference between what users say they want and what they actually need in a social system",
+            "The lag between social norm changes and updates to social computing platforms",
+            "The mismatch between designers' social assumptions and the actual cultural context of users",
+            "The gap between what social systems require to function well and what technical systems can currently support"
+          ],
+          "answerIndex": 3,
+          "explanation": "Ackerman's sociotechnical gap is the fundamental mismatch between the rich complexity of human social systems and what we can practically build in technical systems. Technology can approximate but rarely fully satisfy what social coordination actually requires."
+        },
+        {
+          "id": "u16-hard-2",
+          "topic": "Groupware Time-Space Matrix",
+          "prompt": "Where does video conferencing fall in the groupware time-space matrix?",
+          "options": [
+            "Same time, same place",
+            "Different time, same place",
+            "Different time, different place",
+            "Same time, different place"
+          ],
+          "answerIndex": 3,
+          "explanation": "Video conferencing is synchronous (participants interact at the same time) but distributed (participants are in different physical locations). This places it in the 'same time, different place' quadrant."
+        },
+        {
+          "id": "u16-hard-3",
+          "topic": "Crowdsourcing and Data Quality",
+          "prompt": "The 'Find-Fix-Verify' pattern in crowdsourcing uses three distinct worker stages. Which sequence is correct?",
+          "options": [
+            "Workers generate options \u2192 moderators filter \u2192 experts verify quality",
+            "Workers find content \u2192 organize it \u2192 publish it",
+            "System finds tasks \u2192 users fix them \u2192 algorithm verifies completion",
+            "Workers find problems \u2192 other workers fix those problems \u2192 other workers verify the fixes"
+          ],
+          "answerIndex": 3,
+          "explanation": "Find-Fix-Verify is a three-stage pipeline: one crowd identifies problems, another crowd fixes them, and a third crowd verifies the fixes are correct. This separation prevents the same person from both creating and validating their own work."
+        },
+        {
+          "id": "u16-hard-4",
+          "topic": "Awareness, Tailoring, and Failure Modes",
+          "prompt": "The lecture identifies reasons collaborative systems fail. Which of the following IS one of those reasons?",
+          "options": [
+            "Too much moderation prevents organic community growth",
+            "Over-reliance on synchronous communication creates coordination overhead",
+            "Insufficient anonymity leads to social loafing among contributors",
+            "Disparity between who does the work and who gets the benefit"
+          ],
+          "answerIndex": 3,
+          "explanation": "A key failure mode for collaborative systems is when the effort of contributing falls on one group while the benefits accrue to another \u2014 this creates a disincentive to contribute and leads to free-rider problems."
+        },
+        {
+          "id": "u16-hard-5",
+          "topic": "Awareness, Tailoring, and Failure Modes",
+          "prompt": "In CSCW, 'awareness' specifically refers to:",
+          "options": [
+            "Users being informed about the system's privacy and data collection practices",
+            "Administrative visibility into which team members have accessed shared documents",
+            "The system monitoring user behavior for analytics and performance tracking",
+            "Collaborators' ability to know what others are doing and have done in a shared environment"
+          ],
+          "answerIndex": 3,
+          "explanation": "Awareness in CSCW is the shared knowledge of who is present, what they are doing, and what they have done \u2014 enabling groups to coordinate without explicit communication. It is a technical design challenge, not a privacy or analytics concept."
+        }
+      ]
+    },
+    {
+      "unit": 17,
+      "title": "Human AI Interaction I",
+      "topics": [
+        "HAI and Historical Framing",
+        "Augment versus Automate",
+        "Mixed-Initiative Design"
+      ],
+      "questions": [
+        {
+          "id": "u17-hard-1",
+          "topic": "HAI and Historical Framing",
+          "prompt": "Shneiderman's three principles of direct manipulation are:",
+          "options": [
+            "Visibility, feedback, and user control",
+            "Discoverability, learnability, and efficiency",
+            "Affordance, signifier, and mapping",
+            "Continuous representation of objects, physical actions instead of complex syntax, and rapid incremental reversible operations"
+          ],
+          "answerIndex": 3,
+          "explanation": "Shneiderman's three direct manipulation principles: (1) continuous representation of objects and actions of interest, (2) physical actions or labeled button presses instead of complex syntax, (3) rapid, incremental, reversible actions with immediate feedback."
+        },
+        {
+          "id": "u17-hard-2",
+          "topic": "Augment versus Automate",
+          "prompt": "Beyond the binary of 'automate vs. augment,' the lecture describes five modes of AI interaction. A system that automatically tags and groups your photos by location and people is BEST classified as:",
+          "options": [
+            "Automate",
+            "Augment",
+            "Prompt",
+            "Organize"
+          ],
+          "answerIndex": 3,
+          "explanation": "The 'organize' mode is specifically about AI structuring and categorizing information without the user explicitly requesting each grouping. The system is not completing a task for the user (automate) nor enhancing the user's own work (augment) \u2014 it is organizing information."
+        },
+        {
+          "id": "u17-hard-3",
+          "topic": "Mixed-Initiative Design",
+          "prompt": "The three AI user challenges identified in the lecture are unpredictability, opaqueness, and evolution. 'Evolution' specifically refers to:",
+          "options": [
+            "AI systems learning from user feedback and improving their suggestions over time",
+            "Users gradually adapting their behavior to work around AI limitations",
+            "The progressive adoption of AI tools across different user populations over time",
+            "AI behavior changing across model updates in ways users may not anticipate or even notice"
+          ],
+          "answerIndex": 3,
+          "explanation": "Evolution refers to the challenge that AI systems change \u2014 through retraining, updates, and drift \u2014 in ways that can alter their behavior without user awareness. A system the user trusted last month may behave differently this month."
+        },
+        {
+          "id": "u17-hard-4",
+          "topic": "Mixed-Initiative Design",
+          "prompt": "Designing for 'mixed-initiative' AI interaction means:",
+          "options": [
+            "Ensuring AI is transparent about when it generates content versus retrieves it",
+            "Combining automated decisions with mandatory human review before final output",
+            "Using AI for some tasks while keeping other tasks fully manual",
+            "Allowing both the user and the AI system to take initiative \u2014 either can propose or drive the next action"
+          ],
+          "answerIndex": 3,
+          "explanation": "Mixed-initiative means neither the user nor the AI is always in control. The system can proactively suggest or act; the user can override, redirect, or take the lead. It is a collaborative dynamic rather than a strict human-in-control or AI-in-control model."
+        },
+        {
+          "id": "u17-hard-5",
+          "topic": "Augment versus Automate",
+          "prompt": "A voice assistant gives a different answer to the same factual question depending on the time of day and the user's recent conversation history. Users find it unreliable. This BEST illustrates which AI user challenge?",
+          "options": [
+            "Opaqueness \u2014 the system cannot explain why its answer changed",
+            "Evolution \u2014 the model was retrained without the user's knowledge",
+            "Unpredictability \u2014 the system's outputs vary in ways users cannot anticipate or rely on",
+            "Mixed initiative \u2014 the system is taking initiative when it should not"
+          ],
+          "answerIndex": 2,
+          "explanation": "Unpredictability is the challenge that AI outputs vary across identical or similar inputs, making the system unreliable for users who expect consistent answers. This is distinct from evolution (model updates) and opaqueness (lack of explanations)."
+        }
+      ]
+    },
+    {
+      "unit": 18,
+      "title": "Human-AI Interaction II",
+      "topics": [
+        "Design Challenges for AI Systems",
+        "AI Design Complexity Map",
+        "Human-AI Interaction Guidelines",
+        "Characteristics of HAI Collaboration"
+      ],
+      "questions": [
+        {
+          "id": "u18-hard-1",
+          "topic": "Design Challenges for AI Systems",
+          "prompt": "The distinction between EXPLICIT and IMPLICIT human-AI interaction is:",
+          "options": [
+            "Explicit AI uses natural language; implicit AI uses gestures and behavioral signals",
+            "Explicit AI shows its reasoning process; implicit AI operates as a black box",
+            "Explicit interaction is synchronous; implicit interaction is asynchronous",
+            "Explicit: the user directly instructs the AI what to do; Implicit: the AI responds to background user behavior without direct commands"
+          ],
+          "answerIndex": 3,
+          "explanation": "Explicit interaction means the user deliberately gives the AI a command or query. Implicit interaction means the AI infers user intent from ambient behavior (e.g., tracking what you read to recommend next) without a direct instruction."
+        },
+        {
+          "id": "u18-hard-2",
+          "topic": "AI Design Complexity Map",
+          "prompt": "When designing an LLM-powered medical triage assistant that must consistently recommend verified protocols, the MOST appropriate temperature setting is:",
+          "options": [
+            "High temperature (~1.0) \u2014 to generate diverse treatment options for clinical review",
+            "Medium temperature (~0.5) \u2014 to balance consistency with appropriate clinical variation",
+            "Temperature \u2248 0 \u2014 to produce consistent, deterministic outputs for a safety-critical task",
+            "Temperature doesn't matter if the system prompt is detailed enough"
+          ],
+          "answerIndex": 2,
+          "explanation": "Temperature controls output randomness. For safety-critical, factual tasks requiring consistent outputs (like medical protocol recommendations), temperature \u2248 0 minimizes variation. High temperature is appropriate for creative tasks where diversity is valuable."
+        },
+        {
+          "id": "u18-hard-3",
+          "topic": "Human-AI Interaction Guidelines",
+          "prompt": "To help users develop APPROPRIATE reliance on AI \u2014 neither over-trusting nor dismissing it \u2014 which design strategy is MOST effective?",
+          "options": [
+            "Adding disclaimers that remind users the AI can be wrong",
+            "Requiring users to complete an AI literacy module before use",
+            "Displaying the AI's confidence level or uncertainty alongside its outputs",
+            "Hiding low-confidence outputs and only surfacing high-confidence recommendations"
+          ],
+          "answerIndex": 2,
+          "explanation": "Communicating AI uncertainty helps users calibrate their trust \u2014 they can rely more heavily on high-confidence outputs and apply more scrutiny to uncertain ones. Blanket disclaimers are ignored; hiding low-confidence outputs removes information users need to judge reliability."
+        },
+        {
+          "id": "u18-hard-4",
+          "topic": "Characteristics of HAI Collaboration",
+          "prompt": "RLHF (Reinforcement Learning from Human Feedback) is used primarily to:",
+          "options": [
+            "Generate synthetic training data at scale to reduce the need for human labeling",
+            "Enable AI systems to ask clarifying questions when uncertain about user intent",
+            "Speed up model training by using human-rated examples as curriculum",
+            "Align AI behavior with human values and preferences through human preference signals"
+          ],
+          "answerIndex": 3,
+          "explanation": "RLHF trains AI models to behave in ways that humans rate as preferred \u2014 aligning model outputs with human values, expectations, and norms. It is an alignment technique, not a data generation or training efficiency method."
+        },
+        {
+          "id": "u18-hard-5",
+          "topic": "Design Challenges for AI Systems",
+          "prompt": "An app detects that a user has been editing the same paragraph for 10 minutes and proactively offers rewriting suggestions without being asked. This is an example of:",
+          "options": [
+            "Explicit interaction with AI-initiated augmentation",
+            "Mixed-initiative design where the user set the agenda",
+            "Automated AI behavior triggered by performance analytics",
+            "Implicit interaction with AI-initiated assistance"
+          ],
+          "answerIndex": 3,
+          "explanation": "The interaction is implicit (the AI infers the user is struggling from behavioral signals, not a direct command) and AI-initiated (the AI acts first without being asked). This is a key pattern in proactive AI design."
+        }
+      ]
+    },
+    {
+      "unit": 19,
+      "title": "Virtual Reality I",
+      "topics": [
+        "XR Terminology and VR Basics",
+        "WIMP and Direct Manipulation"
+      ],
+      "questions": [
+        {
+          "id": "u19-hard-1",
+          "topic": "XR Terminology and VR Basics",
+          "prompt": "Milgram's Reality-Virtuality Continuum, ordered from most real to most virtual, is:",
+          "options": [
+            "Real Environment \u2192 Augmented Virtuality \u2192 Augmented Reality \u2192 Virtual Environment",
+            "Virtual Environment \u2192 Augmented Virtuality \u2192 Augmented Reality \u2192 Real Environment",
+            "Real Environment \u2192 Augmented Reality \u2192 Augmented Virtuality \u2192 Virtual Environment",
+            "Augmented Reality \u2192 Real Environment \u2192 Augmented Virtuality \u2192 Virtual Environment"
+          ],
+          "answerIndex": 2,
+          "explanation": "The continuum from real to virtual is: Real Environment \u2192 Augmented Reality (real with virtual overlays) \u2192 Augmented Virtuality (virtual with real elements) \u2192 Virtual Environment. AR and AV are commonly confused \u2014 AR is predominantly real; AV is predominantly virtual."
+        },
+        {
+          "id": "u19-hard-2",
+          "topic": "XR Terminology and VR Basics",
+          "prompt": "A user in a VR forest reaches toward a virtual tree. As their hand approaches, they feel a compelling sense that their hand belongs in that virtual space. This MOST directly exemplifies:",
+          "options": [
+            "Place illusion (presence) \u2014 the sense of being in the virtual environment",
+            "Plausibility illusion \u2014 the virtual world seems to respond realistically",
+            "Embodiment illusion \u2014 the sense that the virtual body or body part is one's own",
+            "Perceptual realism \u2014 the visual rendering is indistinguishable from reality"
+          ],
+          "answerIndex": 2,
+          "explanation": "Embodiment illusion is the sense that a virtual body or body part is one's own \u2014 which is what the hand ownership feeling describes. Place illusion is about being in the environment; plausibility is about events in the environment responding realistically."
+        },
+        {
+          "id": "u19-hard-3",
+          "topic": "XR Terminology and VR Basics",
+          "prompt": "Stereopsis \u2014 the depth cue VR headsets primarily exploit \u2014 works by:",
+          "options": [
+            "Using motion parallax: nearby objects move faster across the visual field as the head rotates",
+            "Rendering physically accurate shadows and lighting that provide monocular depth cues",
+            "Matching the vergence and accommodation of the eye to the same virtual depth",
+            "Presenting each eye a slightly different image so the brain constructs depth from the binocular disparity"
+          ],
+          "answerIndex": 3,
+          "explanation": "Stereopsis is the brain's use of the small difference (disparity) between the two eyes' slightly different views to perceive depth. VR headsets show each eye a distinct rendered image with the appropriate parallax offset to simulate this binocular depth cue."
+        },
+        {
+          "id": "u19-hard-4",
+          "topic": "WIMP and Direct Manipulation",
+          "prompt": "The three types of icons in graphical user interfaces identified in the lecture are:",
+          "options": [
+            "Symbolic, iconic, and indexical icons",
+            "Literal, abstract, and representational icons",
+            "Pixel-based, vector-based, and glyph-based icons",
+            "Direct-mapping, metaphorical, and conventional icons"
+          ],
+          "answerIndex": 3,
+          "explanation": "The three GUI icon types are: direct-mapping (looks like what it represents \u2014 a printer icon for Print), metaphorical (borrows from another domain \u2014 a floppy disk for Save), and conventional (arbitrary but learned \u2014 X for Close). These categories describe the icon-meaning relationship."
+        },
+        {
+          "id": "u19-hard-5",
+          "topic": "XR Terminology and VR Basics",
+          "prompt": "VR aims to create three types of illusion. 'Plausibility illusion' specifically refers to:",
+          "options": [
+            "The sense of physically being present inside the virtual environment",
+            "The sense that the virtual body or avatar is one's own",
+            "The illusion that events and objects in the virtual world would respond to you just as they would in the real world",
+            "The perceptual indistinguishability of rendered graphics from real-world imagery"
+          ],
+          "answerIndex": 2,
+          "explanation": "Plausibility illusion is the sense that what is happening in the virtual world is real and makes sense \u2014 that the virtual environment would respond to you as reality does. Place illusion = being there; embodiment = it's my body; plausibility = it feels real and consequential."
+        }
+      ]
+    },
+    {
+      "unit": 20,
+      "title": "Virtual Reality II",
+      "topics": [
+        "VR Sickness",
+        "Object Selection and Manipulation in VR",
+        "Locomotion in VR"
+      ],
+      "questions": [
+        {
+          "id": "u20-hard-1",
+          "topic": "VR Sickness",
+          "prompt": "The vergence-accommodation conflict in VR refers to:",
+          "options": [
+            "The inconsistency between simulated gravity direction and the vestibular sense of balance",
+            "Conflicting depth information between binocular stereopsis and motion parallax cues",
+            "The mismatch between perceived viewing distance and the rendered field of view",
+            "Eyes rotating to converge on a virtual object at one depth while the lens must focus at the fixed physical screen distance"
+          ],
+          "answerIndex": 3,
+          "explanation": "Vergence is how much the eyes rotate inward to fixate a target; accommodation is how the lens changes shape to focus. In the real world, both are coupled to the same depth. In VR, eyes converge to a virtual depth but the lens focuses at the fixed screen \u2014 this conflict causes visual discomfort."
+        },
+        {
+          "id": "u20-hard-2",
+          "topic": "Object Selection and Manipulation in VR",
+          "prompt": "The Go-Go technique for reaching distant virtual objects works by:",
+          "options": [
+            "Casting a ray from the controller and teleporting selected objects to the user's hand",
+            "Scaling the virtual environment down to bring distant objects within physical arm's reach",
+            "Using gaze direction to select objects, then hand gestures to grab them",
+            "Mapping hand movement 1:1 up to a threshold distance, then extending the virtual hand non-linearly beyond it"
+          ],
+          "answerIndex": 3,
+          "explanation": "Go-Go uses a non-linear mapping: within a close range, the virtual hand moves 1:1 with the real hand. Once the real hand exceeds a threshold distance from the body, the virtual hand's reach extends at an accelerating rate, allowing users to reach far objects with moderate real-world movement."
+        },
+        {
+          "id": "u20-hard-3",
+          "topic": "Object Selection and Manipulation in VR",
+          "prompt": "The 'World in Miniature' (WiM) technique in VR allows users to:",
+          "options": [
+            "Scale their avatar down to explore environments at a smaller physical scale",
+            "Preview remote locations before teleporting to them",
+            "Compress the virtual space to place faraway objects within arm's reach",
+            "Manipulate distant objects by touching their scaled-down representation in a miniature model held in the hand"
+          ],
+          "answerIndex": 3,
+          "explanation": "WiM presents a miniature copy of the virtual world in the user's hand. By touching objects in the miniature, users can select, move, or interact with objects that are physically far away in the full-scale VR environment."
+        },
+        {
+          "id": "u20-hard-4",
+          "topic": "Locomotion in VR",
+          "prompt": "Teleportation is a common VR locomotion technique that reduces motion sickness. Its PRIMARY drawback compared to continuous motion is:",
+          "options": [
+            "Incompatibility with room-scale tracking hardware",
+            "Higher computational rendering load due to instant scene transitions",
+            "Increased controller input complexity for novice users",
+            "Reduced spatial awareness \u2014 the discontinuous jumps undermine the user's sense of environment layout"
+          ],
+          "answerIndex": 3,
+          "explanation": "Teleportation avoids the sensory mismatch that causes VR sickness, but it removes the continuous motion path that helps users build a mental map of the space. Users who teleport frequently often have poorer spatial understanding of the environment than those who walk through it."
+        },
+        {
+          "id": "u20-hard-5",
+          "topic": "Locomotion in VR",
+          "prompt": "Which criterion is used to evaluate VR locomotion techniques?",
+          "options": [
+            "Frame rate stability during locomotion transitions",
+            "Compatibility with multiple headset hardware platforms",
+            "Spatial awareness and sense of presence in the environment",
+            "Latency between controller input and visual scene update"
+          ],
+          "answerIndex": 2,
+          "explanation": "Evaluating VR locomotion includes: how well the technique preserves spatial awareness (the user's understanding of where they are relative to the environment), and how much it maintains presence (the feeling of actually being in the VR space)."
+        }
+      ]
+    },
+    {
+      "unit": 21,
+      "title": "Hand and Body Based Input",
+      "topics": [
+        "Touchscreen Input",
+        "Gesture Interfaces",
+        "Hand and Full-Body Tracking"
+      ],
+      "questions": [
+        {
+          "id": "u21-hard-1",
+          "topic": "Touchscreen Input",
+          "prompt": "Capacitive touchscreens differ from resistive touchscreens in which critical way?",
+          "options": [
+            "Capacitive screens require a special stylus; resistive screens work with any object including bare fingers",
+            "Capacitive screens detect electrical conductivity of the finger; resistive screens detect pressure between two flexible layers",
+            "Capacitive screens are pressure-sensitive; resistive screens detect only the point of contact",
+            "Capacitive screens are used in industrial settings; resistive screens dominate consumer devices"
+          ],
+          "answerIndex": 1,
+          "explanation": "Capacitive screens detect the small electrical disturbance caused by a conductive finger. Resistive screens detect the physical pressure when two layers are pressed together and touch \u2014 any stylus or object works, but multi-touch is not supported."
+        },
+        {
+          "id": "u21-hard-2",
+          "topic": "Gesture Interfaces",
+          "prompt": "'Gorilla arm syndrome' is a well-known failure mode of which type of input interface?",
+          "options": [
+            "Force-sensitive touchpads used for extended precision design work",
+            "Wrist-worn gesture controllers during prolonged sessions",
+            "Full-body motion tracking in room-scale VR environments",
+            "Mid-air gesture interfaces that require sustained arm extension in front of a screen"
+          ],
+          "answerIndex": 3,
+          "explanation": "Gorilla arm describes the fatigue and discomfort of holding arms extended in mid-air for sustained gestural interaction with vertical or distant displays. It is a fundamental ergonomic problem for gesture interfaces that require constant arm elevation."
+        },
+        {
+          "id": "u21-hard-3",
+          "topic": "Hand and Full-Body Tracking",
+          "prompt": "Dwell-based selection in gaze interfaces works by:",
+          "options": [
+            "Detecting the rapid saccadic eye movement toward the target and using it as a selection event",
+            "Using pupil dilation changes to infer intent and confidence of the selection",
+            "Requiring a concurrent physical action (button press or blink) to confirm gaze-based targeting",
+            "Registering a selection when the user holds their gaze on a target for a preset duration (typically ~3 seconds)"
+          ],
+          "answerIndex": 3,
+          "explanation": "Dwell-based selection requires the user to fixate on a target for a specified time threshold (e.g., 2\u20133 seconds) before the selection is registered. This avoids accidental selections from normal eye movement while still enabling hands-free control."
+        },
+        {
+          "id": "u21-hard-4",
+          "topic": "Gesture Interfaces",
+          "prompt": "EMG (electromyography) in gesture sensing works by:",
+          "options": [
+            "Detecting small magnetic field changes produced by limb movement",
+            "Measuring mechanical vibrations transmitted through the skeleton during hand gestures",
+            "Detecting nerve impulse patterns in the peripheral nervous system",
+            "Detecting electrical signals generated by muscle activation in the forearm or hand"
+          ],
+          "answerIndex": 3,
+          "explanation": "EMG sensors detect the electrical activity produced when muscles contract. Placed on the forearm or hand, they can infer which muscles are active and thus which gesture is being performed \u2014 before or without visible hand movement."
+        },
+        {
+          "id": "u21-hard-5",
+          "topic": "Gesture Interfaces",
+          "prompt": "A designer argues that full-body gesture interfaces should always be preferred for productivity tasks because they are 'more natural.' The STRONGEST counter-argument from the lecture is:",
+          "options": [
+            "Gesture interfaces are incompatible with standard input APIs on most development platforms",
+            "Gesture interfaces cannot yet achieve the precision required for professional productivity tools",
+            "Users prefer touchscreens because familiarity makes them feel more natural, regardless of objective performance",
+            "Sustained mid-air gesture interaction causes fatigue (gorilla arm) \u2014 'natural movement' does not imply comfortable for extended use"
+          ],
+          "answerIndex": 3,
+          "explanation": "The gorilla arm problem shows that what feels natural for a brief interaction becomes physically fatiguing over sustained use. 'Natural' does not mean ergonomic for extended productivity sessions."
+        }
+      ]
+    },
+    {
+      "unit": 22,
+      "title": "Haptics",
+      "topics": [
+        "Haptic Sense and Exploration",
+        "Receptors and Haptic Illusions",
+        "Speech-Based Interfaces"
+      ],
+      "questions": [
+        {
+          "id": "u22-hard-1",
+          "topic": "Haptic Sense and Exploration",
+          "prompt": "The two main haptic modalities and their correct definitions are:",
+          "options": [
+            "Active (user-initiated touch) and passive (system-initiated touch)",
+            "Near-field (contact-based sensing) and far-field (non-contact proximity sensing)",
+            "Cutaneous (pressure and temperature only) and proprioceptive (whole-body position awareness)",
+            "Tactile (skin-based sensations: pressure, vibration, texture, temperature) and kinesthetic (force, position, and movement of muscles and joints)"
+          ],
+          "answerIndex": 3,
+          "explanation": "The two haptic modalities are tactile (sensations received through the skin surface) and kinesthetic (sensations of body position, force, and movement from muscles, tendons, and joints). Proprioception and cutaneous sensation are related but not the standard haptics distinction."
+        },
+        {
+          "id": "u22-hard-2",
+          "topic": "Receptors and Haptic Illusions",
+          "prompt": "C-tactile (CT) afferents respond optimally to:",
+          "options": [
+            "Sharp, high-frequency vibration on the fingertips during object manipulation",
+            "Static pressure applied uniformly across the palm",
+            "Slow, gentle stroking motion (3\u201310 cm/s) on hairy skin \u2014 associated with pleasant social touch",
+            "Painful stimuli \u2014 CT afferents are part of the nociceptive pain pathway"
+          ],
+          "answerIndex": 2,
+          "explanation": "CT afferents are unmyelinated nerve fibers in hairy skin that respond best to slow, gentle stroking and are associated with affective, social touch (the pleasant feeling of a gentle stroke). They are not fast-response mechanoreceptors for fine texture or vibration."
+        },
+        {
+          "id": "u22-hard-3",
+          "topic": "Receptors and Haptic Illusions",
+          "prompt": "Which of the following is NOT one of the four main mechanoreceptor types found in human skin?",
+          "options": [
+            "Meissner corpuscles",
+            "Pacinian corpuscles",
+            "C-tactile (CT) afferents",
+            "Merkel discs"
+          ],
+          "answerIndex": 2,
+          "explanation": "The four main mechanoreceptors are Meissner corpuscles (RA1), Pacinian corpuscles (RA2), Merkel discs (SA1), and Ruffini endings (SA2). CT afferents are a distinct class of unmyelinated afferents associated with affective touch, not the four classical mechanoreceptor types."
+        },
+        {
+          "id": "u22-hard-4",
+          "topic": "Speech-Based Interfaces",
+          "prompt": "A speech interface should 'allow barge-in.' This term means:",
+          "options": [
+            "The system can interrupt the user when it detects a recognition error in their speech",
+            "The interface accepts overlapping speech from multiple simultaneous users",
+            "Users can speak and interrupt the system while it is still playing a spoken response",
+            "Users can skip ahead through menu options by speaking any keyword without waiting for the full announcement"
+          ],
+          "answerIndex": 2,
+          "explanation": "Barge-in means the user can interrupt the system's spoken output by starting to speak \u2014 they don't have to wait for the system to finish before responding. This makes speech interactions feel more like natural conversation and less like waiting for a recorded message."
+        },
+        {
+          "id": "u22-hard-5",
+          "topic": "Speech-Based Interfaces",
+          "prompt": "Best practice for speech interface menu design recommends:",
+          "options": [
+            "Deep hierarchies with many options per level to minimize total interaction steps",
+            "Explicit confirmation for every action to prevent speech recognition errors from causing harm",
+            "Forcing users to spell out names and commands to minimize speech ambiguity",
+            "Shallow menus with barge-in enabled and implicit confirmation for common, low-risk actions"
+          ],
+          "answerIndex": 3,
+          "explanation": "Speech interfaces should use shallow menu structures (to minimize the user's memory load for spoken options), allow barge-in (for natural interaction), and use implicit confirmation for low-risk actions (e.g., 'Playing jazz' rather than 'Shall I play jazz? Say yes or no')."
+        }
+      ]
+    },
+    {
+      "unit": 23,
+      "title": "Haptics II",
+      "topics": [
+        "Machine Haptics and Device Types",
+        "Subareas of Haptics",
+        "Computer Haptics and Rendering"
+      ],
+      "questions": [
+        {
+          "id": "u23-hard-1",
+          "topic": "Machine Haptics and Device Types",
+          "prompt": "A 'grounded' haptic device is BEST described as:",
+          "options": [
+            "A device that simulates tactile sensations on the skin surface using vibration motors",
+            "A haptic device designed for use in physically demanding outdoor environments",
+            "A wearable device that provides haptic feedback through contact with the body",
+            "A force-feedback device that is physically fixed to a stable surface, allowing it to exert reaction forces on the user"
+          ],
+          "answerIndex": 3,
+          "explanation": "Grounded devices are mechanically fixed to a surface (desk, floor, wall), giving them a physical anchor to push against when exerting forces. This allows them to provide kinesthetic force feedback. Ungrounded devices (wearables) cannot exert true forces without a ground reference."
+        },
+        {
+          "id": "u23-hard-2",
+          "topic": "Subareas of Haptics",
+          "prompt": "The formal definition of a haptic interface requires the system to:",
+          "options": [
+            "Produce vibrotactile feedback in response to user touch interactions",
+            "Track hand position at sub-millimeter precision for simulation fidelity",
+            "Provide both tactile and kinesthetic feedback simultaneously in a single device",
+            "Both sense physical touch AND actuate forces or sensations, with processing fast enough to maintain the haptic illusion"
+          ],
+          "answerIndex": 3,
+          "explanation": "A haptic interface must close the loop: it senses the user's physical interaction AND renders feedback forces or sensations in response. Speed is critical \u2014 the update rate must be fast enough (typically 1 kHz for force feedback) to feel realistic."
+        },
+        {
+          "id": "u23-hard-3",
+          "topic": "Computer Haptics and Rendering",
+          "prompt": "In virtual wall rendering using the spring model, force is calculated as F = \u2212kx. What do k and x represent?",
+          "options": [
+            "k = damping coefficient; x = velocity of penetration into the wall",
+            "k = mass of the virtual object; x = acceleration during contact",
+            "k = friction constant; x = lateral displacement along the wall surface",
+            "k = stiffness of the virtual surface; x = penetration depth into the wall"
+          ],
+          "answerIndex": 3,
+          "explanation": "In the spring (penalty) model, the restoring force is proportional to how far the virtual probe has penetrated the surface. k is the surface stiffness (spring constant) and x is the penetration depth. Higher k = stiffer wall; larger x = more forceful push-back."
+        },
+        {
+          "id": "u23-hard-4",
+          "topic": "Machine Haptics and Device Types",
+          "prompt": "A phone's vibration motor produces ___ feedback; a PHANTOM Omni haptic arm produces ___ feedback.",
+          "options": [
+            "Kinesthetic; tactile",
+            "Active; passive",
+            "Grounded; ungrounded",
+            "Tactile; kinesthetic"
+          ],
+          "answerIndex": 3,
+          "explanation": "Phone vibration motors stimulate skin-surface receptors \u2014 this is tactile feedback. The PHANTOM Omni applies forces to the fingers through a rigid arm, simulating resistance and weight \u2014 this is kinesthetic feedback. The distinction is skin-surface sensation vs. forces on muscles and joints."
+        },
+        {
+          "id": "u23-hard-5",
+          "topic": "Machine Haptics and Device Types",
+          "prompt": "The PHANTOM Omni is an example of which type of haptic device?",
+          "options": [
+            "Ungrounded tactile feedback wearable",
+            "Pneumatic tactile display array",
+            "EMG-based gesture input device",
+            "Grounded force-feedback desktop arm"
+          ],
+          "answerIndex": 3,
+          "explanation": "The PHANTOM Omni is a classic grounded kinesthetic force-feedback device \u2014 a robotic arm fixed to the desktop that pushes back on the user's stylus to simulate touching virtual objects. It provides force/position feedback, not just surface vibrations."
+        }
+      ]
+    },
+    {
+      "unit": 24,
+      "title": "Haptics III",
+      "topics": [
+        "Haptic Interaction Design Process",
+        "Generating and Evaluating Haptics",
+        "Role of Haptics in Multisensory Interaction"
+      ],
+      "questions": [
+        {
+          "id": "u24-hard-1",
+          "topic": "Haptic Interaction Design Process",
+          "prompt": "Haptipedia is a tool specifically designed to:",
+          "options": [
+            "Generate haptic vibration patterns from audio input signals",
+            "Provide a searchable library of haptic effects and their perceptual descriptions",
+            "Standardize haptic programming APIs across hardware platforms",
+            "Enable researchers and designers to browse and compare haptic device designs across multiple attributes"
+          ],
+          "answerIndex": 3,
+          "explanation": "Haptipedia is a database and visualization tool for browsing and comparing haptic devices \u2014 their actuation type, force range, degrees of freedom, and other design attributes. It helps researchers find appropriate hardware for a given design goal."
+        },
+        {
+          "id": "u24-hard-2",
+          "topic": "Generating and Evaluating Haptics",
+          "prompt": "The Sound2Hap system is an example of:",
+          "options": [
+            "A system that maps haptic textures to musical notes for accessible music playback",
+            "A method for generating haptic feedback in VR when users touch virtual sound sources",
+            "Using haptic feedback to spatially localize audio in a 3D environment",
+            "A system that converts audio signals into haptic vibration patterns"
+          ],
+          "answerIndex": 3,
+          "explanation": "Sound2Hap converts sound signals into haptic vibration patterns \u2014 audio-to-haptic rendering. This is useful when audio information needs to be conveyed through touch (e.g., for deaf users or in noisy environments)."
+        },
+        {
+          "id": "u24-hard-3",
+          "topic": "Role of Haptics in Multisensory Interaction",
+          "prompt": "A 'complementary' role for haptics in multisensory design means:",
+          "options": [
+            "Haptic feedback confirms information already conveyed by vision or audio",
+            "Haptics is optional and added to supplement the primary visual channel",
+            "Haptic feedback provides unique information not available through any other sensory channel",
+            "Haptics works in combination with audio but not with visual elements"
+          ],
+          "answerIndex": 2,
+          "explanation": "Complementary haptics conveys information that other senses cannot \u2014 e.g., texture, temperature, or force that vision and audio alone cannot communicate. This is distinct from reinforcing haptics, which repeats information already provided by another sense."
+        },
+        {
+          "id": "u24-hard-4",
+          "topic": "Haptic Interaction Design Process",
+          "prompt": "Which specific challenge of haptic interaction design makes it hard to design for one device and deploy on another?",
+          "options": [
+            "The absence of standardized haptic rendering APIs across operating systems",
+            "Latency requirements that vary significantly across platforms and hardware",
+            "Hardware variety \u2014 the wide range of haptic devices with different actuation mechanisms, ranges, and fidelity",
+            "The lack of open-source haptic rendering software with broad device support"
+          ],
+          "answerIndex": 2,
+          "explanation": "Unlike audio (where standard formats and codecs abstract hardware differences), haptic devices vary enormously in how they actuate, their dynamic range, and their physical characteristics \u2014 making cross-device design a fundamental challenge without a universal abstraction layer."
+        },
+        {
+          "id": "u24-hard-5",
+          "topic": "Role of Haptics in Multisensory Interaction",
+          "prompt": "A 'reinforcing' role for haptics in multisensory design means:",
+          "options": [
+            "Making haptic feedback stronger to compete with simultaneous visual and audio stimulation",
+            "Using haptics as the primary channel while vision and audio play supporting roles",
+            "Using haptic rewards and aversive signals to reinforce desired user behavior",
+            "Using haptics to confirm or strengthen information already conveyed by vision or audio \u2014 making the message more salient"
+          ],
+          "answerIndex": 3,
+          "explanation": "Reinforcing haptics duplicates information from another channel \u2014 e.g., a phone vibrates AND shows a notification AND plays a sound. This redundancy makes the signal more likely to be perceived and strengthens the overall experience, but provides no unique haptic-only information."
+        }
+      ]
+    }
+  ]
+}

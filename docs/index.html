@@ -28,6 +28,17 @@
 
           <div class="control-grid">
             <label class="field select-field">
+              <span>Difficulty</span>
+              <span class="select-wrap">
+                <select id="difficulty-mode" class="select-control">
+                  <option value="easy">Easy Mode</option>
+                  <option value="hard">Hard Mode</option>
+                </select>
+                <span class="select-arrow" aria-hidden="true"></span>
+              </span>
+            </label>
+
+            <label class="field select-field">
               <span>Practice By</span>
               <span class="select-wrap">
                 <select id="selection-mode" class="select-control">
@@ -65,6 +76,11 @@
             <label class="field checkbox-field dopamine-field">
               <input type="checkbox" id="dopamine-toggle" />
               <span>Max Dopamine Mode</span>
+            </label>
+
+            <label class="field checkbox-field">
+              <input type="checkbox" id="quiz-audio-toggle" checked />
+              <span>Show quiz listening accessibility buttons</span>
             </label>
           </div>
 
